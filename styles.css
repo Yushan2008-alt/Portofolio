@@ -82,7 +82,6 @@ nav a:hover::after {
     width: 100%;
 }
 
-
 nav a.active {
     color: #b74b4b;
 }
@@ -90,7 +89,6 @@ nav a.active {
 nav a.active::after {
     width: 100%;
 }
-
 
 @media(max-width:995px){
     nav{
@@ -107,23 +105,22 @@ nav a.active::after {
         border-top: 0.1rem solid rgba(0,0,0,0.1);
     }
 
-
     nav.active{
-    display: block;
+        display: block;
     }
 
     nav a{
-    display: block;
-    font-size: 2rem;
-    margin: 3rem 0;
+        display: block;
+        font-size: 2rem;
+        margin: 3rem 0;
     }
 
     nav a:hover,
     nav a.active{
-    padding: 1rem;
-    border-radius: 0.5rem;
-    border-bottom: 0.5rem;
-   }
+        padding: 1rem;
+        border-radius: 0.5rem;
+        border-bottom: 0.5rem;
+    }
 }
 
 section{
@@ -180,29 +177,33 @@ span{
     inset: 0;
     border-radius: 50%;
     background: radial-gradient(circle, rgba(183, 75, 75, 0.5) 0%, transparent 70%);
-    filter: blur(30px);        /* glow lebih tipis */
+    filter: blur(30px);
     z-index: -1;
     transition: 0.25s ease;
 }
 
 .home-img img {
     position: relative;
-    width: 25vw;               /* ukuran diperkecil */
+    width: 25vw;
     border-radius: 50%;
-    box-shadow: 0 0 25px 5px rgba(183, 75, 75, 0.4); /* glow tipis */
+    box-shadow: 0 0 25px 5px rgba(183, 75, 75, 0.4);
     cursor: pointer;
     transition: 0.25s ease;
 }
 
-/* Efek hover: glow mengembang sedikit dan lembut */
 .home-img:hover::before {
-    filter: blur(28px);        /* glow mengembang sedikit */
+    filter: blur(28px);
 }
 
 .home-img img:hover {
-    transform: scale(1.1);   /* gambar sedikit membesar */
+    transform: scale(1.1);
     box-shadow: 0 0 35px 10px rgba(183, 75, 75, 0.5);
 }
+
+.social-icons {
+    position: relative;
+}
+
 .social-icons a{
     display: inline-flex;
     justify-content: center;
@@ -213,9 +214,18 @@ span{
     border: 0.2rem solid #b74b4b;
     font-size: 2rem;
     border-radius: 50%;
-    margin: 3rem 1.5rem 3rem 0;
+    margin: 3rem 0.8rem 3rem 0;
     transition: 0.3s ease;
     color: #b74b4b;
+    position: relative;
+}
+
+.social-icons a:first-child {
+    margin-left: 0;
+}
+
+.social-icons a:last-child {
+    margin-right: 0;
 }
 
 .social-icons a:hover{
@@ -224,6 +234,54 @@ span{
     background-color: #b74b4b;
     box-shadow: 0 0 25px #b74b4b;
 }
+
+/* Garis bawah untuk indikator contact */
+.social-icons a::after {
+    content: "";
+    position: absolute;
+    bottom: -1.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 3px;
+    background-color: #b74b4b;
+    box-shadow: 0 0 10px rgba(183, 75, 75, 0.8);
+    transition: width 0.4s ease;
+}
+
+.social-icons.contact-active a::after {
+    animation: underlineExpand 0.6s ease-out forwards;
+}
+
+@keyframes underlineExpand {
+    0% {
+        width: 0;
+        opacity: 0;
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        width: 120%;
+        opacity: 1;
+    }
+}
+
+/* Animasi bounce untuk menarik perhatian */
+.social-icons.contact-active a {
+    animation: bounce 1s ease-in-out infinite;
+    animation-delay: 0.6s;
+}
+
+@keyframes bounce {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-8px);
+    }
+}
+
 
 .btn{
     display: inline-block;
@@ -237,8 +295,6 @@ span{
     border: 2px solid #b74b4b;
     cursor: pointer;
     transition: 0.3s ease;
-
-    /* Glow tipis default tapi sedikit lebih besar dari sebelumnya */
     box-shadow: 
         0 0 18px rgba(183, 75, 75, 0.4),
         0 0 30px rgba(183, 75, 75, 0.25);
@@ -248,15 +304,11 @@ span{
     transform: scale(1.08);
     background-color: #b74b4b;
     color: black;
-
-    /* GLOW TEBAL — menyala lebih besar saat hover */
     box-shadow:
-        0 0 25px rgba(183, 75, 75, 0.9),   /* lingkaran glow inti */
-        0 0 50px rgba(183, 75, 75, 0.7),   /* glow luar */
-        0 0 70px rgba(183, 75, 75, 0.5);   /* glow besar menyebar */
+        0 0 25px rgba(183, 75, 75, 0.9),
+        0 0 50px rgba(183, 75, 75, 0.7),
+        0 0 70px rgba(183, 75, 75, 0.5);
 }
-
-
 
 .typing-text{
     font-size: 34px;
@@ -315,8 +367,8 @@ span{
         margin: 4rem 5rem;
     }
 
-.home .home-content h3{
-    font-size: 2.5rem;
+    .home .home-content h3{
+        font-size: 2.5rem;
     }
 
     .home-content h1{
@@ -331,16 +383,16 @@ span{
 
 .about {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    flex-direction: column;
-    gap: 4rem;
-    background-color: #0d0d0d;
-    padding: 8rem 9%;
+    gap: 2rem;
+    background-color: #000000;
+    padding: 18rem 9% 8rem;
+    min-height: 100vh;
     opacity: 0;
     transform: translateY(80px) scale(0.97);
     filter: blur(8px);
-
     transition:
         opacity 1s ease-out,
         transform 1s ease-out,
@@ -353,44 +405,73 @@ span{
     filter: blur(0);
 }
 
-
-
 .about .heading {
     font-size: 4rem;
     font-weight: 700;
     text-align: center;
     margin-bottom: 2rem;
+    width: 100%;
+    position: relative;
 }
 
 .about .heading span {
     color: #b74b4b;
 }
 
-.about p {
-    font-size: 1.8rem;
-    max-width: 800px;
-    text-align: center;
-    line-height: 1.8;
-    color: #ddd;
+.about .heading::after {
+    content: "";
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 150px;
+    height: 3px;
+    background-color: #b74b4b;
 }
 
-/* Smooth scroll behavior */
-html {
-    scroll-behavior: smooth;
+.about-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5rem;
+    width: 100%;
+    max-width: 1200px;
 }
 
-.about-content{
-    max-width: 600px;
+.about-img {
+    flex-shrink: 0;
+    order: 1;
+}
+
+.about-img img {
+    width: 350px;
+    height: 350px;
+    border-radius: 20px;
+    object-fit: cover;
+    box-shadow: 0 0 25px rgba(183, 75, 75, 0.4);
+    transition: 0.3s ease;
+}
+
+.about-img img:hover {
+    transform: scale(1.05);
+    box-shadow: 
+        0 0 35px rgba(183, 75, 75, 0.6),
+        0 0 55px rgba(183, 75, 75, 0.4);
+}
+
+.about-content {
+    flex: 1;
     text-align: left;
     display: flex;
     flex-direction: column;
-    gap: 1.5rem;
+    gap: 2rem;
+    order: 2;
     animation: scrolling linear;
     animation-timeline: view();
     animation-range: entry 0% cover 50%;
 }
 
-@keyframes scrolling{
+@keyframes scrolling {
     from {
         opacity: 0;
         scale: 0.5;
@@ -403,41 +484,495 @@ html {
 
 .about-content p {
     font-size: 1.6rem;
-    line-height: 1.7;
+    line-height: 1.8;
+    color: #ddd;
 }
 
 .about-content .btn {
-    margin-top: 2rem;
+    align-self: flex-start;
+    margin-top: 1rem;
 }
 
 @media (max-width: 995px) {
-    .about {
+    .about-container {
         flex-direction: column;
+        gap: 3rem;
+    }
+
+    .about-img {
+        order: 1;
     }
 
     .about-content {
+        order: 2;
         text-align: center;
         align-items: center;
     }
 
+    .about-content .btn {
+        align-self: center;
+    }
+
     .about-img img {
-        width: 260px;
+        width: 280px;
+        height: 280px;
+        border-radius: 15px;
     }
 }
 
-.about-img img {
-    width: 320px;
-    border-radius: 50%;
-    object-fit: cover;
+@media (max-width: 768px) {
+    .about .heading {
+        font-size: 3rem;
+        margin-bottom: 4rem;
+    }
 
-    /* Glow merah tipis agar konsisten */
-    box-shadow: 0 0 25px rgba(183, 75, 75, 0.4);
-    transition: 0.3s ease;
+    .about-content p {
+        font-size: 1.4rem;
+    }
+
+    .about-img img {
+        width: 240px;
+        height: 240px;
+        border-radius: 12px;
+    }
 }
 
-.about-img img:hover {
-    transform: scale(1.05);
+.skills {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 4rem;
+    background-color: black;
+    padding: 18rem 9% 8rem;
+    min-height: 100vh;
+    opacity: 0;
+    transform: translateY(80px) scale(0.97);
+    filter: blur(8px);
+    transition:
+        opacity 1s ease-out,
+        transform 1s ease-out,
+        filter 1.2s ease-out;
+}
+
+.skills.show {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+}
+
+.skills .heading {
+    font-size: 4rem;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 3rem;
+    width: 100%;
+    position: relative;
+}
+
+.skills .heading::after {
+    content: "";
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 150px;
+    height: 3px;
+    background-color: #b74b4b;
+}
+
+.skills-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 8rem;
+    width: 100%;
+    max-width: 1200px;
+}
+
+.skills-description {
+    flex: 1;
+    max-width: 500px;
+}
+
+.skills-description h3 {
+    font-size: 3rem;
+    font-weight: 700;
+    margin-bottom: 2rem;
+    line-height: 1.3;
+}
+
+.skills-description p {
+    font-size: 1.5rem;
+    line-height: 1.8;
+    color: #ddd;
+    text-align: justify;
+    margin-bottom: 3rem;
+}
+
+.experience-box {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+
+.experience-number {
+    font-size: 10rem;
+    font-weight: 900;
+    color: white;
+    line-height: 1;
+}
+
+.experience-text {
+    font-size: 2rem;
+    font-weight: 600;
+    color: white;
+    line-height: 1.3;
+}
+
+.skills-bars {
+    flex: 1;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 6rem 10rem;
+    width: 100%;
+    max-width: 600px;
+}
+
+.skill-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.skill-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+.skill-name {
+    font-size: 2.2rem;
+    font-weight: 500;
+    color: #b74b4b;
+}
+
+.skill-percentage {
+    font-size: 5rem;
+    font-weight: 700;
+    color: #b74b4b;
+    line-height: 1;
+}
+
+@media (max-width: 995px) {
+    .skills-container {
+        flex-direction: column;
+        gap: 4rem;
+        align-items: center;
+    }
+
+    .skills-description {
+        text-align: center;
+        max-width: 100%;
+    }
+
+    .experience-box {
+        justify-content: center;
+    }
+
+    .skills-bars {
+        width: 100%;
+        gap: 4rem 5rem;
+    }
+
+    .skills .heading {
+        font-size: 3rem;
+    }
+
+    .skills-description h3 {
+        font-size: 2.5rem;
+    }
+
+    .experience-number {
+        font-size: 7rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .skills-bars {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+    }
+
+    .skill-percentage {
+        font-size: 4rem;
+    }
+
+    .skill-name {
+        font-size: 1.8rem;
+    }
+}
+
+/* ===== CONTACT VIEW ANIMATION ===== */
+
+.contact-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0);
+    backdrop-filter: blur(0px);
+    z-index: 90;
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.8s ease-in-out;
+}
+
+.contact-overlay.active {
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(10px);
+    opacity: 1;
+}
+
+.home.contact-blur .home-img,
+.home.contact-blur .home-content > *:not(.social-icons) {
+    filter: blur(8px);
+    opacity: 0.3;
+    transition: all 0.8s ease-in-out;
+}
+
+.social-icons {
+    position: relative;
+    transition: none;
+}
+
+.social-icons.contact-focused::before {
+    content: "";
+    position: absolute;
+    top: -1.5rem;
+    left: -1.5rem;       
+    right: 0.5rem;
+    bottom: -1.5rem;
+    border: 3px solid transparent;
+    border-radius: 2rem;
+    z-index: -1;
+    
+    background: 
+        linear-gradient(to right, #b74b4b 100%, transparent 0) no-repeat,
+        linear-gradient(to right, #b74b4b 100%, transparent 0) no-repeat,
+        linear-gradient(to bottom, #b74b4b 100%, transparent 0) no-repeat,
+        linear-gradient(to bottom, #b74b4b 100%, transparent 0) no-repeat;
+    
+    background-size: 
+        0 3px,
+        0 3px,
+        3px 0,
+        3px 0;
+    
+    background-position:
+        left top,
+        right bottom,
+        left top,
+        right bottom;
+    
+    animation: drawBox 1.2s ease-out forwards;
+}
+
+@keyframes drawBox {
+    0% {
+        background-size: 
+            0 3px,
+            0 3px,
+            3px 0,
+            3px 0;
+    }
+    30% {
+        background-size: 
+            0 3px,
+            0 3px,
+            3px 100%,
+            3px 100%;
+    }
+    70% {
+        background-size: 
+            100% 3px,
+            100% 3px,
+            3px 100%,
+            3px 100%;
+    }
+    100% {
+        background-size: 
+            100% 3px,
+            100% 3px,
+            3px 100%,
+            3px 100%;
+    }
+}
+
+.social-icons.contact-focused::after {
+    content: "";
+    position: absolute;
+    top: -1.5rem;
+    left: -1.5rem;
+    right: 0.5rem;
+    bottom: -1.5rem;
+    border: 3px solid #b74b4b;
+    border-radius: 2rem;
     box-shadow: 
-        0 0 35px rgba(183, 75, 75, 0.6),
-        0 0 55px rgba(183, 75, 75, 0.4);
+        0 0 30px rgba(183, 75, 75, 0.8),
+        inset 0 0 30px rgba(183, 75, 75, 0.3);
+    animation: borderGlow 2s ease-in-out infinite;
+    animation-delay: 1.2s;
+    opacity: 0;
+    z-index: -1;
+}
+
+@keyframes borderGlow {
+    0% {
+        opacity: 0;
+    }
+    10%, 100% {
+        opacity: 1;
+    }
+    50% {
+        box-shadow: 
+            0 0 50px rgba(183, 75, 75, 1),
+            inset 0 0 50px rgba(183, 75, 75, 0.5);
+    }
+}
+
+.social-icons.contact-focused {
+    animation: zoomIn 0.6s ease-out forwards;
+    animation-delay: 1.2s;
+    z-index: 95;
+}
+
+@keyframes zoomIn {
+    from {
+        transform: scale(1) translateY(0);
+        filter: brightness(1);
+    }
+    to {
+        transform: scale(1.3) translateY(-10px);
+        filter: brightness(1.2);
+    }
+}
+
+.social-icons.contact-focused a {
+    pointer-events: auto;
+    cursor: pointer;
+    box-shadow: 0 0 20px rgba(183, 75, 75, 0.5);
+}
+
+.social-icons.contact-focused a:hover {
+    color: black;
+    transform: scale(1.3) translateY(-5px);
+    background-color: #b74b4b;
+    box-shadow: 0 0 25px #b74b4b;
+}
+
+.social-icons.zooming-out {
+    animation: zoomOut 0.5s ease-in forwards;
+    z-index: 95;
+}
+
+@keyframes zoomOut {
+    from {
+        transform: scale(1.3) translateY(-10px);
+        filter: brightness(1.2);
+    }
+    to {
+        transform: scale(1) translateY(0);
+        filter: brightness(1);
+    }
+}
+
+.social-icons.zooming-out::before {
+    animation: eraseBox 0.8s ease-in forwards;
+    animation-delay: 0.5s;
+}
+
+@keyframes eraseBox {
+    0% {
+        background-size: 
+            100% 3px,
+            100% 3px,
+            3px 100%,
+            3px 100%;
+        opacity: 1;
+    }
+    30% {
+        background-size: 
+            0 3px,
+            0 3px,
+            3px 100%,
+            3px 100%;
+        opacity: 1;
+    }
+    70% {
+        background-size: 
+            0 3px,
+            0 3px,
+            3px 0,
+            3px 0;
+        opacity: 1;
+    }
+    100% {
+        background-size: 
+            0 3px,
+            0 3px,
+            3px 0,
+            3px 0;
+        opacity: 0;
+    }
+}
+
+.social-icons.zooming-out::after {
+    animation: fadeOut 0.3s ease-in forwards;
+}
+
+@keyframes fadeOut {
+    to {
+        opacity: 0;
+    }
+}
+
+@media (max-width: 995px) {
+    .social-icons.contact-focused::before,
+    .social-icons.contact-focused::after {
+        top: -1.2rem;
+        left: -1.2rem;
+        right: 0.4rem;
+        bottom: -1.2rem;
+    }
+    
+    @keyframes zoomIn {
+        to {
+            transform: scale(1.2) translateY(-15px);
+        }
+    }
+    
+    @keyframes zoomOut {
+        from {
+            transform: scale(1.2) translateY(-15px);
+        }
+    }
+}
+
+@media (max-width: 768px) {
+    @keyframes zoomIn {
+        to {
+            transform: scale(1.15) translateY(-10px);
+        }
+    }
+    
+    @keyframes zoomOut {
+        from {
+            transform: scale(1.15) translateY(-10px);
+        }
+    }
 }

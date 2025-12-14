@@ -14,9 +14,9 @@
         <nav>
             <a href="#home">Home</a>
             <a href="#about">About</a>
-            <a href="#">Skills</a>
-            <a href="#">Experience</a>
-            <a href="#">Contact</a>
+            <a href="#skills">Skills</a>
+            <!-- <a href="#">Experience</a> -->
+            <a href="#contact">Contact</a>
         </nav>
     </header>
     <section class="home" id="home">
@@ -39,41 +39,168 @@
         </div>
     </section>
         <section class="about" id="about">
-    <div class="about-img">
-        <img src="image/Yushan.jpg" alt="">
-    </div>
+    <!-- JUDUL DI TOP CENTER -->
+    <h2 class="heading">About <span>Me</span></h2>
+    
+    <!-- WRAPPER UNTUK GAMBAR + CONTENT -->
+    <div class="about-container">
+        <!-- GAMBAR DI KIRI (PERSEGI) -->
+        <div class="about-img">
+            <img src="image/yushanpose.jpg" alt="">
+        </div>
 
-    <div class="about-content">
-        <h2 class="heading">About <span>Me</span></h2>
-        <p>
-            Halo! Saya <span></span>seorang pengembang web yang menciptakan tampilan dan pengalaman pengguna yang modern, interaktif, dan estetis. 
-            Ketertarikan saya pada dunia teknologi membuat saya terus belajar hal-hal baru setiap hari, mulai dari eksplorasi teknologi backend hingga memahami tren terbaru dalam desain dan pengembangan web. 
-            Saya menikmati proses membangun antarmuka yang responsif dan intuitif, serta memastikan setiap detail visual dan fungsional bekerja secara optimal. 
-            Saya terus berupaya memperkuat kemampuan teknis, meningkatkan kreativitas, dan beradaptasi dengan lingkungan kerja yang dinamis agar dapat memberikan hasil terbaik pada setiap proyek yang saya kerjakan.
-        </p>
-
-        <a href="#" class="btn">Selengkapnya</a>
+        <!-- CONTENT DI KANAN -->
+        <div class="about-content">
+            <p>
+                Halo! Saya seorang pengembang web yang menciptakan tampilan dan pengalaman pengguna yang modern, interaktif, dan estetis. 
+                Ketertarikan saya pada dunia teknologi membuat saya terus belajar hal-hal baru setiap hari, mulai dari eksplorasi teknologi backend hingga memahami tren terbaru dalam desain dan pengembangan web. 
+                Saya menikmati proses membangun antarmuka yang responsif dan intuitif, serta memastikan setiap detail visual dan fungsional bekerja secara optimal. 
+                Saya terus berupaya memperkuat kemampuan teknis, meningkatkan kreativitas, dan beradaptasi dengan lingkungan kerja yang dinamis agar dapat memberikan hasil terbaik pada setiap proyek yang saya kerjakan.
+            </p>
+            <a href="#" class="btn">Selengkapnya</a>
+        </div>
     </div>
 </section>
+<!-- SKILLS SECTION -->
+<section class="skills" id="skills">
+    <h2 class="heading">My <span>Skills</span></h2>
+    
+    <div class="skills-container">
+        <!-- LEFT SIDE - Description -->
+        <div class="skills-description">
+            <h3>Skills Reflects Our Knowledge</h3>
+            <p>
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minus natus tenetur 
+                tempora? Quasi, rem quos omnis. Porro rem aspernatur reiciendis ut 
+                praesentium minima ad, quos, officia! Illo libero, et, distinctio repellat sed 
+                nesciunt est modi quaerat placeat. Quod molestiae, alias?
+            </p>
+            
+            <div class="experience-box">
+                <h2 class="experience-number">3</h2>
+                <p class="experience-text">Years Of<br>Experience</p>
+            </div>
+        </div>
+
+        <!-- RIGHT SIDE - Skills Grid -->
+<div class="skills-bars">
+    <div class="skill-item">
+        <div class="skill-header">
+            <span class="skill-name">HTML</span>
+            <span class="skill-percentage">60%</span>
+        </div>
+    </div>
+
+    <div class="skill-item">
+        <div class="skill-header">
+            <span class="skill-name">CSS</span>
+            <span class="skill-percentage">40%</span>
+        </div>
+    </div>
+
+    <div class="skill-item">
+        <div class="skill-header">
+            <span class="skill-name">JavaScript</span>
+            <span class="skill-percentage">70%</span>
+        </div>
+    </div>
+
+    <div class="skill-item">
+        <div class="skill-header">
+            <span class="skill-name">PHP</span>
+            <span class="skill-percentage">50%</span>
+        </div>
+    </div>
+</div>
+</section>
 <script>
+// State untuk tracking contact view
+let isContactView = false;
+
+// Smooth scroll animation untuk navbar links
+document.querySelectorAll('nav a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        
+        const targetId = this.getAttribute('href');
+        
+        // Jika klik Contact
+        if (targetId === '#contact') {
+            activateContactView();
+        } else {
+            // Jika sedang di contact view, deactivate dulu
+            if (isContactView) {
+                deactivateContactView(() => {
+                    scrollToSection(targetId);
+                });
+            } else {
+                scrollToSection(targetId);
+            }
+        }
+    });
+});
+
+function scrollToSection(targetId) {
+    const targetSection = document.querySelector(targetId);
+    if (targetSection) {
+        targetSection.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+        });
+    }
+}
+
+function activateContactView() {
+    isContactView = true;
+    
+    // Scroll ke home dulu
+    document.querySelector('#home').scrollIntoView({
+        behavior: 'smooth',
+        block: 'start'
+    });
+    
+    setTimeout(() => {
+        const socialIcons = document.querySelector('.social-icons');
+        
+        // Tambah class untuk animasi garis bawah (TANPA BLUR)
+        socialIcons.classList.add('contact-active');
+    }, 500);
+}
+
+function deactivateContactView(callback) {
+    const socialIcons = document.querySelector('.social-icons');
+    
+    // Hapus class
+    socialIcons.classList.remove('contact-active');
+    
+    setTimeout(() => {
+        isContactView = false;
+        if (callback) callback();
+    }, 600);
+}
+
+// Intersection Observer untuk animasi scroll
 document.addEventListener("DOMContentLoaded", () => {
     const about = document.querySelector('.about');
+    const skills = document.querySelector('.skills');
+
+    const observerOptions = {
+        threshold: 0.2
+    };
 
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                about.classList.add('show');   // Muncul
+                entry.target.classList.add('show');
             } else {
-                about.classList.remove('show'); // Menghilang lagi
+                entry.target.classList.remove('show');
             }
         });
-    }, {
-        threshold: 0.2 // muncul saat 20% elemen terlihat
-    });
+    }, observerOptions);
 
-    observer.observe(about);
+    if (about) observer.observe(about);
+    if (skills) observer.observe(skills);
 });
 </script>
-
 </body>
 </html>
