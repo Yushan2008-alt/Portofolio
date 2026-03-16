@@ -3,37 +3,261 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio</title>
+    <title>Portfolio — YS</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <style>
         html { scroll-behavior: smooth; }
+
         body {
-            /* Initializing as Dark Theme */
-            --bg: #0a0a0a; 
-            --text: #ededed; 
-            --text-muted: #a3a3a3; 
-            --primary: #3b82f6; 
-            --border: #262626;
+            --bg: #080810;
+            --bg2: #0d0d18;
+            --text: #e8e8f0;
+            --text-muted: #8888aa;
+            --primary: #3b82f6;
+            --primary-glow: rgba(59,130,246,0.25);
+            --border: #1a1a2e;
+            --border-bright: #252540;
             background-color: var(--bg);
             color: var(--text);
-            font-family: 'Inter', sans-serif;
+            font-family: 'DM Sans', sans-serif;
         }
-        @keyframes pulse-slow {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.5; }
-        }
+
+        h1, h2, h3, nav, .font-display { font-family: 'Syne', sans-serif; }
+        .font-mono { font-family: 'JetBrains Mono', monospace; }
+
+        @keyframes pulse-slow { 0%,100%{opacity:1} 50%{opacity:0.4} }
+        @keyframes grid-move { 0%{background-position:0 0} 100%{background-position:40px 40px} }
+        @keyframes glow-pulse { 0%,100%{box-shadow:0 0 20px var(--primary-glow)} 50%{box-shadow:0 0 40px var(--primary-glow), 0 0 80px var(--primary-glow)} }
+        @keyframes scan { 0%{transform:translateY(-100%)} 100%{transform:translateY(100vh)} }
+        @keyframes shimmer { 0%{background-position:-200% 0} 100%{background-position:200% 0} }
+        @keyframes float-particle { 0%,100%{transform:translateY(0) scale(1);opacity:0.4} 50%{transform:translateY(-20px) scale(1.2);opacity:0.8} }
+        @keyframes border-glow { 0%,100%{opacity:0.4} 50%{opacity:1} }
+        @keyframes typewriter { from{width:0} to{width:100%} }
+        @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+        @keyframes fade-up { from{opacity:0;transform:translateY(16px)} to{opacity:1;transform:translateY(0)} }
+
         * { cursor: none !important; }
-        
-        /* Custom scrollbar for AI modal */
-        ::-webkit-scrollbar { width: 6px; }
+
+        /* Grid background */
+        .grid-bg {
+            background-image:
+                linear-gradient(rgba(59,130,246,0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(59,130,246,0.03) 1px, transparent 1px);
+            background-size: 40px 40px;
+            animation: grid-move 8s linear infinite;
+        }
+
+        /* Glowing borders */
+        .glow-border { border-color: var(--primary) !important; box-shadow: 0 0 20px var(--primary-glow), inset 0 0 20px rgba(59,130,246,0.03); }
+        .glow-text { text-shadow: 0 0 20px var(--primary-glow); }
+
+        /* Gradient text */
+        .gradient-text {
+            background: linear-gradient(135deg, var(--text) 0%, var(--primary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Futuristic card */
+        .futuristic-card {
+            position: relative;
+            background: linear-gradient(135deg, rgba(13,13,24,0.9), rgba(8,8,16,0.95));
+            border: 1px solid var(--border-bright);
+            transition: all 0.4s cubic-bezier(0.23,1,0.32,1);
+        }
+        .futuristic-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: inherit;
+            padding: 1px;
+            background: linear-gradient(135deg, var(--primary-glow), transparent 60%);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            opacity: 0;
+            transition: opacity 0.4s;
+        }
+        .futuristic-card:hover::before { opacity: 1; }
+        .futuristic-card:hover { border-color: rgba(59,130,246,0.3); box-shadow: 0 8px 40px rgba(59,130,246,0.1), 0 0 0 1px rgba(59,130,246,0.05); }
+
+        /* Scanline on AI modal */
+        .scanline::after {
+            content: '';
+            position: absolute;
+            left: 0; right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--primary), transparent);
+            opacity: 0.15;
+            animation: scan 4s linear infinite;
+            pointer-events: none;
+        }
+
+        /* Shimmer loading */
+        .shimmer-text {
+            background: linear-gradient(90deg, var(--text-muted) 25%, var(--text) 50%, var(--text-muted) 75%);
+            background-size: 200% 100%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: shimmer 1.5s infinite;
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar { width: 4px; }
         ::-webkit-scrollbar-track { background: transparent; }
-        ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 10px; }
-        ::-webkit-scrollbar-thumb:hover { background: var(--text-muted); }
+        ::-webkit-scrollbar-thumb { background: var(--border-bright); border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--primary); }
+
+        /* Noise overlay */
+        .noise::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+            opacity: 0.018;
+            pointer-events: none;
+            z-index: 9999;
+        }
+
+        /* Nav glow pill */
+        #nav-pill { background: linear-gradient(135deg, rgba(59,130,246,0.12), rgba(59,130,246,0.04)); }
+
+        /* Hero accent line */
+        .accent-line { height: 1px; background: linear-gradient(90deg, transparent, var(--primary), transparent); }
+
+        /* Tag chips */
+        .tag-chip {
+            border: 1px solid var(--border-bright);
+            color: var(--text-muted);
+            background: rgba(59,130,246,0.03);
+            transition: all 0.2s;
+        }
+        .tag-chip:hover { border-color: rgba(59,130,246,0.4); color: var(--primary); }
+
+        /* Corner decorators */
+        .corner-tl::before, .corner-br::after {
+            content: '';
+            position: absolute;
+            width: 8px; height: 8px;
+            border-color: var(--primary);
+            border-style: solid;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        .corner-tl::before { top: -1px; left: -1px; border-width: 1px 0 0 1px; }
+        .corner-br::after { bottom: -1px; right: -1px; border-width: 0 1px 1px 0; }
+        .futuristic-card:hover .corner-tl::before,
+        .futuristic-card:hover .corner-br::after { opacity: 1; }
+
+        /* AI message fade-in */
+        .ai-msg { animation: fade-up 0.3s ease-out; }
+
+        /* Cursor trail */
+        #cursor-trail {
+            position: fixed;
+            top: 0; left: 0;
+            pointer-events: none;
+            z-index: 99;
+        }
+
+        .trail-dot {
+            position: absolute;
+            border-radius: 50%;
+            background: var(--primary);
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+        }
+
+        /* Status dot */
+        .status-dot { animation: glow-pulse 2s infinite; border-radius: 50%; }
+
+        /* Scroll reveal */
+        .scroll-reveal { opacity: 0; transform: translateY(30px); transition: all 1s cubic-bezier(0.16,1,0.3,1); }
+
+        /* Paragraph mark */
+        .section-label {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.65rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--primary);
+            opacity: 0.8;
+        }
+
+        /* AI thinking dots */
+        .thinking-dot { animation: pulse-slow 1s infinite; }
+        .thinking-dot:nth-child(2) { animation-delay: 0.2s; }
+        .thinking-dot:nth-child(3) { animation-delay: 0.4s; }
+
+        /* AI response prose */
+        #ai-results p { margin-bottom: 0.5em; }
+        #ai-results strong { color: var(--text); font-weight: 500; }
+        #ai-results code {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8em;
+            background: rgba(59,130,246,0.1);
+            border: 1px solid rgba(59,130,246,0.2);
+            padding: 0.1em 0.4em;
+            border-radius: 4px;
+            color: var(--primary);
+        }
+
+        /* Light mode */
+        body.light {
+            --bg: #f4f4f8;
+            --bg2: #eeeef5;
+            --text: #111118;
+            --text-muted: #666680;
+            --border: #dddde8;
+            --border-bright: #ccccdd;
+            --primary-glow: rgba(59,130,246,0.15);
+        }
+        body.light .grid-bg {
+            background-image:
+                linear-gradient(rgba(59,130,246,0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(59,130,246,0.05) 1px, transparent 1px);
+        }
+        body.light .futuristic-card { background: linear-gradient(135deg, rgba(238,238,245,0.9), rgba(244,244,248,0.95)); }
+
+        /* Inline code in user message */
+        .user-bubble {
+            background: linear-gradient(135deg, rgba(59,130,246,0.08), rgba(59,130,246,0.03));
+            border: 1px solid rgba(59,130,246,0.15);
+            border-radius: 12px 12px 4px 12px;
+            padding: 10px 14px;
+        }
+        .ai-bubble {
+            background: linear-gradient(135deg, rgba(13,13,24,0.8), rgba(8,8,16,0.6));
+            border: 1px solid var(--border-bright);
+            border-radius: 4px 12px 12px 12px;
+            padding: 10px 14px;
+        }
+        body.light .ai-bubble { background: rgba(238,238,245,0.7); }
+
+        /* Particles canvas */
+        #particles-canvas {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.5;
+        }
     </style>
 </head>
-<body class="font-sans antialiased selection:bg-[var(--primary)] selection:text-white transition-colors duration-300 relative overflow-x-hidden">
+<body class="font-sans antialiased selection:bg-[var(--primary)] selection:text-white transition-colors duration-300 relative overflow-x-hidden noise">
+
+    <!-- Particles -->
+    <canvas id="particles-canvas"></canvas>
+
+    <!-- Grid Background -->
+    <div class="grid-bg fixed inset-0 pointer-events-none z-0"></div>
+
+    <!-- Top accent line -->
+    <div class="fixed top-0 left-0 right-0 z-50 h-px accent-line opacity-60"></div>
 
     <!-- Custom Cursor -->
     <div id="cursor" class="fixed top-0 left-0 pointer-events-none z-[100]"
@@ -42,23 +266,25 @@
              style="position: absolute; top: 50%; left: 50%;
                     transform: translate(-50%, -50%);
                     width: 38px; height: 38px; border-radius: 50%;
-                    border: 1.5px solid var(--primary); opacity: 0.5;
+                    border: 1px solid var(--primary); opacity: 0.5;
+                    box-shadow: 0 0 10px var(--primary-glow);
                     transition: width 0.3s ease, height 0.3s ease, opacity 0.3s ease;"></div>
         <div id="cursor-dot"
              style="position: absolute; top: 50%; left: 50%;
                     transform: translate(-50%, -50%);
-                    width: 7px; height: 7px; border-radius: 50%;
+                    width: 5px; height: 5px; border-radius: 50%;
                     background: var(--primary);
+                    box-shadow: 0 0 8px var(--primary);
                     transform-origin: center center;"></div>
     </div>
 
     <!-- Navigation -->
-    <nav class="fixed top-0 w-full z-40 backdrop-blur-md border-b border-[var(--border)] bg-[var(--bg)]/80 transition-colors duration-300">
+    <nav class="fixed top-0 w-full z-40 backdrop-blur-xl border-b border-[var(--border)] bg-[var(--bg)]/70 transition-colors duration-300">
         <div class="max-w-5xl mx-auto px-6 h-16 flex items-center justify-between">
-            <div class="font-medium tracking-tight text-xl interactive cursor-pointer text-[var(--text)]" onclick="window.scrollTo(0,0)">YS</div>
+            <div class="font-display font-bold tracking-tight text-xl interactive cursor-pointer text-[var(--text)] glow-text" onclick="window.scrollTo(0,0)" style="font-family:'Syne',sans-serif;">YS</div>
             
-            <div class="relative items-center p-1 rounded-full border border-[var(--border)] bg-[var(--bg)]/50 hidden md:flex shadow-sm">
-                <div id="nav-pill" class="absolute inset-y-1 bg-[var(--text)]/5 rounded-full z-0" style="width: 0px; left: 4px; transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);"></div>
+            <div class="relative items-center p-1 rounded-full border border-[var(--border-bright)] bg-[var(--bg)]/50 hidden md:flex shadow-sm">
+                <div id="nav-pill" class="absolute inset-y-1 rounded-full z-0" style="width: 0px; left: 4px; transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);"></div>
                 <a href="#home" class="nav-link interactive relative z-10 px-5 py-1.5 text-sm font-normal transition-colors text-[var(--text)]">Home</a>
                 <a href="#about" class="nav-link interactive relative z-10 px-5 py-1.5 text-sm font-normal transition-colors text-[var(--text-muted)] hover:text-[var(--text)]">About</a>
                 <a href="#skills" class="nav-link interactive relative z-10 px-5 py-1.5 text-sm font-normal transition-colors text-[var(--text-muted)] hover:text-[var(--text)]">Skills</a>
@@ -67,23 +293,21 @@
             </div>
 
             <div class="flex items-center gap-4">
-                <button id="ai-trigger" class="interactive flex items-center justify-center gap-2 px-3 py-1.5 rounded-full border border-[var(--border)] bg-[var(--bg)] text-xs font-normal text-[var(--text)] hover:border-[var(--primary)]/50 hover:text-[var(--primary)] transition-colors shadow-sm">
+                <button id="ai-trigger" class="interactive flex items-center justify-center gap-2 px-3 py-1.5 rounded-full border border-[var(--border-bright)] bg-[var(--bg)] text-xs font-normal text-[var(--text)] hover:border-[var(--primary)]/60 hover:text-[var(--primary)] hover:shadow-[0_0_16px_var(--primary-glow)] transition-all shadow-sm" style="font-family:'Syne',sans-serif;">
                     <iconify-icon icon="solar:magic-stick-3-linear" style="stroke-width: 1.5;"></iconify-icon>
                     Ask AI
-                    <span class="hidden sm:inline-block ml-1 text-[var(--text-muted)] bg-[var(--border)] px-1.5 py-0.5 rounded" style="font-size: 0.65rem;">⌘K</span>
+                    <span class="hidden sm:inline-block ml-1 text-[var(--text-muted)] bg-[var(--border)] px-1.5 py-0.5 rounded font-mono" style="font-size: 0.6rem;">⌘K</span>
                 </button>
 
-                <!-- Color Theme Selector -->
                 <div class="flex gap-2 items-center border-l border-[var(--border)] pl-4">
-                    <button class="w-3.5 h-3.5 rounded-full bg-blue-500 interactive color-btn ring-2 ring-transparent ring-offset-2 ring-offset-[var(--bg)] transition-all" data-color="#3b82f6" aria-label="Blue"></button>
-                    <button class="w-3.5 h-3.5 rounded-full bg-purple-500 interactive color-btn ring-2 ring-transparent ring-offset-2 ring-offset-[var(--bg)] transition-all" data-color="#a855f7" aria-label="Purple"></button>
-                    <button class="w-3.5 h-3.5 rounded-full bg-green-500 interactive color-btn ring-2 ring-transparent ring-offset-2 ring-offset-[var(--bg)] transition-all" data-color="#22c55e" aria-label="Green"></button>
-                    <button class="w-3.5 h-3.5 rounded-full bg-yellow-500 interactive color-btn ring-2 ring-transparent ring-offset-2 ring-offset-[var(--bg)] transition-all" data-color="#eab308" aria-label="Yellow"></button>
-                    <button class="w-3.5 h-3.5 rounded-full bg-orange-500 interactive color-btn ring-2 ring-transparent ring-offset-2 ring-offset-[var(--bg)] transition-all" data-color="#f97316" aria-label="Orange"></button>
-                    <button class="w-3.5 h-3.5 rounded-full bg-red-500 interactive color-btn ring-2 ring-transparent ring-offset-2 ring-offset-[var(--bg)] transition-all" data-color="#ef4444" aria-label="Red"></button>
+                    <button class="w-3.5 h-3.5 rounded-full bg-blue-500 interactive color-btn ring-2 ring-transparent ring-offset-2 ring-offset-[var(--bg)] transition-all hover:scale-125" data-color="#3b82f6" aria-label="Blue"></button>
+                    <button class="w-3.5 h-3.5 rounded-full bg-purple-500 interactive color-btn ring-2 ring-transparent ring-offset-2 ring-offset-[var(--bg)] transition-all hover:scale-125" data-color="#a855f7" aria-label="Purple"></button>
+                    <button class="w-3.5 h-3.5 rounded-full bg-green-500 interactive color-btn ring-2 ring-transparent ring-offset-2 ring-offset-[var(--bg)] transition-all hover:scale-125" data-color="#22c55e" aria-label="Green"></button>
+                    <button class="w-3.5 h-3.5 rounded-full bg-yellow-500 interactive color-btn ring-2 ring-transparent ring-offset-2 ring-offset-[var(--bg)] transition-all hover:scale-125" data-color="#eab308" aria-label="Yellow"></button>
+                    <button class="w-3.5 h-3.5 rounded-full bg-orange-500 interactive color-btn ring-2 ring-transparent ring-offset-2 ring-offset-[var(--bg)] transition-all hover:scale-125" data-color="#f97316" aria-label="Orange"></button>
+                    <button class="w-3.5 h-3.5 rounded-full bg-red-500 interactive color-btn ring-2 ring-transparent ring-offset-2 ring-offset-[var(--bg)] transition-all hover:scale-125" data-color="#ef4444" aria-label="Red"></button>
                 </div>
-                 <button id="theme-toggle" class="interactive flex items-center justify-center text-xl text-[var(--text-muted)] hover:text-[var(--text)] transition-colors ml-2" aria-label="Toggle Theme">
-                    <!-- Default to sun since starting in dark mode -->
+                <button id="theme-toggle" class="interactive flex items-center justify-center text-xl text-[var(--text-muted)] hover:text-[var(--text)] transition-colors ml-2" aria-label="Toggle Theme">
                     <iconify-icon icon="solar:sun-linear" style="stroke-width: 1.5;"></iconify-icon>
                 </button>
             </div>
@@ -91,71 +315,102 @@
     </nav>
 
     <!-- AI Search Modal -->
-    <div id="ai-modal" class="fixed inset-0 z-50 flex items-start justify-center pt-24 px-4 opacity-0 pointer-events-none transition-opacity duration-300">
-        <div class="absolute inset-0 bg-[var(--bg)]/80 backdrop-blur-sm ai-close interactive"></div>
+    <div id="ai-modal" class="fixed inset-0 z-50 flex items-start justify-center pt-20 px-4 opacity-0 pointer-events-none transition-opacity duration-300">
+        <div class="absolute inset-0 bg-[var(--bg)]/80 backdrop-blur-md ai-close interactive"></div>
         
-        <div class="relative w-full max-w-2xl bg-[var(--bg)] rounded-2xl border border-[var(--border)] shadow-2xl overflow-hidden transform scale-95 transition-transform duration-300 flex flex-col" id="ai-dialog" style="max-height: 70vh;">
+        <div class="relative w-full max-w-2xl rounded-2xl border border-[var(--border-bright)] shadow-2xl overflow-hidden transform scale-95 transition-transform duration-300 flex flex-col scanline" id="ai-dialog"
+             style="max-height: 72vh; background: linear-gradient(180deg, rgba(8,8,20,0.98) 0%, rgba(5,5,15,0.99) 100%); box-shadow: 0 0 60px rgba(59,130,246,0.08), 0 24px 64px rgba(0,0,0,0.6);">
             
-            <div class="flex items-center px-4 py-4 border-b border-[var(--border)]">
-                <iconify-icon icon="solar:magnifer-linear" class="text-xl text-[var(--text-muted)] mr-3"></iconify-icon>
-                <input type="text" id="ai-input" placeholder="Ask AI about my projects, skills, or general programming concepts..." class="w-full bg-transparent border-none outline-none text-sm text-[var(--text)] placeholder-[var(--text-muted)] interactive" autocomplete="off">
-                <button class="text-xs text-[var(--text-muted)] bg-[var(--border)] px-2 py-1 rounded ml-2 ai-close interactive hover:bg-[var(--primary)] hover:text-white transition-colors">ESC</button>
+            <!-- Modal header glow top line -->
+            <div class="absolute top-0 left-0 right-0 h-px" style="background: linear-gradient(90deg, transparent, var(--primary), transparent); opacity: 0.6;"></div>
+
+            <div class="flex items-center px-5 py-4 border-b border-[var(--border)]">
+                <div class="flex items-center gap-2 mr-3">
+                    <div class="w-2 h-2 rounded-full bg-[var(--primary)]" style="animation: pulse-slow 2s infinite; box-shadow: 0 0 8px var(--primary);"></div>
+                    <span class="font-mono text-[10px] text-[var(--primary)] uppercase tracking-widest opacity-70">AI System</span>
+                </div>
+                <iconify-icon icon="solar:magnifer-linear" class="text-lg text-[var(--text-muted)] mr-3"></iconify-icon>
+                <input type="text" id="ai-input" placeholder="Ask me anything — portfolio, coding, or general knowledge…" class="w-full bg-transparent border-none outline-none text-sm text-[var(--text)] placeholder-[var(--text-muted)] interactive" autocomplete="off" style="font-family:'DM Sans',sans-serif;">
+                <button class="text-[10px] font-mono text-[var(--text-muted)] bg-[var(--border)] px-2 py-1 rounded ml-2 ai-close interactive hover:bg-[var(--primary)] hover:text-white transition-colors tracking-widest">ESC</button>
             </div>
 
-            <div id="ai-results" class="overflow-y-auto p-6 hidden flex-col gap-6 flex-1">
-                <!-- Chat messages will be dynamically added here -->
+            <!-- Suggested prompts (visible when no results yet) -->
+            <div id="ai-suggestions" class="p-5 flex flex-wrap gap-2">
+                <span class="section-label w-full mb-2">Suggested</span>
+                <button class="suggestion-btn interactive px-3 py-1.5 rounded-lg border border-[var(--border-bright)] text-xs text-[var(--text-muted)] hover:border-[var(--primary)]/40 hover:text-[var(--primary)] transition-all" style="font-family:'JetBrains Mono',monospace;">What are your skills?</button>
+                <button class="suggestion-btn interactive px-3 py-1.5 rounded-lg border border-[var(--border-bright)] text-xs text-[var(--text-muted)] hover:border-[var(--primary)]/40 hover:text-[var(--primary)] transition-all" style="font-family:'JetBrains Mono',monospace;">Tell me about your projects</button>
+                <button class="suggestion-btn interactive px-3 py-1.5 rounded-lg border border-[var(--border-bright)] text-xs text-[var(--text-muted)] hover:border-[var(--primary)]/40 hover:text-[var(--primary)] transition-all" style="font-family:'JetBrains Mono',monospace;">How do I learn web development?</button>
+                <button class="suggestion-btn interactive px-3 py-1.5 rounded-lg border border-[var(--border-bright)] text-xs text-[var(--text-muted)] hover:border-[var(--primary)]/40 hover:text-[var(--primary)] transition-all" style="font-family:'JetBrains Mono',monospace;">What is REST API?</button>
+                <button class="suggestion-btn interactive px-3 py-1.5 rounded-lg border border-[var(--border-bright)] text-xs text-[var(--text-muted)] hover:border-[var(--primary)]/40 hover:text-[var(--primary)] transition-all" style="font-family:'JetBrains Mono',monospace;">How to contact you?</button>
             </div>
+
+            <div id="ai-results" class="overflow-y-auto px-5 pb-5 hidden flex-col gap-4 flex-1" style="gap: 16px;"></div>
         </div>
     </div>
 
-    <main>
+    <main class="relative z-10">
         <!-- Hero Section -->
         <section id="home" class="min-h-screen flex flex-col items-center justify-center pt-24 px-6 text-center relative">
             
-            <!-- Profile Picture Frame (Fixed) -->
+            <!-- Background orbs -->
+            <div class="absolute inset-0 overflow-hidden pointer-events-none">
+                <div class="absolute top-1/3 left-1/4 w-80 h-80 rounded-full opacity-[0.06]" style="background: radial-gradient(circle, var(--primary), transparent 70%); filter: blur(40px);"></div>
+                <div class="absolute bottom-1/3 right-1/4 w-64 h-64 rounded-full opacity-[0.04]" style="background: radial-gradient(circle, var(--primary), transparent 70%); filter: blur(60px);"></div>
+            </div>
+
+            <!-- Profile Picture -->
             <div class="relative w-28 h-28 sm:w-32 sm:h-32 mx-auto mb-8 interactive z-10 group">
-                <div class="absolute -inset-0.5 bg-gradient-to-tr from-[var(--primary)] to-transparent rounded-full opacity-40 group-hover:opacity-100 blur-[3px] transition-opacity duration-500"></div>
-                <div class="absolute inset-0 bg-[var(--bg)] rounded-full border border-[var(--border)] shadow-sm"></div>
-                <div class="absolute inset-1 rounded-full bg-[var(--border)]/30 overflow-hidden flex items-center justify-center border border-[var(--border)]">
+                <div class="absolute -inset-1 rounded-full opacity-30 group-hover:opacity-80 blur-[6px] transition-opacity duration-500" style="background: conic-gradient(var(--primary), transparent, var(--primary));"></div>
+                <div class="absolute inset-0 bg-[var(--bg)] rounded-full border border-[var(--border-bright)]"></div>
+                <div class="absolute inset-1 rounded-full overflow-hidden flex items-center justify-center border border-[var(--border)]" style="background: var(--bg2);">
                     <iconify-icon icon="solar:user-linear" class="text-4xl text-[var(--text-muted)] absolute group-hover:scale-110 transition-transform duration-500" style="stroke-width: 1.5;"></iconify-icon>
                     <img src="image/yushanpose.jpg" alt="Profile" class="w-full h-full object-cover relative z-10 transition-opacity duration-300" onerror="this.style.opacity=0">
                 </div>
             </div>
 
-            <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-[var(--border)] text-xs text-[var(--text-muted)] mb-8 bg-[var(--bg)] z-10 shadow-sm">
-                <span class="w-2 h-2 rounded-full bg-[var(--primary)]" style="animation: pulse-slow 2s infinite;"></span>
-                Available for opportunities
+            <!-- Status Badge -->
+            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-[var(--border-bright)] text-xs text-[var(--text-muted)] mb-10 z-10" style="background: rgba(59,130,246,0.04); backdrop-filter: blur(8px);">
+                <span class="w-2 h-2 rounded-full bg-[var(--primary)] status-dot"></span>
+                <span class="font-mono tracking-wider" style="font-size:0.65rem;">AVAILABLE FOR OPPORTUNITIES</span>
             </div>
             
-            <div id="floating-title" class="relative z-10">
-                <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full max-w-lg bg-[var(--primary)]/30 blur-[100px] rounded-full -z-10 transition-colors duration-500"></div>
+            <div id="floating-title" class="relative z-10 mb-6">
+                <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full max-w-lg opacity-30 -z-10 transition-colors duration-500" style="background: radial-gradient(ellipse, var(--primary-glow), transparent 70%); filter: blur(40px);"></div>
                 
-                <h1 class="text-5xl md:text-7xl font-medium tracking-tight mb-6 leading-tight">
+                <h1 class="text-5xl md:text-7xl font-display font-bold tracking-tight mb-2 leading-tight" style="font-family:'Syne',sans-serif;">
                     Crafting digital <br/> 
-                    <span class="text-[var(--text-muted)]">experiences.</span>
+                    <span class="gradient-text">experiences.</span>
                 </h1>
             </div>
             
-            <p class="text-base sm:text-lg text-[var(--text-muted)] max-w-xl mx-auto mb-10 z-10 leading-relaxed font-normal">
+            <!-- Accent line under title -->
+            <div class="accent-line w-24 mb-8 z-10 opacity-40"></div>
+            
+            <p class="text-base sm:text-lg text-[var(--text-muted)] max-w-xl mx-auto mb-10 z-10 leading-relaxed">
                 I build fast, accessible, and highly interactive web applications using modern technologies and refined physics.
             </p>
             
-            <a href="#contact" class="interactive px-8 py-3.5 rounded-full bg-[var(--text)] text-[var(--bg)] text-sm font-normal hover:scale-105 transition-transform duration-300 z-10 shadow-lg">
-                CV Details
+            <a href="#contact" class="interactive group relative px-8 py-3.5 rounded-full text-sm font-medium z-10 overflow-hidden transition-all duration-300 hover:scale-105" style="background: var(--text); color: var(--bg); font-family:'Syne',sans-serif;">
+                <span class="relative z-10">CV Details</span>
+                <div class="absolute inset-0 opacity-0 group-hover:opacity-20 transition-opacity" style="background: var(--primary);"></div>
             </a>
 
-            <div class="absolute inset-0 z-0 overflow-hidden pointer-events-none opacity-10">
-                <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-[var(--primary)] rounded-full blur-[120px]"></div>
+            <!-- Scroll indicator -->
+            <div class="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 opacity-30 z-10">
+                <span class="font-mono text-[10px] tracking-widest uppercase" style="color: var(--text-muted);">Scroll</span>
+                <div class="w-px h-8" style="background: linear-gradient(to bottom, var(--primary), transparent);"></div>
             </div>
         </section>
 
         <!-- About Section -->
-        <section id="about" class="py-32 px-6 max-w-3xl mx-auto scroll-reveal" style="opacity: 0; transform: translateY(30px); transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);">
-            <div class="flex items-center gap-4 mb-8">
-                <span class="h-[1px] w-12 bg-[var(--primary)]"></span>
-                <h2 class="text-3xl font-medium tracking-tight">About Me</h2>
+        <section id="about" class="py-32 px-6 max-w-3xl mx-auto scroll-reveal">
+            <div class="flex items-center gap-4 mb-3">
+                <span class="h-px w-12 bg-[var(--primary)] opacity-80"></span>
+                <span class="section-label">01 / About</span>
             </div>
-            <div class="space-y-6 text-[var(--text-muted)] leading-relaxed text-base font-normal">
+            <h2 class="text-3xl font-display font-bold tracking-tight mb-10" style="font-family:'Syne',sans-serif;">About Me</h2>
+            
+            <div class="space-y-6 text-[var(--text-muted)] leading-relaxed text-base">
                 <p>
                     As a Backend Developer, I'm a 'behind-the-scenes architect' who enjoys breaking down complex business logic into seamless, functional systems. I have experience integrating various third-party services and ensuring seamless data flow between servers and users.
                 </p>
@@ -163,45 +418,69 @@
                     My focus is on delivering technology solutions that not only meet business needs, but also provide a responsive user experience. I thrive on solving complex problems and optimizing performance, while maintaining a strong emphasis on security and scalability.
                 </p>
             </div>
+
+            <!-- Inline stat row -->
+            <div class="flex flex-wrap gap-8 mt-12 pt-8 border-t border-[var(--border)]">
+                <div>
+                    <div class="text-3xl font-bold gradient-text mb-1" style="font-family:'Syne',sans-serif;">3+</div>
+                    <div class="text-xs text-[var(--text-muted)] font-mono uppercase tracking-wider">Years Exp.</div>
+                </div>
+                <div>
+                    <div class="text-3xl font-bold gradient-text mb-1" style="font-family:'Syne',sans-serif;">15+</div>
+                    <div class="text-xs text-[var(--text-muted)] font-mono uppercase tracking-wider">Projects</div>
+                </div>
+                <div>
+                    <div class="text-3xl font-bold gradient-text mb-1" style="font-family:'Syne',sans-serif;">10+</div>
+                    <div class="text-xs text-[var(--text-muted)] font-mono uppercase tracking-wider">Technologies</div>
+                </div>
+            </div>
         </section>
 
         <!-- Skills Section -->
-        <section id="skills" class="py-32 px-6 max-w-5xl mx-auto scroll-reveal" style="opacity: 0; transform: translateY(30px); transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);">
-            <div class="flex items-center justify-end gap-4 mb-12">
-                <h2 class="text-3xl font-medium tracking-tight">Technical Arsenal</h2>
-                <span class="h-[1px] w-12 bg-[var(--primary)]"></span>
+        <section id="skills" class="py-32 px-6 max-w-5xl mx-auto scroll-reveal">
+            <div class="flex items-center justify-end gap-4 mb-3">
+                <span class="section-label">02 / Skills</span>
+                <span class="h-px w-12 bg-[var(--primary)] opacity-80"></span>
             </div>
+            <h2 class="text-3xl font-display font-bold tracking-tight mb-12 text-right" style="font-family:'Syne',sans-serif;">Technical Arsenal</h2>
             
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div class="tilt-card interactive relative p-8 rounded-2xl border border-[var(--border)] bg-[var(--bg)]/50 backdrop-blur-sm group transition-colors hover:border-[var(--primary)]/40 shadow-sm" style="transform-style: preserve-3d;">
+                <div class="tilt-card futuristic-card interactive relative p-8 rounded-2xl group corner-tl corner-br" style="transform-style: preserve-3d;">
                     <div class="absolute inset-0 bg-gradient-to-br from-[var(--primary)]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl pointer-events-none"></div>
-                    <iconify-icon icon="solar:code-square-linear" class="text-4xl mb-6 text-[var(--primary)]" style="stroke-width: 1.5; transform: translateZ(20px);"></iconify-icon>
-                    <h3 class="text-xl font-medium tracking-tight mb-3" style="transform: translateZ(15px);">Frontend</h3>
-                    <p class="text-sm text-[var(--text-muted)] leading-relaxed font-normal" style="transform: translateZ(10px);">Mastery in React, Vue, vanilla JavaScript, and utility-first CSS frameworks like Tailwind.</p>
+                    <div class="w-10 h-10 rounded-lg flex items-center justify-center mb-6" style="background: rgba(59,130,246,0.1); border: 1px solid rgba(59,130,246,0.2); transform: translateZ(20px);">
+                        <iconify-icon icon="solar:code-square-linear" class="text-xl text-[var(--primary)]" style="stroke-width: 1.5;"></iconify-icon>
+                    </div>
+                    <h3 class="text-xl font-bold tracking-tight mb-3" style="font-family:'Syne',sans-serif; transform: translateZ(15px);">Frontend</h3>
+                    <p class="text-sm text-[var(--text-muted)] leading-relaxed" style="transform: translateZ(10px);">Mastery in React, Vue, vanilla JavaScript, and utility-first CSS frameworks like Tailwind.</p>
                 </div>
                 
-                <div class="tilt-card interactive relative p-8 rounded-2xl border border-[var(--border)] bg-[var(--bg)]/50 backdrop-blur-sm group transition-colors hover:border-[var(--primary)]/40 shadow-sm" style="transform-style: preserve-3d;">
+                <div class="tilt-card futuristic-card interactive relative p-8 rounded-2xl group corner-tl corner-br" style="transform-style: preserve-3d;">
                     <div class="absolute inset-0 bg-gradient-to-br from-[var(--primary)]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl pointer-events-none"></div>
-                    <iconify-icon icon="solar:magic-stick-3-linear" class="text-4xl mb-6 text-[var(--primary)]" style="stroke-width: 1.5; transform: translateZ(20px);"></iconify-icon>
-                    <h3 class="text-xl font-medium tracking-tight mb-3" style="transform: translateZ(15px);">Motion</h3>
-                    <p class="text-sm text-[var(--text-muted)] leading-relaxed font-normal" style="transform: translateZ(10px);">Implementing fluid animations and spring physics using Framer Motion and custom WebGL setups.</p>
+                    <div class="w-10 h-10 rounded-lg flex items-center justify-center mb-6" style="background: rgba(59,130,246,0.1); border: 1px solid rgba(59,130,246,0.2); transform: translateZ(20px);">
+                        <iconify-icon icon="solar:magic-stick-3-linear" class="text-xl text-[var(--primary)]" style="stroke-width: 1.5;"></iconify-icon>
+                    </div>
+                    <h3 class="text-xl font-bold tracking-tight mb-3" style="font-family:'Syne',sans-serif; transform: translateZ(15px);">Motion</h3>
+                    <p class="text-sm text-[var(--text-muted)] leading-relaxed" style="transform: translateZ(10px);">Implementing fluid animations and spring physics using Framer Motion and custom WebGL setups.</p>
                 </div>
 
-                <div class="tilt-card interactive relative p-8 rounded-2xl border border-[var(--border)] bg-[var(--bg)]/50 backdrop-blur-sm group transition-colors hover:border-[var(--primary)]/40 shadow-sm" style="transform-style: preserve-3d;">
+                <div class="tilt-card futuristic-card interactive relative p-8 rounded-2xl group corner-tl corner-br" style="transform-style: preserve-3d;">
                     <div class="absolute inset-0 bg-gradient-to-br from-[var(--primary)]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl pointer-events-none"></div>
-                    <iconify-icon icon="solar:server-square-linear" class="text-4xl mb-6 text-[var(--primary)]" style="stroke-width: 1.5; transform: translateZ(20px);"></iconify-icon>
-                    <h3 class="text-xl font-medium tracking-tight mb-3" style="transform: translateZ(15px);">Architecture</h3>
-                    <p class="text-sm text-[var(--text-muted)] leading-relaxed font-normal" style="transform: translateZ(10px);">Designing scalable component architectures, state management, and optimized build pipelines.</p>
+                    <div class="w-10 h-10 rounded-lg flex items-center justify-center mb-6" style="background: rgba(59,130,246,0.1); border: 1px solid rgba(59,130,246,0.2); transform: translateZ(20px);">
+                        <iconify-icon icon="solar:server-square-linear" class="text-xl text-[var(--primary)]" style="stroke-width: 1.5;"></iconify-icon>
+                    </div>
+                    <h3 class="text-xl font-bold tracking-tight mb-3" style="font-family:'Syne',sans-serif; transform: translateZ(15px);">Architecture</h3>
+                    <p class="text-sm text-[var(--text-muted)] leading-relaxed" style="transform: translateZ(10px);">Designing scalable component architectures, state management, and optimized build pipelines.</p>
                 </div>
             </div>
         </section>
 
         <!-- Projects Section (Carousel) -->
-        <section id="projects" class="py-32 px-6 max-w-5xl mx-auto scroll-reveal overflow-visible" style="opacity: 0; transform: translateY(30px); transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);">
-            <div class="flex items-center gap-4 mb-12">
-                <span class="h-[1px] w-12 bg-[var(--primary)]"></span>
-                <h2 class="text-3xl font-medium tracking-tight">Featured Work</h2>
+        <section id="projects" class="py-32 px-6 max-w-5xl mx-auto scroll-reveal overflow-visible">
+            <div class="flex items-center gap-4 mb-3">
+                <span class="h-px w-12 bg-[var(--primary)] opacity-80"></span>
+                <span class="section-label">03 / Work</span>
             </div>
+            <h2 class="text-3xl font-display font-bold tracking-tight mb-12" style="font-family:'Syne',sans-serif;">Featured Work</h2>
             
             <div class="relative group/slider mx-auto">
                 <div class="overflow-hidden pb-8 pt-4 -mt-4 -mx-2 px-2"> 
@@ -209,22 +488,23 @@
                         
                         <!-- Project 1 -->
                         <div class="project-slide w-full md:w-[calc(50%-0.75rem)] flex-shrink-0">
-                            <a href="#" class="tilt-card interactive block h-full p-4 rounded-2xl border border-[var(--border)] bg-[var(--bg)]/50 hover:bg-[var(--bg)] hover:border-[var(--primary)]/40 transition-all shadow-sm group" style="transform-style: preserve-3d;">
-                                <div class="aspect-[16/10] w-full rounded-xl bg-[var(--border)]/30 mb-6 overflow-hidden relative flex items-center justify-center border border-[var(--border)]" style="transform: translateZ(15px);">
+                            <a href="#" class="tilt-card futuristic-card interactive block h-full p-4 rounded-2xl transition-all group corner-tl corner-br" style="transform-style: preserve-3d;">
+                                <div class="aspect-[16/10] w-full rounded-xl mb-6 overflow-hidden relative flex items-center justify-center border border-[var(--border)]" style="background: linear-gradient(135deg, rgba(59,130,246,0.05), rgba(8,8,16,0.8)); transform: translateZ(15px);">
                                     <iconify-icon icon="solar:gallery-linear" class="text-5xl text-[var(--text-muted)] group-hover:scale-110 group-hover:text-[var(--primary)] transition-all duration-500"></iconify-icon>
+                                    <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500" style="background: linear-gradient(135deg, rgba(59,130,246,0.05), transparent);"></div>
                                 </div>
                                 <div class="px-2 flex flex-col justify-between" style="transform: translateZ(25px);">
                                     <div>
-                                        <h3 class="text-lg font-medium tracking-tight mb-2 flex items-center justify-between">
+                                        <h3 class="text-lg font-bold tracking-tight mb-2 flex items-center justify-between" style="font-family:'Syne',sans-serif;">
                                             E-Commerce Platform
-                                            <iconify-icon icon="solar:arrow-right-up-linear" class="text-[var(--text-muted)] group-hover:text-[var(--text)] transition-colors"></iconify-icon>
+                                            <iconify-icon icon="solar:arrow-right-up-linear" class="text-[var(--text-muted)] group-hover:text-[var(--primary)] transition-colors"></iconify-icon>
                                         </h3>
-                                        <p class="text-sm text-[var(--text-muted)] font-normal leading-relaxed mb-5">A high-performance storefront with real-time inventory synchronization and secure checkout.</p>
+                                        <p class="text-sm text-[var(--text-muted)] leading-relaxed mb-5">A high-performance storefront with real-time inventory synchronization and secure checkout.</p>
                                     </div>
                                     <div class="flex flex-wrap gap-2 mt-auto">
-                                        <span class="px-2.5 py-1 rounded-full text-xs border border-[var(--border)] text-[var(--text-muted)] bg-[var(--bg)]">Next.js</span>
-                                        <span class="px-2.5 py-1 rounded-full text-xs border border-[var(--border)] text-[var(--text-muted)] bg-[var(--bg)]">Stripe</span>
-                                        <span class="px-2.5 py-1 rounded-full text-xs border border-[var(--border)] text-[var(--text-muted)] bg-[var(--bg)]">PostgreSQL</span>
+                                        <span class="tag-chip px-2.5 py-1 rounded-full text-xs">Next.js</span>
+                                        <span class="tag-chip px-2.5 py-1 rounded-full text-xs">Stripe</span>
+                                        <span class="tag-chip px-2.5 py-1 rounded-full text-xs">PostgreSQL</span>
                                     </div>
                                 </div>
                             </a>
@@ -232,22 +512,22 @@
 
                         <!-- Project 2 -->
                         <div class="project-slide w-full md:w-[calc(50%-0.75rem)] flex-shrink-0">
-                            <a href="#" class="tilt-card interactive block h-full p-4 rounded-2xl border border-[var(--border)] bg-[var(--bg)]/50 hover:bg-[var(--bg)] hover:border-[var(--primary)]/40 transition-all shadow-sm group" style="transform-style: preserve-3d;">
-                                <div class="aspect-[16/10] w-full rounded-xl bg-[var(--border)]/30 mb-6 overflow-hidden relative flex items-center justify-center border border-[var(--border)]" style="transform: translateZ(15px);">
+                            <a href="#" class="tilt-card futuristic-card interactive block h-full p-4 rounded-2xl transition-all group corner-tl corner-br" style="transform-style: preserve-3d;">
+                                <div class="aspect-[16/10] w-full rounded-xl mb-6 overflow-hidden relative flex items-center justify-center border border-[var(--border)]" style="background: linear-gradient(135deg, rgba(59,130,246,0.05), rgba(8,8,16,0.8)); transform: translateZ(15px);">
                                     <iconify-icon icon="solar:chart-square-linear" class="text-5xl text-[var(--text-muted)] group-hover:scale-110 group-hover:text-[var(--primary)] transition-all duration-500"></iconify-icon>
                                 </div>
-                                <div class="px-2 flex flex-col justify-between h-[calc(100%-14rem)]" style="transform: translateZ(25px);">
+                                <div class="px-2 flex flex-col justify-between" style="transform: translateZ(25px);">
                                     <div>
-                                        <h3 class="text-lg font-medium tracking-tight mb-2 flex items-center justify-between">
+                                        <h3 class="text-lg font-bold tracking-tight mb-2 flex items-center justify-between" style="font-family:'Syne',sans-serif;">
                                             Analytics Dashboard
-                                            <iconify-icon icon="solar:arrow-right-up-linear" class="text-[var(--text-muted)] group-hover:text-[var(--text)] transition-colors"></iconify-icon>
+                                            <iconify-icon icon="solar:arrow-right-up-linear" class="text-[var(--text-muted)] group-hover:text-[var(--primary)] transition-colors"></iconify-icon>
                                         </h3>
-                                        <p class="text-sm text-[var(--text-muted)] font-normal leading-relaxed mb-5">Interactive data visualization tool capable of processing and displaying thousands of records.</p>
+                                        <p class="text-sm text-[var(--text-muted)] leading-relaxed mb-5">Interactive data visualization tool capable of processing and displaying thousands of records.</p>
                                     </div>
                                     <div class="flex flex-wrap gap-2 mt-auto">
-                                        <span class="px-2.5 py-1 rounded-full text-xs border border-[var(--border)] text-[var(--text-muted)] bg-[var(--bg)]">Vue.js</span>
-                                        <span class="px-2.5 py-1 rounded-full text-xs border border-[var(--border)] text-[var(--text-muted)] bg-[var(--bg)]">D3.js</span>
-                                        <span class="px-2.5 py-1 rounded-full text-xs border border-[var(--border)] text-[var(--text-muted)] bg-[var(--bg)]">Node.js</span>
+                                        <span class="tag-chip px-2.5 py-1 rounded-full text-xs">Vue.js</span>
+                                        <span class="tag-chip px-2.5 py-1 rounded-full text-xs">D3.js</span>
+                                        <span class="tag-chip px-2.5 py-1 rounded-full text-xs">Node.js</span>
                                     </div>
                                 </div>
                             </a>
@@ -255,22 +535,22 @@
                         
                         <!-- Project 3 -->
                         <div class="project-slide w-full md:w-[calc(50%-0.75rem)] flex-shrink-0">
-                            <a href="#" class="tilt-card interactive block h-full p-4 rounded-2xl border border-[var(--border)] bg-[var(--bg)]/50 hover:bg-[var(--bg)] hover:border-[var(--primary)]/40 transition-all shadow-sm group" style="transform-style: preserve-3d;">
-                                <div class="aspect-[16/10] w-full rounded-xl bg-[var(--border)]/30 mb-6 overflow-hidden relative flex items-center justify-center border border-[var(--border)]" style="transform: translateZ(15px);">
+                            <a href="#" class="tilt-card futuristic-card interactive block h-full p-4 rounded-2xl transition-all group corner-tl corner-br" style="transform-style: preserve-3d;">
+                                <div class="aspect-[16/10] w-full rounded-xl mb-6 overflow-hidden relative flex items-center justify-center border border-[var(--border)]" style="background: linear-gradient(135deg, rgba(59,130,246,0.05), rgba(8,8,16,0.8)); transform: translateZ(15px);">
                                     <iconify-icon icon="solar:chat-round-line-linear" class="text-5xl text-[var(--text-muted)] group-hover:scale-110 group-hover:text-[var(--primary)] transition-all duration-500"></iconify-icon>
                                 </div>
-                                <div class="px-2 flex flex-col justify-between h-[calc(100%-14rem)]" style="transform: translateZ(25px);">
+                                <div class="px-2 flex flex-col justify-between" style="transform: translateZ(25px);">
                                     <div>
-                                        <h3 class="text-lg font-medium tracking-tight mb-2 flex items-center justify-between">
+                                        <h3 class="text-lg font-bold tracking-tight mb-2 flex items-center justify-between" style="font-family:'Syne',sans-serif;">
                                             Real-Time Chat Engine
-                                            <iconify-icon icon="solar:arrow-right-up-linear" class="text-[var(--text-muted)] group-hover:text-[var(--text)] transition-colors"></iconify-icon>
+                                            <iconify-icon icon="solar:arrow-right-up-linear" class="text-[var(--text-muted)] group-hover:text-[var(--primary)] transition-colors"></iconify-icon>
                                         </h3>
-                                        <p class="text-sm text-[var(--text-muted)] font-normal leading-relaxed mb-5">A scalable messaging application with WebSocket integration and end-to-end encryption mechanics.</p>
+                                        <p class="text-sm text-[var(--text-muted)] leading-relaxed mb-5">A scalable messaging application with WebSocket integration and end-to-end encryption mechanics.</p>
                                     </div>
                                     <div class="flex flex-wrap gap-2 mt-auto">
-                                        <span class="px-2.5 py-1 rounded-full text-xs border border-[var(--border)] text-[var(--text-muted)] bg-[var(--bg)]">React</span>
-                                        <span class="px-2.5 py-1 rounded-full text-xs border border-[var(--border)] text-[var(--text-muted)] bg-[var(--bg)]">Socket.io</span>
-                                        <span class="px-2.5 py-1 rounded-full text-xs border border-[var(--border)] text-[var(--text-muted)] bg-[var(--bg)]">Redis</span>
+                                        <span class="tag-chip px-2.5 py-1 rounded-full text-xs">React</span>
+                                        <span class="tag-chip px-2.5 py-1 rounded-full text-xs">Socket.io</span>
+                                        <span class="tag-chip px-2.5 py-1 rounded-full text-xs">Redis</span>
                                     </div>
                                 </div>
                             </a>
@@ -280,56 +560,112 @@
                 </div>
                 
                 <!-- Slider Controls -->
-                <button id="prev-project" class="absolute -left-5 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-[var(--bg)] border border-[var(--border)] text-[var(--text)] flex items-center justify-center opacity-0 group-hover/slider:opacity-100 transition-all shadow-md hover:border-[var(--primary)] hover:text-[var(--primary)] interactive z-10 disabled:opacity-0 disabled:pointer-events-none" disabled>
+                <button id="prev-project" class="absolute -left-5 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full border border-[var(--border-bright)] text-[var(--text)] flex items-center justify-center opacity-0 group-hover/slider:opacity-100 transition-all shadow-md hover:border-[var(--primary)] hover:text-[var(--primary)] hover:shadow-[0_0_16px_var(--primary-glow)] interactive z-10 disabled:opacity-0 disabled:pointer-events-none" style="background: var(--bg2);" disabled>
                     <iconify-icon icon="solar:arrow-left-linear" style="stroke-width: 1.5;"></iconify-icon>
                 </button>
-                <button id="next-project" class="absolute -right-5 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-[var(--bg)] border border-[var(--border)] text-[var(--text)] flex items-center justify-center opacity-0 group-hover/slider:opacity-100 transition-all shadow-md hover:border-[var(--primary)] hover:text-[var(--primary)] interactive z-10 disabled:opacity-0 disabled:pointer-events-none">
+                <button id="next-project" class="absolute -right-5 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full border border-[var(--border-bright)] text-[var(--text)] flex items-center justify-center opacity-0 group-hover/slider:opacity-100 transition-all shadow-md hover:border-[var(--primary)] hover:text-[var(--primary)] hover:shadow-[0_0_16px_var(--primary-glow)] interactive z-10 disabled:opacity-0 disabled:pointer-events-none" style="background: var(--bg2);">
                     <iconify-icon icon="solar:arrow-right-linear" style="stroke-width: 1.5;"></iconify-icon>
                 </button>
             </div>
         </section>
 
         <!-- Contact Section -->
-        <section id="contact" class="py-32 px-6 max-w-4xl mx-auto scroll-reveal mb-20 text-center" style="opacity: 0; transform: translateY(30px); transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);">
-            <div class="mb-14">
-                <h2 class="text-3xl font-medium tracking-tight mb-4">Let's Connect</h2>
-                <p class="text-base text-[var(--text-muted)] max-w-lg mx-auto font-normal">
-                    Reach out instantly through your preferred platform. I'm currently available for new opportunities and collaborations.
-                </p>
+        <section id="contact" class="py-32 px-6 max-w-4xl mx-auto scroll-reveal mb-20 text-center">
+            <div class="mb-4 flex items-center justify-center gap-4">
+                <span class="h-px w-12 bg-[var(--primary)] opacity-80"></span>
+                <span class="section-label">04 / Contact</span>
+                <span class="h-px w-12 bg-[var(--primary)] opacity-80"></span>
             </div>
+            <h2 class="text-3xl font-display font-bold tracking-tight mb-4" style="font-family:'Syne',sans-serif;">Let's Connect</h2>
+            <p class="text-base text-[var(--text-muted)] max-w-lg mx-auto mb-14">
+                Reach out instantly through your preferred platform. I'm currently available for new opportunities and collaborations.
+            </p>
             
             <div class="flex flex-wrap justify-center gap-4 sm:gap-6">
-                <!-- Links -->
-                <a href="https://www.youtube.com/@yushanthoriq3744" class="tilt-card interactive flex flex-col items-center justify-center gap-3 w-[calc(50%-0.5rem)] sm:w-36 h-36 rounded-2xl border border-[var(--border)] bg-[var(--bg)]/50 hover:border-[var(--primary)]/50 hover:bg-[var(--primary)]/5 transition-all group shadow-sm" style="transform-style: preserve-3d;">
+                <a href="https://www.youtube.com/@yushanthoriq3744" class="tilt-card futuristic-card interactive flex flex-col items-center justify-center gap-3 w-[calc(50%-0.5rem)] sm:w-36 h-36 rounded-2xl group corner-tl corner-br transition-all" style="transform-style: preserve-3d;">
                     <iconify-icon icon="tabler:brand-youtube" class="text-3xl text-[var(--text-muted)] group-hover:text-[var(--primary)] transition-colors" style="stroke-width: 1.5; transform: translateZ(20px);"></iconify-icon>
-                    <span class="text-sm text-[var(--text)] font-normal" style="transform: translateZ(10px);">YouTube</span>
+                    <span class="text-sm text-[var(--text)]" style="transform: translateZ(10px); font-family:'Syne',sans-serif;">YouTube</span>
                 </a>
                 
-                <a href="#" class="tilt-card interactive flex flex-col items-center justify-center gap-3 w-[calc(50%-0.5rem)] sm:w-36 h-36 rounded-2xl border border-[var(--border)] bg-[var(--bg)]/50 hover:border-[var(--primary)]/50 hover:bg-[var(--primary)]/5 transition-all group shadow-sm" style="transform-style: preserve-3d;">
+                <a href="#" class="tilt-card futuristic-card interactive flex flex-col items-center justify-center gap-3 w-[calc(50%-0.5rem)] sm:w-36 h-36 rounded-2xl group corner-tl corner-br transition-all" style="transform-style: preserve-3d;">
                     <iconify-icon icon="tabler:brand-github" class="text-3xl text-[var(--text-muted)] group-hover:text-[var(--primary)] transition-colors" style="stroke-width: 1.5; transform: translateZ(20px);"></iconify-icon>
-                    <span class="text-sm text-[var(--text)] font-normal" style="transform: translateZ(10px);">GitHub</span>
+                    <span class="text-sm text-[var(--text)]" style="transform: translateZ(10px); font-family:'Syne',sans-serif;">GitHub</span>
                 </a>
 
-                <a href="#" class="tilt-card interactive flex flex-col items-center justify-center gap-3 w-[calc(50%-0.5rem)] sm:w-36 h-36 rounded-2xl border border-[var(--border)] bg-[var(--bg)]/50 hover:border-[var(--primary)]/50 hover:bg-[var(--primary)]/5 transition-all group shadow-sm" style="transform-style: preserve-3d;">
+                <a href="#" class="tilt-card futuristic-card interactive flex flex-col items-center justify-center gap-3 w-[calc(50%-0.5rem)] sm:w-36 h-36 rounded-2xl group corner-tl corner-br transition-all" style="transform-style: preserve-3d;">
                     <iconify-icon icon="tabler:brand-instagram" class="text-3xl text-[var(--text-muted)] group-hover:text-[var(--primary)] transition-colors" style="stroke-width: 1.5; transform: translateZ(20px);"></iconify-icon>
-                    <span class="text-sm text-[var(--text)] font-normal" style="transform: translateZ(10px);">Instagram</span>
+                    <span class="text-sm text-[var(--text)]" style="transform: translateZ(10px); font-family:'Syne',sans-serif;">Instagram</span>
                 </a>
                 
-                <a href="#" class="tilt-card interactive flex flex-col items-center justify-center gap-3 w-[calc(50%-0.5rem)] sm:w-36 h-36 rounded-2xl border border-[var(--border)] bg-[var(--bg)]/50 hover:border-[var(--primary)]/50 hover:bg-[var(--primary)]/5 transition-all group shadow-sm" style="transform-style: preserve-3d;">
+                <a href="#" class="tilt-card futuristic-card interactive flex flex-col items-center justify-center gap-3 w-[calc(50%-0.5rem)] sm:w-36 h-36 rounded-2xl group corner-tl corner-br transition-all" style="transform-style: preserve-3d;">
                     <iconify-icon icon="tabler:brand-whatsapp" class="text-3xl text-[var(--text-muted)] group-hover:text-[var(--primary)] transition-colors" style="stroke-width: 1.5; transform: translateZ(20px);"></iconify-icon>
-                    <span class="text-sm text-[var(--text)] font-normal" style="transform: translateZ(10px);">WhatsApp</span>
+                    <span class="text-sm text-[var(--text)]" style="transform: translateZ(10px); font-family:'Syne',sans-serif;">WhatsApp</span>
                 </a>
                 
-                <a href="#" class="tilt-card interactive flex flex-col items-center justify-center gap-3 w-[calc(50%-0.5rem)] sm:w-36 h-36 rounded-2xl border border-[var(--border)] bg-[var(--bg)]/50 hover:border-[var(--primary)]/50 hover:bg-[var(--primary)]/5 transition-all group shadow-sm" style="transform-style: preserve-3d;">
+                <a href="#" class="tilt-card futuristic-card interactive flex flex-col items-center justify-center gap-3 w-[calc(50%-0.5rem)] sm:w-36 h-36 rounded-2xl group corner-tl corner-br transition-all" style="transform-style: preserve-3d;">
                     <iconify-icon icon="tabler:brand-linkedin" class="text-3xl text-[var(--text-muted)] group-hover:text-[var(--primary)] transition-colors" style="stroke-width: 1.5; transform: translateZ(20px);"></iconify-icon>
-                    <span class="text-sm text-[var(--text)] font-normal" style="transform: translateZ(10px);">LinkedIn</span>
+                    <span class="text-sm text-[var(--text)]" style="transform: translateZ(10px); font-family:'Syne',sans-serif;">LinkedIn</span>
                 </a>
             </div>
         </section>
+
+        <!-- Footer -->
+        <footer class="border-t border-[var(--border)] py-8 px-6 text-center">
+            <p class="font-mono text-xs text-[var(--text-muted)] tracking-widest opacity-50">© 2025 YS — BUILT WITH PRECISION</p>
+        </footer>
     </main>
 
     <script>
-        // Custom Cursor Engine
+        // ─── Particles ────────────────────────────────────────────────
+        const canvas = document.getElementById('particles-canvas');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        resizeCanvas();
+        window.addEventListener('resize', resizeCanvas);
+
+        function createParticle() {
+            return {
+                x: Math.random() * canvas.width,
+                y: Math.random() * canvas.height,
+                size: Math.random() * 1.5 + 0.3,
+                speedX: (Math.random() - 0.5) * 0.2,
+                speedY: (Math.random() - 0.5) * 0.2,
+                opacity: Math.random() * 0.4 + 0.1,
+                twinkleSpeed: Math.random() * 0.02 + 0.005,
+                twinkleOffset: Math.random() * Math.PI * 2,
+            };
+        }
+
+        for (let i = 0; i < 80; i++) particles.push(createParticle());
+
+        function animateParticles(t) {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            const primary = getComputedStyle(document.body).getPropertyValue('--primary').trim() || '#3b82f6';
+            particles.forEach(p => {
+                p.x += p.speedX;
+                p.y += p.speedY;
+                if (p.x < 0) p.x = canvas.width;
+                if (p.x > canvas.width) p.x = 0;
+                if (p.y < 0) p.y = canvas.height;
+                if (p.y > canvas.height) p.y = 0;
+                const twinkle = Math.sin(t * 0.001 * (1/p.twinkleSpeed) + p.twinkleOffset) * 0.3 + 0.7;
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+                ctx.fillStyle = primary;
+                ctx.globalAlpha = p.opacity * twinkle;
+                ctx.fill();
+            });
+            ctx.globalAlpha = 1;
+            requestAnimationFrame(animateParticles);
+        }
+        requestAnimationFrame(animateParticles);
+
+        // ─── Custom Cursor ────────────────────────────────────────────
         const cursor     = document.getElementById('cursor');
         const cursorRing = document.getElementById('cursor-ring');
         const cursorDot  = document.getElementById('cursor-dot');
@@ -348,22 +684,22 @@
             mouseY = e.clientY;
         });
 
-        // Reusable function to attach cursor events to new elements
         function attachCursorEvents() {
             const interactives = document.querySelectorAll('.interactive, a, button, input');
             interactives.forEach(el => {
-                if(el.dataset.cursorAttached) return; 
+                if(el.dataset.cursorAttached) return;
                 el.dataset.cursorAttached = "true";
-                
                 el.addEventListener('mouseenter', () => {
                     cursorRing.style.width   = '52px';
                     cursorRing.style.height  = '52px';
                     cursorRing.style.opacity = '1';
+                    cursorRing.style.boxShadow = '0 0 20px var(--primary)';
                 });
                 el.addEventListener('mouseleave', () => {
                     cursorRing.style.width   = '38px';
                     cursorRing.style.height  = '38px';
                     cursorRing.style.opacity = '0.5';
+                    cursorRing.style.boxShadow = '0 0 10px var(--primary-glow)';
                 });
             });
         }
@@ -382,7 +718,6 @@
         function renderCursor() {
             const resX = updateSpring(cursorX, mouseX, vX);
             cursorX = resX.current; vX = resX.velocity;
-
             const resY = updateSpring(cursorY, mouseY, vY);
             cursorY = resY.current; vY = resY.velocity;
 
@@ -401,7 +736,7 @@
         }
         renderCursor();
 
-        // Project Slider Engine
+        // ─── Project Slider ───────────────────────────────────────────
         const slider = document.getElementById('project-slider');
         const prevProjectBtn = document.getElementById('prev-project');
         const nextProjectBtn = document.getElementById('next-project');
@@ -412,16 +747,12 @@
             const isMobile = window.innerWidth < 768;
             const slidesPerView = isMobile ? 1 : 2;
             const maxSlides = Math.max(0, projectSlides.length - slidesPerView);
-            
             if (currentSlide > maxSlides) currentSlide = maxSlides;
             if (currentSlide < 0) currentSlide = 0;
-            
             const slideWidth = projectSlides[0].offsetWidth;
-            const gap = 24; // 1.5rem gap (gap-6)
+            const gap = 24;
             const offset = currentSlide * (slideWidth + gap);
-            
             slider.style.transform = `translate3d(-${offset}px, 0, 0)`;
-            
             prevProjectBtn.disabled = currentSlide === 0;
             nextProjectBtn.disabled = currentSlide === maxSlides;
         }
@@ -431,19 +762,40 @@
         window.addEventListener('resize', updateSlider);
         setTimeout(updateSlider, 100);
 
-        // AI Modal Engine
+        // ─── AI Modal Engine (Real Claude API) ────────────────────────
         const aiModal = document.getElementById('ai-modal');
         const aiDialog = document.getElementById('ai-dialog');
         const aiInput = document.getElementById('ai-input');
         const aiResults = document.getElementById('ai-results');
         const aiTrigger = document.getElementById('ai-trigger');
         const aiClosers = document.querySelectorAll('.ai-close');
+        const aiSuggestions = document.getElementById('ai-suggestions');
+
+        // Conversation history for multi-turn context
+        let conversationHistory = [];
+
+        const SYSTEM_PROMPT = `You are an intelligent AI assistant embedded in the personal portfolio website of YS (Yushan), a Backend Developer.
+
+Portfolio Context:
+- Name: YS (Yushan)
+- Role: Backend Developer — a 'behind-the-scenes architect'
+- About: Enjoys breaking down complex business logic into seamless functional systems. Experienced with third-party service integrations and seamless data flow between servers and users. Focus on responsive UX, security, scalability, and performance optimization.
+- Skills: Frontend (React, Vue, vanilla JavaScript, Tailwind CSS), Motion/Animation (Framer Motion, WebGL), Architecture (scalable components, state management, build pipelines), Backend development, REST APIs
+- Projects:
+  1. E-Commerce Platform — high-performance storefront with real-time inventory sync and secure checkout (Next.js, Stripe, PostgreSQL)
+  2. Analytics Dashboard — interactive data visualization for thousands of records (Vue.js, D3.js, Node.js)
+  3. Real-Time Chat Engine — scalable messaging with WebSocket and end-to-end encryption (React, Socket.io, Redis)
+- Contact: YouTube (@yushanthoriq3744), GitHub, Instagram, WhatsApp, LinkedIn
+- Availability: Currently open to new opportunities and collaborations
+
+You can answer ANY question the user asks — whether about this portfolio, programming, technology, general knowledge, science, math, history, and more. You are a full-featured AI assistant like ChatGPT or Gemini. Always provide accurate, helpful, and complete answers. Be conversational, concise, and friendly. Use markdown-style formatting where helpful (bold with **, code with backticks). Keep responses focused and not overly long unless detail is genuinely needed.`;
 
         function openAI() {
             aiModal.classList.remove('opacity-0', 'pointer-events-none');
             aiDialog.classList.remove('scale-95');
             aiDialog.classList.add('scale-100');
             aiInput.focus();
+            attachCursorEvents();
         }
 
         function closeAI() {
@@ -454,80 +806,142 @@
 
         aiTrigger.addEventListener('click', openAI);
         aiClosers.forEach(btn => btn.addEventListener('click', closeAI));
-        
+
         document.addEventListener('keydown', (e) => {
-            if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
-                e.preventDefault();
-                openAI();
-            }
+            if ((e.metaKey || e.ctrlKey) && e.key === 'k') { e.preventDefault(); openAI(); }
             if (e.key === 'Escape') closeAI();
         });
 
-        const portfolioContext = {
-            skills: "frontend, backend, react, vue, tailwind, motion, webgl, architecture",
-        };
+        // Suggestion buttons
+        document.querySelectorAll('.suggestion-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                aiInput.value = btn.textContent;
+                sendMessage(btn.textContent);
+                aiInput.value = '';
+            });
+        });
+
+        function appendUserMessage(text) {
+            aiSuggestions.style.display = 'none';
+            aiResults.style.display = 'flex';
+            aiResults.classList.remove('hidden');
+
+            const div = document.createElement('div');
+            div.className = 'ai-msg flex gap-3 text-sm justify-end';
+            div.innerHTML = `
+                <div class="user-bubble text-[var(--text)] leading-relaxed max-w-[85%]">${escapeHtml(text)}</div>
+                <div class="w-7 h-7 rounded-full flex-shrink-0 flex items-center justify-center text-[var(--text-muted)]" style="background: var(--border-bright);">
+                    <iconify-icon icon="solar:user-linear" style="stroke-width: 1.5; font-size:14px;"></iconify-icon>
+                </div>
+            `;
+            aiResults.appendChild(div);
+            setTimeout(() => aiResults.scrollTop = aiResults.scrollHeight, 10);
+        }
+
+        function appendThinkingIndicator() {
+            const id = 'ai-' + Date.now();
+            const div = document.createElement('div');
+            div.id = id;
+            div.className = 'ai-msg flex gap-3 text-sm';
+            div.innerHTML = `
+                <div class="w-7 h-7 rounded-full flex-shrink-0 flex items-center justify-center" style="background: rgba(59,130,246,0.12); border: 1px solid rgba(59,130,246,0.2);">
+                    <iconify-icon icon="solar:magic-stick-3-linear" class="text-[var(--primary)]" style="stroke-width: 1.5; font-size:13px;"></iconify-icon>
+                </div>
+                <div class="ai-bubble flex items-center gap-1.5 max-w-[85%]">
+                    <span class="thinking-dot w-1.5 h-1.5 rounded-full bg-[var(--primary)] inline-block"></span>
+                    <span class="thinking-dot w-1.5 h-1.5 rounded-full bg-[var(--primary)] inline-block"></span>
+                    <span class="thinking-dot w-1.5 h-1.5 rounded-full bg-[var(--primary)] inline-block"></span>
+                </div>
+            `;
+            aiResults.appendChild(div);
+            setTimeout(() => aiResults.scrollTop = aiResults.scrollHeight, 10);
+            return id;
+        }
+
+        function replaceThinkingWithResponse(id, htmlContent) {
+            const div = document.getElementById(id);
+            if (!div) return;
+            div.innerHTML = `
+                <div class="w-7 h-7 rounded-full flex-shrink-0 flex items-center justify-center flex-col" style="background: rgba(59,130,246,0.12); border: 1px solid rgba(59,130,246,0.2); margin-top: 2px;">
+                    <iconify-icon icon="solar:magic-stick-3-linear" class="text-[var(--primary)]" style="stroke-width: 1.5; font-size:13px;"></iconify-icon>
+                </div>
+                <div class="ai-bubble text-[var(--text)] leading-relaxed max-w-[85%] text-sm">${htmlContent}</div>
+            `;
+            setTimeout(() => aiResults.scrollTop = aiResults.scrollHeight, 10);
+        }
+
+        function escapeHtml(text) {
+            return text.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+        }
+
+        function formatAIResponse(text) {
+            // Bold
+            text = text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+            // Inline code
+            text = text.replace(/`([^`]+)`/g, '<code>$1</code>');
+            // Line breaks
+            text = text.replace(/\n\n/g, '</p><p>');
+            text = text.replace(/\n/g, '<br>');
+            return `<p>${text}</p>`;
+        }
+
+        async function sendMessage(text) {
+            if (!text.trim()) return;
+
+            appendUserMessage(text);
+            const thinkingId = appendThinkingIndicator();
+
+            // Add to conversation history
+            conversationHistory.push({ role: 'user', content: text });
+
+            try {
+                const response = await fetch('https://api.anthropic.com/v1/messages', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        model: 'claude-sonnet-4-20250514',
+                        max_tokens: 1000,
+                        system: SYSTEM_PROMPT,
+                        messages: conversationHistory,
+                    })
+                });
+
+                if (!response.ok) {
+                    throw new Error(`API error: ${response.status}`);
+                }
+
+                const data = await response.json();
+                const assistantText = data.content?.[0]?.text || 'I encountered an issue generating a response. Please try again.';
+
+                // Add assistant response to history
+                conversationHistory.push({ role: 'assistant', content: assistantText });
+
+                // Keep history to last 20 messages to avoid token limits
+                if (conversationHistory.length > 20) {
+                    conversationHistory = conversationHistory.slice(-20);
+                }
+
+                replaceThinkingWithResponse(thinkingId, formatAIResponse(assistantText));
+
+            } catch (err) {
+                const errMsg = err.message.includes('Failed to fetch')
+                    ? 'Network error — please check your connection and try again.'
+                    : `Something went wrong: ${err.message}`;
+                replaceThinkingWithResponse(thinkingId, `<p style="color: var(--text-muted);">${errMsg}</p>`);
+            }
+
+            attachCursorEvents();
+        }
 
         aiInput.addEventListener('keydown', (e) => {
-            if(e.key === 'Enter' && aiInput.value.trim() !== '') {
+            if (e.key === 'Enter' && aiInput.value.trim()) {
                 const query = aiInput.value.trim();
                 aiInput.value = '';
-                aiResults.classList.remove('hidden');
-                
-                aiResults.innerHTML += `
-                    <div class="flex gap-4 text-sm animate-[pulse-slow_0.3s_ease-out]">
-                        <div class="w-7 h-7 rounded-full bg-[var(--border)] flex-shrink-0 flex items-center justify-center text-[var(--text-muted)]">
-                            <iconify-icon icon="solar:user-linear" style="stroke-width: 1.5;"></iconify-icon>
-                        </div>
-                        <div class="pt-1 text-[var(--text)] leading-relaxed">${query}</div>
-                    </div>
-                `;
-
-                const id = 'ai-' + Date.now();
-                aiResults.innerHTML += `
-                    <div id="${id}" class="flex gap-4 text-sm">
-                        <div class="w-7 h-7 rounded-full bg-[var(--primary)]/10 text-[var(--primary)] flex-shrink-0 flex items-center justify-center">
-                            <iconify-icon icon="solar:magic-stick-3-linear" class="animate-spin" style="stroke-width: 1.5;"></iconify-icon>
-                        </div>
-                        <div class="pt-1 text-[var(--text-muted)] typing-indicator font-mono text-xs">Generating response...</div>
-                    </div>
-                `;
-                
-                setTimeout(() => aiResults.scrollTop = aiResults.scrollHeight, 10);
-
-                setTimeout(() => {
-                    const aiMsg = document.getElementById(id);
-                    const icon = aiMsg.querySelector('iconify-icon');
-                    icon.classList.remove('animate-spin');
-                    
-                    const textContainer = aiMsg.querySelector('.typing-indicator');
-                    textContainer.classList.remove('text-[var(--text-muted)]', 'typing-indicator', 'font-mono', 'text-xs');
-                    textContainer.classList.add('text-[var(--text)]', 'leading-relaxed');
-                    
-                    const lowerQuery = query.toLowerCase();
-                    let response = "Based on the portfolio, I specialize in crafting fast, accessible, and interactive digital experiences. My core focus is bridging the gap between design and scalable technical architecture.";
-                    
-                    // Extended AI Logic handling both portfolio context & general programming
-                    if (lowerQuery.includes('programming') || lowerQuery.includes('language') || lowerQuery.includes('code') || lowerQuery.includes('what is')) {
-                        response = "Programming is the process of writing instructions that computers execute to perform specific tasks. There are many paradigms and types of programming languages, such as Object-Oriented (Java, Python, C++), Functional (Haskell, Clojure), and Scripting languages (JavaScript, Bash). Different languages are suited for distinct tasks—for instance, JavaScript excels in web interfaces, Python is popular for data science, and C++ is used for high-performance systems.";
-                    } else if (lowerQuery.includes('project') || lowerQuery.includes('work') || lowerQuery.includes('build')) {
-                        response = "You can view the featured work in the Projects section. Highlights include a high-performance E-Commerce Platform built with Next.js, an Analytics Dashboard powered by Vue and D3.js, and a Real-Time Chat Engine using WebSocket integration.";
-                    } else if (lowerQuery.includes('contact') || lowerQuery.includes('hire') || lowerQuery.includes('reach')) {
-                        response = "I am currently available for new opportunities! You can easily reach out via the links in the Contact section at the bottom of the page (GitHub, LinkedIn, WhatsApp).";
-                    } else if (lowerQuery.includes('skill') || lowerQuery.includes('tech') || lowerQuery.includes('stack')) {
-                        response = `My technical arsenal includes ${portfolioContext.skills}. I heavily focus on modern JavaScript frameworks and fluid motion design.`;
-                    } else if (lowerQuery.includes('hello') || lowerQuery.includes('hi')) {
-                        response = "Hello! I'm the AI assistant for this portfolio. You can ask me about the projects, skills, contact info, or even explore general programming concepts together!";
-                    } else {
-                        response = "I'm primarily focused on this portfolio, but I can also answer general questions about programming and technology. Could you be more specific about what you'd like to know?";
-                    }
-                    
-                    textContainer.innerHTML = response;
-                    setTimeout(() => aiResults.scrollTop = aiResults.scrollHeight, 10);
-                }, 1200);
+                sendMessage(query);
             }
         });
 
-        // Navigation Highlight
+        // ─── Navigation Highlight ─────────────────────────────────────
         const navLinks = document.querySelectorAll('.nav-link');
         const navPill = document.getElementById('nav-pill');
         const sections = document.querySelectorAll('section');
@@ -536,10 +950,8 @@
             if(!activeLink) return;
             const linkRect = activeLink.getBoundingClientRect();
             const containerRect = activeLink.parentElement.getBoundingClientRect();
-            
             navPill.style.width = `${linkRect.width}px`;
             navPill.style.left = `${linkRect.left - containerRect.left}px`;
-            
             navLinks.forEach(link => {
                 link.classList.remove('text-[var(--text)]');
                 link.classList.add('text-[var(--text-muted)]');
@@ -560,7 +972,6 @@
         }, observerOptions);
 
         sections.forEach(sec => observer.observe(sec));
-        
         setTimeout(() => updateNavPill(navLinks[0]), 100);
         window.addEventListener('resize', () => {
             const activeId = Array.from(sections).find(s => {
@@ -570,20 +981,34 @@
             updateNavPill(document.querySelector(`.nav-link[href="#${activeId}"]`));
         });
 
-        // Theme & Color Picker (Initializing to Dark Mode logic)
+        // ─── Theme & Color Picker ─────────────────────────────────────
         const themeToggle = document.getElementById('theme-toggle');
-        const bodyStyle = document.body.style;
-        let isDark = true; // Started as true as requested
+        let isDark = true;
 
         themeToggle.addEventListener('click', () => {
             isDark = !isDark;
-            bodyStyle.setProperty('--bg', isDark ? '#0a0a0a' : '#ffffff');
-            bodyStyle.setProperty('--text', isDark ? '#ededed' : '#171717');
-            bodyStyle.setProperty('--text-muted', isDark ? '#a3a3a3' : '#737373');
-            bodyStyle.setProperty('--border', isDark ? '#262626' : '#f5f5f5');
-            
-            themeToggle.innerHTML = isDark 
-                ? '<iconify-icon icon="solar:sun-linear" style="stroke-width: 1.5;"></iconify-icon>' 
+            document.body.classList.toggle('light', !isDark);
+
+            if (!isDark) {
+                document.body.style.setProperty('--bg', '#f4f4f8');
+                document.body.style.setProperty('--bg2', '#eeeef5');
+                document.body.style.setProperty('--text', '#111118');
+                document.body.style.setProperty('--text-muted', '#666680');
+                document.body.style.setProperty('--border', '#dddde8');
+                document.body.style.setProperty('--border-bright', '#ccccdd');
+                document.body.style.setProperty('--primary-glow', 'rgba(59,130,246,0.15)');
+            } else {
+                document.body.style.setProperty('--bg', '#080810');
+                document.body.style.setProperty('--bg2', '#0d0d18');
+                document.body.style.setProperty('--text', '#e8e8f0');
+                document.body.style.setProperty('--text-muted', '#8888aa');
+                document.body.style.setProperty('--border', '#1a1a2e');
+                document.body.style.setProperty('--border-bright', '#252540');
+                document.body.style.setProperty('--primary-glow', 'rgba(59,130,246,0.25)');
+            }
+
+            themeToggle.innerHTML = isDark
+                ? '<iconify-icon icon="solar:sun-linear" style="stroke-width: 1.5;"></iconify-icon>'
                 : '<iconify-icon icon="solar:moon-linear" style="stroke-width: 1.5;"></iconify-icon>';
         });
 
@@ -591,15 +1016,20 @@
         colorBtns.forEach(btn => {
             btn.addEventListener('click', () => {
                 const color = btn.getAttribute('data-color');
-                bodyStyle.setProperty('--primary', color);
-                
+                document.body.style.setProperty('--primary', color);
+                // Update glow too
+                const hex = color.replace('#','');
+                const r = parseInt(hex.slice(0,2),16);
+                const g = parseInt(hex.slice(2,4),16);
+                const b = parseInt(hex.slice(4,6),16);
+                document.body.style.setProperty('--primary-glow', `rgba(${r},${g},${b},${isDark?'0.25':'0.15'})`);
                 colorBtns.forEach(b => b.classList.replace('ring-[var(--primary)]', 'ring-transparent'));
                 btn.classList.replace('ring-transparent', 'ring-[var(--primary)]');
             });
         });
         colorBtns[0].classList.replace('ring-transparent', 'ring-[var(--primary)]');
 
-        // Floating Title Animation
+        // ─── Floating Title ───────────────────────────────────────────
         const floatingTitle = document.getElementById('floating-title');
         let time = 0;
         function animateFloat() {
@@ -610,7 +1040,7 @@
         }
         animateFloat();
 
-        // Scroll Reveal
+        // ─── Scroll Reveal ────────────────────────────────────────────
         const revealElements = document.querySelectorAll('.scroll-reveal');
         const revealObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
@@ -623,23 +1053,19 @@
         }, { threshold: 0.1 });
         revealElements.forEach(el => revealObserver.observe(el));
 
-        // 3D Tilt Effect
+        // ─── 3D Tilt Effect ───────────────────────────────────────────
         const tiltCards = document.querySelectorAll('.tilt-card');
         tiltCards.forEach(card => {
             card.addEventListener('mousemove', (e) => {
                 const rect = card.getBoundingClientRect();
                 const x = e.clientX - rect.left;
                 const y = e.clientY - rect.top;
-                
                 const centerX = rect.width / 2;
                 const centerY = rect.height / 2;
-                
                 const rotateX = ((y - centerY) / centerY) * -6;
                 const rotateY = ((x - centerX) / centerX) * 6;
-                
                 card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
             });
-            
             card.addEventListener('mouseleave', () => {
                 card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg)`;
                 card.style.transition = `transform 0.5s cubic-bezier(0.23, 1, 0.32, 1)`;
