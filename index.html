@@ -3,204 +3,651 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-     <link rel="stylesheet" href="styles.css">
-    <title>Portofolio Website</title>
+    <title>Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        html { scroll-behavior: smooth; }
+        body {
+            /* Initializing as Dark Theme */
+            --bg: #0a0a0a; 
+            --text: #ededed; 
+            --text-muted: #a3a3a3; 
+            --primary: #3b82f6; 
+            --border: #262626;
+            background-color: var(--bg);
+            color: var(--text);
+            font-family: 'Inter', sans-serif;
+        }
+        @keyframes pulse-slow {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        * { cursor: none !important; }
+        
+        /* Custom scrollbar for AI modal */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--text-muted); }
+    </style>
 </head>
-<body>
-    <header>
-        <a href="#" class="logo">Yushan</a>
+<body class="font-sans antialiased selection:bg-[var(--primary)] selection:text-white transition-colors duration-300 relative overflow-x-hidden">
 
-        <nav>
-            <a href="#home">Home</a>
-            <a href="#about">About</a>
-            <a href="#skills">Skills</a>
-            <!-- <a href="#">Experience</a> -->
-            <a href="#contact">Contact</a>
-        </nav>
-    </header>
-    <section class="home" id="home">
-        <div class="home-img">
-            <img src="image/Yushan.jpg" alt="">
-        </div>
-        <div class="home-content">
-            <h3>Hi, Saya <span>Yushan Thoriq</span></h3>
-            <h2 class="typing-text">Saya adalah <span></span></h2>
-            <p>Seorang pengembang web yang bersemangat 
-                menciptakan tampilan dan pengalaman pengguna yang menarik. 
-                Saya menyukai dunia teknologi dan terus belajar hal-hal baru setiap harinya.</p>
-            <div class="social-icons">
-                <a href="https://www.youtube.com/@yushanthoriq3744"><i class="fa-brands fa-youtube"></i></a>
-                <a href="https://github.com/Yushan2008"><i class="fa-brands fa-github"></i></a>
-                <a href="https://wa.me/+6285231654898"><i class="fa-brands fa-whatsapp"></i></a>
-                <a href="https://www.instagram.com/yshnz7/"><i class="fa-brands fa-instagram"></i></a>
+    <!-- Custom Cursor -->
+    <div id="cursor" class="fixed top-0 left-0 pointer-events-none z-[100]"
+         style="will-change: transform; transform: translate3d(-100px, -100px, 0) translate(-50%, -50%);">
+        <div id="cursor-ring"
+             style="position: absolute; top: 50%; left: 50%;
+                    transform: translate(-50%, -50%);
+                    width: 38px; height: 38px; border-radius: 50%;
+                    border: 1.5px solid var(--primary); opacity: 0.5;
+                    transition: width 0.3s ease, height 0.3s ease, opacity 0.3s ease;"></div>
+        <div id="cursor-dot"
+             style="position: absolute; top: 50%; left: 50%;
+                    transform: translate(-50%, -50%);
+                    width: 7px; height: 7px; border-radius: 50%;
+                    background: var(--primary);
+                    transform-origin: center center;"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-40 backdrop-blur-md border-b border-[var(--border)] bg-[var(--bg)]/80 transition-colors duration-300">
+        <div class="max-w-5xl mx-auto px-6 h-16 flex items-center justify-between">
+            <div class="font-medium tracking-tight text-xl interactive cursor-pointer text-[var(--text)]" onclick="window.scrollTo(0,0)">YS</div>
+            
+            <div class="relative items-center p-1 rounded-full border border-[var(--border)] bg-[var(--bg)]/50 hidden md:flex shadow-sm">
+                <div id="nav-pill" class="absolute inset-y-1 bg-[var(--text)]/5 rounded-full z-0" style="width: 0px; left: 4px; transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);"></div>
+                <a href="#home" class="nav-link interactive relative z-10 px-5 py-1.5 text-sm font-normal transition-colors text-[var(--text)]">Home</a>
+                <a href="#about" class="nav-link interactive relative z-10 px-5 py-1.5 text-sm font-normal transition-colors text-[var(--text-muted)] hover:text-[var(--text)]">About</a>
+                <a href="#skills" class="nav-link interactive relative z-10 px-5 py-1.5 text-sm font-normal transition-colors text-[var(--text-muted)] hover:text-[var(--text)]">Skills</a>
+                <a href="#projects" class="nav-link interactive relative z-10 px-5 py-1.5 text-sm font-normal transition-colors text-[var(--text-muted)] hover:text-[var(--text)]">Projects</a>
+                <a href="#contact" class="nav-link interactive relative z-10 px-5 py-1.5 text-sm font-normal transition-colors text-[var(--text-muted)] hover:text-[var(--text)]">Contact</a>
             </div>
-            <a href="#" class="btn">Hire me</a>
-        </div>
-    </section>
-        <section class="about" id="about">
-    <!-- JUDUL DI TOP CENTER -->
-    <h2 class="heading">About <span>Me</span></h2>
-    
-    <!-- WRAPPER UNTUK GAMBAR + CONTENT -->
-    <div class="about-container">
-        <!-- GAMBAR DI KIRI (PERSEGI) -->
-        <div class="about-img">
-            <img src="image/yushanpose.jpg" alt="">
-        </div>
 
-        <!-- CONTENT DI KANAN -->
-        <div class="about-content">
-            <p>
-                Halo! Saya seorang pengembang web yang menciptakan tampilan dan pengalaman pengguna yang modern, interaktif, dan estetis. 
-                Ketertarikan saya pada dunia teknologi membuat saya terus belajar hal-hal baru setiap hari, mulai dari eksplorasi teknologi backend hingga memahami tren terbaru dalam desain dan pengembangan web. 
-                Saya menikmati proses membangun antarmuka yang responsif dan intuitif, serta memastikan setiap detail visual dan fungsional bekerja secara optimal. 
-                Saya terus berupaya memperkuat kemampuan teknis, meningkatkan kreativitas, dan beradaptasi dengan lingkungan kerja yang dinamis agar dapat memberikan hasil terbaik pada setiap proyek yang saya kerjakan.
-            </p>
-            <a href="#" class="btn">Selengkapnya</a>
+            <div class="flex items-center gap-4">
+                <button id="ai-trigger" class="interactive flex items-center justify-center gap-2 px-3 py-1.5 rounded-full border border-[var(--border)] bg-[var(--bg)] text-xs font-normal text-[var(--text)] hover:border-[var(--primary)]/50 hover:text-[var(--primary)] transition-colors shadow-sm">
+                    <iconify-icon icon="solar:magic-stick-3-linear" style="stroke-width: 1.5;"></iconify-icon>
+                    Ask AI
+                    <span class="hidden sm:inline-block ml-1 text-[var(--text-muted)] bg-[var(--border)] px-1.5 py-0.5 rounded" style="font-size: 0.65rem;">⌘K</span>
+                </button>
+
+                <!-- Color Theme Selector -->
+                <div class="flex gap-2 items-center border-l border-[var(--border)] pl-4">
+                    <button class="w-3.5 h-3.5 rounded-full bg-blue-500 interactive color-btn ring-2 ring-transparent ring-offset-2 ring-offset-[var(--bg)] transition-all" data-color="#3b82f6" aria-label="Blue"></button>
+                    <button class="w-3.5 h-3.5 rounded-full bg-purple-500 interactive color-btn ring-2 ring-transparent ring-offset-2 ring-offset-[var(--bg)] transition-all" data-color="#a855f7" aria-label="Purple"></button>
+                    <button class="w-3.5 h-3.5 rounded-full bg-green-500 interactive color-btn ring-2 ring-transparent ring-offset-2 ring-offset-[var(--bg)] transition-all" data-color="#22c55e" aria-label="Green"></button>
+                    <button class="w-3.5 h-3.5 rounded-full bg-yellow-500 interactive color-btn ring-2 ring-transparent ring-offset-2 ring-offset-[var(--bg)] transition-all" data-color="#eab308" aria-label="Yellow"></button>
+                    <button class="w-3.5 h-3.5 rounded-full bg-orange-500 interactive color-btn ring-2 ring-transparent ring-offset-2 ring-offset-[var(--bg)] transition-all" data-color="#f97316" aria-label="Orange"></button>
+                    <button class="w-3.5 h-3.5 rounded-full bg-red-500 interactive color-btn ring-2 ring-transparent ring-offset-2 ring-offset-[var(--bg)] transition-all" data-color="#ef4444" aria-label="Red"></button>
+                </div>
+                 <button id="theme-toggle" class="interactive flex items-center justify-center text-xl text-[var(--text-muted)] hover:text-[var(--text)] transition-colors ml-2" aria-label="Toggle Theme">
+                    <!-- Default to sun since starting in dark mode -->
+                    <iconify-icon icon="solar:sun-linear" style="stroke-width: 1.5;"></iconify-icon>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- AI Search Modal -->
+    <div id="ai-modal" class="fixed inset-0 z-50 flex items-start justify-center pt-24 px-4 opacity-0 pointer-events-none transition-opacity duration-300">
+        <div class="absolute inset-0 bg-[var(--bg)]/80 backdrop-blur-sm ai-close interactive"></div>
+        
+        <div class="relative w-full max-w-2xl bg-[var(--bg)] rounded-2xl border border-[var(--border)] shadow-2xl overflow-hidden transform scale-95 transition-transform duration-300 flex flex-col" id="ai-dialog" style="max-height: 70vh;">
+            
+            <div class="flex items-center px-4 py-4 border-b border-[var(--border)]">
+                <iconify-icon icon="solar:magnifer-linear" class="text-xl text-[var(--text-muted)] mr-3"></iconify-icon>
+                <input type="text" id="ai-input" placeholder="Ask AI about my projects, skills, or general programming concepts..." class="w-full bg-transparent border-none outline-none text-sm text-[var(--text)] placeholder-[var(--text-muted)] interactive" autocomplete="off">
+                <button class="text-xs text-[var(--text-muted)] bg-[var(--border)] px-2 py-1 rounded ml-2 ai-close interactive hover:bg-[var(--primary)] hover:text-white transition-colors">ESC</button>
+            </div>
+
+            <div id="ai-results" class="overflow-y-auto p-6 hidden flex-col gap-6 flex-1">
+                <!-- Chat messages will be dynamically added here -->
+            </div>
         </div>
     </div>
-</section>
-<!-- SKILLS SECTION -->
-<section class="skills" id="skills">
-    <h2 class="heading">My <span>Skills</span></h2>
-    
-    <div class="skills-container">
-        <!-- LEFT SIDE - Description -->
-        <div class="skills-description">
-            <h3>Skills Reflects Our Knowledge</h3>
-            <p>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minus natus tenetur 
-                tempora? Quasi, rem quos omnis. Porro rem aspernatur reiciendis ut 
-                praesentium minima ad, quos, officia! Illo libero, et, distinctio repellat sed 
-                nesciunt est modi quaerat placeat. Quod molestiae, alias?
+
+    <main>
+        <!-- Hero Section -->
+        <section id="home" class="min-h-screen flex flex-col items-center justify-center pt-24 px-6 text-center relative">
+            
+            <!-- Profile Picture Frame (Fixed) -->
+            <div class="relative w-28 h-28 sm:w-32 sm:h-32 mx-auto mb-8 interactive z-10 group">
+                <div class="absolute -inset-0.5 bg-gradient-to-tr from-[var(--primary)] to-transparent rounded-full opacity-40 group-hover:opacity-100 blur-[3px] transition-opacity duration-500"></div>
+                <div class="absolute inset-0 bg-[var(--bg)] rounded-full border border-[var(--border)] shadow-sm"></div>
+                <div class="absolute inset-1 rounded-full bg-[var(--border)]/30 overflow-hidden flex items-center justify-center border border-[var(--border)]">
+                    <iconify-icon icon="solar:user-linear" class="text-4xl text-[var(--text-muted)] absolute group-hover:scale-110 transition-transform duration-500" style="stroke-width: 1.5;"></iconify-icon>
+                    <img src="yushanpose.jpg" alt="Profile" class="w-full h-full object-cover relative z-10 transition-opacity duration-300" onerror="this.style.opacity=0">
+                </div>
+            </div>
+
+            <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-[var(--border)] text-xs text-[var(--text-muted)] mb-8 bg-[var(--bg)] z-10 shadow-sm">
+                <span class="w-2 h-2 rounded-full bg-[var(--primary)]" style="animation: pulse-slow 2s infinite;"></span>
+                Available for opportunities
+            </div>
+            
+            <div id="floating-title" class="relative z-10">
+                <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full max-w-lg bg-[var(--primary)]/30 blur-[100px] rounded-full -z-10 transition-colors duration-500"></div>
+                
+                <h1 class="text-5xl md:text-7xl font-medium tracking-tight mb-6 leading-tight">
+                    Crafting digital <br/> 
+                    <span class="text-[var(--text-muted)]">experiences.</span>
+                </h1>
+            </div>
+            
+            <p class="text-base sm:text-lg text-[var(--text-muted)] max-w-xl mx-auto mb-10 z-10 leading-relaxed font-normal">
+                I build fast, accessible, and highly interactive web applications using modern technologies and refined physics.
             </p>
             
-            <div class="experience-box">
-                <h2 class="experience-number">3</h2>
-                <p class="experience-text">Years Of<br>Experience</p>
+            <a href="#contact" class="interactive px-8 py-3.5 rounded-full bg-[var(--text)] text-[var(--bg)] text-sm font-normal hover:scale-105 transition-transform duration-300 z-10 shadow-lg">
+                CV Details
+            </a>
+
+            <div class="absolute inset-0 z-0 overflow-hidden pointer-events-none opacity-10">
+                <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-[var(--primary)] rounded-full blur-[120px]"></div>
             </div>
-        </div>
+        </section>
 
-        <!-- RIGHT SIDE - Skills Grid -->
-<div class="skills-bars">
-    <div class="skill-item">
-        <div class="skill-header">
-            <span class="skill-name">HTML</span>
-            <span class="skill-percentage">60%</span>
-        </div>
-    </div>
+        <!-- About Section -->
+        <section id="about" class="py-32 px-6 max-w-3xl mx-auto scroll-reveal" style="opacity: 0; transform: translateY(30px); transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);">
+            <div class="flex items-center gap-4 mb-8">
+                <span class="h-[1px] w-12 bg-[var(--primary)]"></span>
+                <h2 class="text-3xl font-medium tracking-tight">About Me</h2>
+            </div>
+            <div class="space-y-6 text-[var(--text-muted)] leading-relaxed text-base font-normal">
+                <p>
+                    As a Backend Developer, I'm a 'behind-the-scenes architect' who enjoys breaking down complex business logic into seamless, functional systems. I have experience integrating various third-party services and ensuring seamless data flow between servers and users.
+                </p>
+                <p>
+                    My focus is on delivering technology solutions that not only meet business needs, but also provide a responsive user experience. I thrive on solving complex problems and optimizing performance, while maintaining a strong emphasis on security and scalability.
+                </p>
+            </div>
+        </section>
 
-    <div class="skill-item">
-        <div class="skill-header">
-            <span class="skill-name">CSS</span>
-            <span class="skill-percentage">40%</span>
-        </div>
-    </div>
+        <!-- Skills Section -->
+        <section id="skills" class="py-32 px-6 max-w-5xl mx-auto scroll-reveal" style="opacity: 0; transform: translateY(30px); transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);">
+            <div class="flex items-center justify-end gap-4 mb-12">
+                <h2 class="text-3xl font-medium tracking-tight">Technical Arsenal</h2>
+                <span class="h-[1px] w-12 bg-[var(--primary)]"></span>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="tilt-card interactive relative p-8 rounded-2xl border border-[var(--border)] bg-[var(--bg)]/50 backdrop-blur-sm group transition-colors hover:border-[var(--primary)]/40 shadow-sm" style="transform-style: preserve-3d;">
+                    <div class="absolute inset-0 bg-gradient-to-br from-[var(--primary)]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl pointer-events-none"></div>
+                    <iconify-icon icon="solar:code-square-linear" class="text-4xl mb-6 text-[var(--primary)]" style="stroke-width: 1.5; transform: translateZ(20px);"></iconify-icon>
+                    <h3 class="text-xl font-medium tracking-tight mb-3" style="transform: translateZ(15px);">Frontend</h3>
+                    <p class="text-sm text-[var(--text-muted)] leading-relaxed font-normal" style="transform: translateZ(10px);">Mastery in React, Vue, vanilla JavaScript, and utility-first CSS frameworks like Tailwind.</p>
+                </div>
+                
+                <div class="tilt-card interactive relative p-8 rounded-2xl border border-[var(--border)] bg-[var(--bg)]/50 backdrop-blur-sm group transition-colors hover:border-[var(--primary)]/40 shadow-sm" style="transform-style: preserve-3d;">
+                    <div class="absolute inset-0 bg-gradient-to-br from-[var(--primary)]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl pointer-events-none"></div>
+                    <iconify-icon icon="solar:magic-stick-3-linear" class="text-4xl mb-6 text-[var(--primary)]" style="stroke-width: 1.5; transform: translateZ(20px);"></iconify-icon>
+                    <h3 class="text-xl font-medium tracking-tight mb-3" style="transform: translateZ(15px);">Motion</h3>
+                    <p class="text-sm text-[var(--text-muted)] leading-relaxed font-normal" style="transform: translateZ(10px);">Implementing fluid animations and spring physics using Framer Motion and custom WebGL setups.</p>
+                </div>
 
-    <div class="skill-item">
-        <div class="skill-header">
-            <span class="skill-name">JavaScript</span>
-            <span class="skill-percentage">70%</span>
-        </div>
-    </div>
+                <div class="tilt-card interactive relative p-8 rounded-2xl border border-[var(--border)] bg-[var(--bg)]/50 backdrop-blur-sm group transition-colors hover:border-[var(--primary)]/40 shadow-sm" style="transform-style: preserve-3d;">
+                    <div class="absolute inset-0 bg-gradient-to-br from-[var(--primary)]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl pointer-events-none"></div>
+                    <iconify-icon icon="solar:server-square-linear" class="text-4xl mb-6 text-[var(--primary)]" style="stroke-width: 1.5; transform: translateZ(20px);"></iconify-icon>
+                    <h3 class="text-xl font-medium tracking-tight mb-3" style="transform: translateZ(15px);">Architecture</h3>
+                    <p class="text-sm text-[var(--text-muted)] leading-relaxed font-normal" style="transform: translateZ(10px);">Designing scalable component architectures, state management, and optimized build pipelines.</p>
+                </div>
+            </div>
+        </section>
 
-    <div class="skill-item">
-        <div class="skill-header">
-            <span class="skill-name">PHP</span>
-            <span class="skill-percentage">50%</span>
-        </div>
-    </div>
-</div>
-</section>
-<script>
-// State untuk tracking contact view
-let isContactView = false;
+        <!-- Projects Section (Carousel) -->
+        <section id="projects" class="py-32 px-6 max-w-5xl mx-auto scroll-reveal overflow-visible" style="opacity: 0; transform: translateY(30px); transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);">
+            <div class="flex items-center gap-4 mb-12">
+                <span class="h-[1px] w-12 bg-[var(--primary)]"></span>
+                <h2 class="text-3xl font-medium tracking-tight">Featured Work</h2>
+            </div>
+            
+            <div class="relative group/slider mx-auto">
+                <div class="overflow-hidden pb-8 pt-4 -mt-4 -mx-2 px-2"> 
+                    <div id="project-slider" class="flex gap-6 transition-transform duration-700 ease-out will-change-transform">
+                        
+                        <!-- Project 1 -->
+                        <div class="project-slide w-full md:w-[calc(50%-0.75rem)] flex-shrink-0">
+                            <a href="#" class="tilt-card interactive block h-full p-4 rounded-2xl border border-[var(--border)] bg-[var(--bg)]/50 hover:bg-[var(--bg)] hover:border-[var(--primary)]/40 transition-all shadow-sm group" style="transform-style: preserve-3d;">
+                                <div class="aspect-[16/10] w-full rounded-xl bg-[var(--border)]/30 mb-6 overflow-hidden relative flex items-center justify-center border border-[var(--border)]" style="transform: translateZ(15px);">
+                                    <iconify-icon icon="solar:gallery-linear" class="text-5xl text-[var(--text-muted)] group-hover:scale-110 group-hover:text-[var(--primary)] transition-all duration-500"></iconify-icon>
+                                </div>
+                                <div class="px-2 flex flex-col justify-between" style="transform: translateZ(25px);">
+                                    <div>
+                                        <h3 class="text-lg font-medium tracking-tight mb-2 flex items-center justify-between">
+                                            E-Commerce Platform
+                                            <iconify-icon icon="solar:arrow-right-up-linear" class="text-[var(--text-muted)] group-hover:text-[var(--text)] transition-colors"></iconify-icon>
+                                        </h3>
+                                        <p class="text-sm text-[var(--text-muted)] font-normal leading-relaxed mb-5">A high-performance storefront with real-time inventory synchronization and secure checkout.</p>
+                                    </div>
+                                    <div class="flex flex-wrap gap-2 mt-auto">
+                                        <span class="px-2.5 py-1 rounded-full text-xs border border-[var(--border)] text-[var(--text-muted)] bg-[var(--bg)]">Next.js</span>
+                                        <span class="px-2.5 py-1 rounded-full text-xs border border-[var(--border)] text-[var(--text-muted)] bg-[var(--bg)]">Stripe</span>
+                                        <span class="px-2.5 py-1 rounded-full text-xs border border-[var(--border)] text-[var(--text-muted)] bg-[var(--bg)]">PostgreSQL</span>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
 
-// Smooth scroll animation untuk navbar links
-document.querySelectorAll('nav a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        
-        const targetId = this.getAttribute('href');
-        
-        // Jika klik Contact
-        if (targetId === '#contact') {
-            activateContactView();
-        } else {
-            // Jika sedang di contact view, deactivate dulu
-            if (isContactView) {
-                deactivateContactView(() => {
-                    scrollToSection(targetId);
+                        <!-- Project 2 -->
+                        <div class="project-slide w-full md:w-[calc(50%-0.75rem)] flex-shrink-0">
+                            <a href="#" class="tilt-card interactive block h-full p-4 rounded-2xl border border-[var(--border)] bg-[var(--bg)]/50 hover:bg-[var(--bg)] hover:border-[var(--primary)]/40 transition-all shadow-sm group" style="transform-style: preserve-3d;">
+                                <div class="aspect-[16/10] w-full rounded-xl bg-[var(--border)]/30 mb-6 overflow-hidden relative flex items-center justify-center border border-[var(--border)]" style="transform: translateZ(15px);">
+                                    <iconify-icon icon="solar:chart-square-linear" class="text-5xl text-[var(--text-muted)] group-hover:scale-110 group-hover:text-[var(--primary)] transition-all duration-500"></iconify-icon>
+                                </div>
+                                <div class="px-2 flex flex-col justify-between h-[calc(100%-14rem)]" style="transform: translateZ(25px);">
+                                    <div>
+                                        <h3 class="text-lg font-medium tracking-tight mb-2 flex items-center justify-between">
+                                            Analytics Dashboard
+                                            <iconify-icon icon="solar:arrow-right-up-linear" class="text-[var(--text-muted)] group-hover:text-[var(--text)] transition-colors"></iconify-icon>
+                                        </h3>
+                                        <p class="text-sm text-[var(--text-muted)] font-normal leading-relaxed mb-5">Interactive data visualization tool capable of processing and displaying thousands of records.</p>
+                                    </div>
+                                    <div class="flex flex-wrap gap-2 mt-auto">
+                                        <span class="px-2.5 py-1 rounded-full text-xs border border-[var(--border)] text-[var(--text-muted)] bg-[var(--bg)]">Vue.js</span>
+                                        <span class="px-2.5 py-1 rounded-full text-xs border border-[var(--border)] text-[var(--text-muted)] bg-[var(--bg)]">D3.js</span>
+                                        <span class="px-2.5 py-1 rounded-full text-xs border border-[var(--border)] text-[var(--text-muted)] bg-[var(--bg)]">Node.js</span>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        
+                        <!-- Project 3 -->
+                        <div class="project-slide w-full md:w-[calc(50%-0.75rem)] flex-shrink-0">
+                            <a href="#" class="tilt-card interactive block h-full p-4 rounded-2xl border border-[var(--border)] bg-[var(--bg)]/50 hover:bg-[var(--bg)] hover:border-[var(--primary)]/40 transition-all shadow-sm group" style="transform-style: preserve-3d;">
+                                <div class="aspect-[16/10] w-full rounded-xl bg-[var(--border)]/30 mb-6 overflow-hidden relative flex items-center justify-center border border-[var(--border)]" style="transform: translateZ(15px);">
+                                    <iconify-icon icon="solar:chat-round-line-linear" class="text-5xl text-[var(--text-muted)] group-hover:scale-110 group-hover:text-[var(--primary)] transition-all duration-500"></iconify-icon>
+                                </div>
+                                <div class="px-2 flex flex-col justify-between h-[calc(100%-14rem)]" style="transform: translateZ(25px);">
+                                    <div>
+                                        <h3 class="text-lg font-medium tracking-tight mb-2 flex items-center justify-between">
+                                            Real-Time Chat Engine
+                                            <iconify-icon icon="solar:arrow-right-up-linear" class="text-[var(--text-muted)] group-hover:text-[var(--text)] transition-colors"></iconify-icon>
+                                        </h3>
+                                        <p class="text-sm text-[var(--text-muted)] font-normal leading-relaxed mb-5">A scalable messaging application with WebSocket integration and end-to-end encryption mechanics.</p>
+                                    </div>
+                                    <div class="flex flex-wrap gap-2 mt-auto">
+                                        <span class="px-2.5 py-1 rounded-full text-xs border border-[var(--border)] text-[var(--text-muted)] bg-[var(--bg)]">React</span>
+                                        <span class="px-2.5 py-1 rounded-full text-xs border border-[var(--border)] text-[var(--text-muted)] bg-[var(--bg)]">Socket.io</span>
+                                        <span class="px-2.5 py-1 rounded-full text-xs border border-[var(--border)] text-[var(--text-muted)] bg-[var(--bg)]">Redis</span>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+
+                    </div>
+                </div>
+                
+                <!-- Slider Controls -->
+                <button id="prev-project" class="absolute -left-5 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-[var(--bg)] border border-[var(--border)] text-[var(--text)] flex items-center justify-center opacity-0 group-hover/slider:opacity-100 transition-all shadow-md hover:border-[var(--primary)] hover:text-[var(--primary)] interactive z-10 disabled:opacity-0 disabled:pointer-events-none" disabled>
+                    <iconify-icon icon="solar:arrow-left-linear" style="stroke-width: 1.5;"></iconify-icon>
+                </button>
+                <button id="next-project" class="absolute -right-5 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-[var(--bg)] border border-[var(--border)] text-[var(--text)] flex items-center justify-center opacity-0 group-hover/slider:opacity-100 transition-all shadow-md hover:border-[var(--primary)] hover:text-[var(--primary)] interactive z-10 disabled:opacity-0 disabled:pointer-events-none">
+                    <iconify-icon icon="solar:arrow-right-linear" style="stroke-width: 1.5;"></iconify-icon>
+                </button>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="py-32 px-6 max-w-4xl mx-auto scroll-reveal mb-20 text-center" style="opacity: 0; transform: translateY(30px); transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);">
+            <div class="mb-14">
+                <h2 class="text-3xl font-medium tracking-tight mb-4">Let's Connect</h2>
+                <p class="text-base text-[var(--text-muted)] max-w-lg mx-auto font-normal">
+                    Reach out instantly through your preferred platform. I'm currently available for new opportunities and collaborations.
+                </p>
+            </div>
+            
+            <div class="flex flex-wrap justify-center gap-4 sm:gap-6">
+                <!-- Links -->
+                <a href="https://www.youtube.com/@yushanthoriq3744" class="tilt-card interactive flex flex-col items-center justify-center gap-3 w-[calc(50%-0.5rem)] sm:w-36 h-36 rounded-2xl border border-[var(--border)] bg-[var(--bg)]/50 hover:border-[var(--primary)]/50 hover:bg-[var(--primary)]/5 transition-all group shadow-sm" style="transform-style: preserve-3d;">
+                    <iconify-icon icon="tabler:brand-youtube" class="text-3xl text-[var(--text-muted)] group-hover:text-[var(--primary)] transition-colors" style="stroke-width: 1.5; transform: translateZ(20px);"></iconify-icon>
+                    <span class="text-sm text-[var(--text)] font-normal" style="transform: translateZ(10px);">YouTube</span>
+                </a>
+                
+                <a href="#" class="tilt-card interactive flex flex-col items-center justify-center gap-3 w-[calc(50%-0.5rem)] sm:w-36 h-36 rounded-2xl border border-[var(--border)] bg-[var(--bg)]/50 hover:border-[var(--primary)]/50 hover:bg-[var(--primary)]/5 transition-all group shadow-sm" style="transform-style: preserve-3d;">
+                    <iconify-icon icon="tabler:brand-github" class="text-3xl text-[var(--text-muted)] group-hover:text-[var(--primary)] transition-colors" style="stroke-width: 1.5; transform: translateZ(20px);"></iconify-icon>
+                    <span class="text-sm text-[var(--text)] font-normal" style="transform: translateZ(10px);">GitHub</span>
+                </a>
+
+                <a href="#" class="tilt-card interactive flex flex-col items-center justify-center gap-3 w-[calc(50%-0.5rem)] sm:w-36 h-36 rounded-2xl border border-[var(--border)] bg-[var(--bg)]/50 hover:border-[var(--primary)]/50 hover:bg-[var(--primary)]/5 transition-all group shadow-sm" style="transform-style: preserve-3d;">
+                    <iconify-icon icon="tabler:brand-instagram" class="text-3xl text-[var(--text-muted)] group-hover:text-[var(--primary)] transition-colors" style="stroke-width: 1.5; transform: translateZ(20px);"></iconify-icon>
+                    <span class="text-sm text-[var(--text)] font-normal" style="transform: translateZ(10px);">Instagram</span>
+                </a>
+                
+                <a href="#" class="tilt-card interactive flex flex-col items-center justify-center gap-3 w-[calc(50%-0.5rem)] sm:w-36 h-36 rounded-2xl border border-[var(--border)] bg-[var(--bg)]/50 hover:border-[var(--primary)]/50 hover:bg-[var(--primary)]/5 transition-all group shadow-sm" style="transform-style: preserve-3d;">
+                    <iconify-icon icon="tabler:brand-whatsapp" class="text-3xl text-[var(--text-muted)] group-hover:text-[var(--primary)] transition-colors" style="stroke-width: 1.5; transform: translateZ(20px);"></iconify-icon>
+                    <span class="text-sm text-[var(--text)] font-normal" style="transform: translateZ(10px);">WhatsApp</span>
+                </a>
+                
+                <a href="#" class="tilt-card interactive flex flex-col items-center justify-center gap-3 w-[calc(50%-0.5rem)] sm:w-36 h-36 rounded-2xl border border-[var(--border)] bg-[var(--bg)]/50 hover:border-[var(--primary)]/50 hover:bg-[var(--primary)]/5 transition-all group shadow-sm" style="transform-style: preserve-3d;">
+                    <iconify-icon icon="tabler:brand-linkedin" class="text-3xl text-[var(--text-muted)] group-hover:text-[var(--primary)] transition-colors" style="stroke-width: 1.5; transform: translateZ(20px);"></iconify-icon>
+                    <span class="text-sm text-[var(--text)] font-normal" style="transform: translateZ(10px);">LinkedIn</span>
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        // Custom Cursor Engine
+        const cursor     = document.getElementById('cursor');
+        const cursorRing = document.getElementById('cursor-ring');
+        const cursorDot  = document.getElementById('cursor-dot');
+
+        let mouseX = window.innerWidth / 2;
+        let mouseY = window.innerHeight / 2;
+        let cursorX = mouseX, cursorY = mouseY;
+        let vX = 0, vY = 0;
+
+        const stiffness = 120;
+        const damping = 16;
+        const dt = 0.016;
+
+        document.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+        });
+
+        // Reusable function to attach cursor events to new elements
+        function attachCursorEvents() {
+            const interactives = document.querySelectorAll('.interactive, a, button, input');
+            interactives.forEach(el => {
+                if(el.dataset.cursorAttached) return; 
+                el.dataset.cursorAttached = "true";
+                
+                el.addEventListener('mouseenter', () => {
+                    cursorRing.style.width   = '52px';
+                    cursorRing.style.height  = '52px';
+                    cursorRing.style.opacity = '1';
                 });
-            } else {
-                scrollToSection(targetId);
-            }
+                el.addEventListener('mouseleave', () => {
+                    cursorRing.style.width   = '38px';
+                    cursorRing.style.height  = '38px';
+                    cursorRing.style.opacity = '0.5';
+                });
+            });
         }
-    });
-});
+        attachCursorEvents();
 
-function scrollToSection(targetId) {
-    const targetSection = document.querySelector(targetId);
-    if (targetSection) {
-        targetSection.scrollIntoView({
-            behavior: 'smooth',
-            block: 'start'
-        });
-    }
-}
+        function updateSpring(current, target, velocity) {
+            const displacement  = target - current;
+            const springForce   = displacement * stiffness;
+            const dampingForce  = velocity * damping;
+            const acceleration  = springForce - dampingForce;
+            velocity += acceleration * dt;
+            current  += velocity * dt;
+            return { current, velocity };
+        }
 
-function activateContactView() {
-    isContactView = true;
-    
-    // Scroll ke home dulu
-    document.querySelector('#home').scrollIntoView({
-        behavior: 'smooth',
-        block: 'start'
-    });
-    
-    setTimeout(() => {
-        const socialIcons = document.querySelector('.social-icons');
+        function renderCursor() {
+            const resX = updateSpring(cursorX, mouseX, vX);
+            cursorX = resX.current; vX = resX.velocity;
+
+            const resY = updateSpring(cursorY, mouseY, vY);
+            cursorY = resY.current; vY = resY.velocity;
+
+            const speed = Math.sqrt(vX * vX + vY * vY);
+            const blurAmount = Math.min(speed * 0.022, 1.8);
+            const angle   = Math.atan2(vY, vX) * (180 / Math.PI);
+            const stretch = 1 + Math.min(speed * 0.013, 0.55);
+            const squish  = 1 / Math.sqrt(stretch);
+
+            cursor.style.transform = `translate3d(${cursorX}px, ${cursorY}px, 0) translate(-50%, -50%)`;
+            cursorRing.style.filter = `blur(${blurAmount * 0.45}px)`;
+            cursorDot.style.filter  = `blur(${blurAmount}px)`;
+            cursorDot.style.transform = `translate(-50%, -50%) rotate(${angle}deg) scaleX(${stretch}) scaleY(${squish})`;
+
+            requestAnimationFrame(renderCursor);
+        }
+        renderCursor();
+
+        // Project Slider Engine
+        const slider = document.getElementById('project-slider');
+        const prevProjectBtn = document.getElementById('prev-project');
+        const nextProjectBtn = document.getElementById('next-project');
+        const projectSlides = document.querySelectorAll('.project-slide');
+        let currentSlide = 0;
+
+        function updateSlider() {
+            const isMobile = window.innerWidth < 768;
+            const slidesPerView = isMobile ? 1 : 2;
+            const maxSlides = Math.max(0, projectSlides.length - slidesPerView);
+            
+            if (currentSlide > maxSlides) currentSlide = maxSlides;
+            if (currentSlide < 0) currentSlide = 0;
+            
+            const slideWidth = projectSlides[0].offsetWidth;
+            const gap = 24; // 1.5rem gap (gap-6)
+            const offset = currentSlide * (slideWidth + gap);
+            
+            slider.style.transform = `translate3d(-${offset}px, 0, 0)`;
+            
+            prevProjectBtn.disabled = currentSlide === 0;
+            nextProjectBtn.disabled = currentSlide === maxSlides;
+        }
+
+        nextProjectBtn.addEventListener('click', () => { currentSlide++; updateSlider(); });
+        prevProjectBtn.addEventListener('click', () => { currentSlide--; updateSlider(); });
+        window.addEventListener('resize', updateSlider);
+        setTimeout(updateSlider, 100);
+
+        // AI Modal Engine
+        const aiModal = document.getElementById('ai-modal');
+        const aiDialog = document.getElementById('ai-dialog');
+        const aiInput = document.getElementById('ai-input');
+        const aiResults = document.getElementById('ai-results');
+        const aiTrigger = document.getElementById('ai-trigger');
+        const aiClosers = document.querySelectorAll('.ai-close');
+
+        function openAI() {
+            aiModal.classList.remove('opacity-0', 'pointer-events-none');
+            aiDialog.classList.remove('scale-95');
+            aiDialog.classList.add('scale-100');
+            aiInput.focus();
+        }
+
+        function closeAI() {
+            aiModal.classList.add('opacity-0', 'pointer-events-none');
+            aiDialog.classList.remove('scale-100');
+            aiDialog.classList.add('scale-95');
+        }
+
+        aiTrigger.addEventListener('click', openAI);
+        aiClosers.forEach(btn => btn.addEventListener('click', closeAI));
         
-        // Tambah class untuk animasi garis bawah (TANPA BLUR)
-        socialIcons.classList.add('contact-active');
-    }, 500);
-}
+        document.addEventListener('keydown', (e) => {
+            if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+                e.preventDefault();
+                openAI();
+            }
+            if (e.key === 'Escape') closeAI();
+        });
 
-function deactivateContactView(callback) {
-    const socialIcons = document.querySelector('.social-icons');
-    
-    // Hapus class
-    socialIcons.classList.remove('contact-active');
-    
-    setTimeout(() => {
-        isContactView = false;
-        if (callback) callback();
-    }, 600);
-}
+        const portfolioContext = {
+            skills: "frontend, backend, react, vue, tailwind, motion, webgl, architecture",
+        };
 
-// Intersection Observer untuk animasi scroll
-document.addEventListener("DOMContentLoaded", () => {
-    const about = document.querySelector('.about');
-    const skills = document.querySelector('.skills');
+        aiInput.addEventListener('keydown', (e) => {
+            if(e.key === 'Enter' && aiInput.value.trim() !== '') {
+                const query = aiInput.value.trim();
+                aiInput.value = '';
+                aiResults.classList.remove('hidden');
+                
+                aiResults.innerHTML += `
+                    <div class="flex gap-4 text-sm animate-[pulse-slow_0.3s_ease-out]">
+                        <div class="w-7 h-7 rounded-full bg-[var(--border)] flex-shrink-0 flex items-center justify-center text-[var(--text-muted)]">
+                            <iconify-icon icon="solar:user-linear" style="stroke-width: 1.5;"></iconify-icon>
+                        </div>
+                        <div class="pt-1 text-[var(--text)] leading-relaxed">${query}</div>
+                    </div>
+                `;
 
-    const observerOptions = {
-        threshold: 0.2
-    };
+                const id = 'ai-' + Date.now();
+                aiResults.innerHTML += `
+                    <div id="${id}" class="flex gap-4 text-sm">
+                        <div class="w-7 h-7 rounded-full bg-[var(--primary)]/10 text-[var(--primary)] flex-shrink-0 flex items-center justify-center">
+                            <iconify-icon icon="solar:magic-stick-3-linear" class="animate-spin" style="stroke-width: 1.5;"></iconify-icon>
+                        </div>
+                        <div class="pt-1 text-[var(--text-muted)] typing-indicator font-mono text-xs">Generating response...</div>
+                    </div>
+                `;
+                
+                setTimeout(() => aiResults.scrollTop = aiResults.scrollHeight, 10);
 
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('show');
-            } else {
-                entry.target.classList.remove('show');
+                setTimeout(() => {
+                    const aiMsg = document.getElementById(id);
+                    const icon = aiMsg.querySelector('iconify-icon');
+                    icon.classList.remove('animate-spin');
+                    
+                    const textContainer = aiMsg.querySelector('.typing-indicator');
+                    textContainer.classList.remove('text-[var(--text-muted)]', 'typing-indicator', 'font-mono', 'text-xs');
+                    textContainer.classList.add('text-[var(--text)]', 'leading-relaxed');
+                    
+                    const lowerQuery = query.toLowerCase();
+                    let response = "Based on the portfolio, I specialize in crafting fast, accessible, and interactive digital experiences. My core focus is bridging the gap between design and scalable technical architecture.";
+                    
+                    // Extended AI Logic handling both portfolio context & general programming
+                    if (lowerQuery.includes('programming') || lowerQuery.includes('language') || lowerQuery.includes('code') || lowerQuery.includes('what is')) {
+                        response = "Programming is the process of writing instructions that computers execute to perform specific tasks. There are many paradigms and types of programming languages, such as Object-Oriented (Java, Python, C++), Functional (Haskell, Clojure), and Scripting languages (JavaScript, Bash). Different languages are suited for distinct tasks—for instance, JavaScript excels in web interfaces, Python is popular for data science, and C++ is used for high-performance systems.";
+                    } else if (lowerQuery.includes('project') || lowerQuery.includes('work') || lowerQuery.includes('build')) {
+                        response = "You can view the featured work in the Projects section. Highlights include a high-performance E-Commerce Platform built with Next.js, an Analytics Dashboard powered by Vue and D3.js, and a Real-Time Chat Engine using WebSocket integration.";
+                    } else if (lowerQuery.includes('contact') || lowerQuery.includes('hire') || lowerQuery.includes('reach')) {
+                        response = "I am currently available for new opportunities! You can easily reach out via the links in the Contact section at the bottom of the page (GitHub, LinkedIn, WhatsApp).";
+                    } else if (lowerQuery.includes('skill') || lowerQuery.includes('tech') || lowerQuery.includes('stack')) {
+                        response = `My technical arsenal includes ${portfolioContext.skills}. I heavily focus on modern JavaScript frameworks and fluid motion design.`;
+                    } else if (lowerQuery.includes('hello') || lowerQuery.includes('hi')) {
+                        response = "Hello! I'm the AI assistant for this portfolio. You can ask me about the projects, skills, contact info, or even explore general programming concepts together!";
+                    } else {
+                        response = "I'm primarily focused on this portfolio, but I can also answer general questions about programming and technology. Could you be more specific about what you'd like to know?";
+                    }
+                    
+                    textContainer.innerHTML = response;
+                    setTimeout(() => aiResults.scrollTop = aiResults.scrollHeight, 10);
+                }, 1200);
             }
         });
-    }, observerOptions);
 
-    if (about) observer.observe(about);
-    if (skills) observer.observe(skills);
-});
-</script>
+        // Navigation Highlight
+        const navLinks = document.querySelectorAll('.nav-link');
+        const navPill = document.getElementById('nav-pill');
+        const sections = document.querySelectorAll('section');
+
+        function updateNavPill(activeLink) {
+            if(!activeLink) return;
+            const linkRect = activeLink.getBoundingClientRect();
+            const containerRect = activeLink.parentElement.getBoundingClientRect();
+            
+            navPill.style.width = `${linkRect.width}px`;
+            navPill.style.left = `${linkRect.left - containerRect.left}px`;
+            
+            navLinks.forEach(link => {
+                link.classList.remove('text-[var(--text)]');
+                link.classList.add('text-[var(--text-muted)]');
+            });
+            activeLink.classList.remove('text-[var(--text-muted)]');
+            activeLink.classList.add('text-[var(--text)]');
+        }
+
+        const observerOptions = { root: null, rootMargin: '-20% 0px -60% 0px', threshold: 0 };
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const id = entry.target.getAttribute('id');
+                    const activeLink = document.querySelector(`.nav-link[href="#${id}"]`);
+                    updateNavPill(activeLink);
+                }
+            });
+        }, observerOptions);
+
+        sections.forEach(sec => observer.observe(sec));
+        
+        setTimeout(() => updateNavPill(navLinks[0]), 100);
+        window.addEventListener('resize', () => {
+            const activeId = Array.from(sections).find(s => {
+                const rect = s.getBoundingClientRect();
+                return rect.top <= window.innerHeight / 2 && rect.bottom >= window.innerHeight / 2;
+            })?.id || 'home';
+            updateNavPill(document.querySelector(`.nav-link[href="#${activeId}"]`));
+        });
+
+        // Theme & Color Picker (Initializing to Dark Mode logic)
+        const themeToggle = document.getElementById('theme-toggle');
+        const bodyStyle = document.body.style;
+        let isDark = true; // Started as true as requested
+
+        themeToggle.addEventListener('click', () => {
+            isDark = !isDark;
+            bodyStyle.setProperty('--bg', isDark ? '#0a0a0a' : '#ffffff');
+            bodyStyle.setProperty('--text', isDark ? '#ededed' : '#171717');
+            bodyStyle.setProperty('--text-muted', isDark ? '#a3a3a3' : '#737373');
+            bodyStyle.setProperty('--border', isDark ? '#262626' : '#f5f5f5');
+            
+            themeToggle.innerHTML = isDark 
+                ? '<iconify-icon icon="solar:sun-linear" style="stroke-width: 1.5;"></iconify-icon>' 
+                : '<iconify-icon icon="solar:moon-linear" style="stroke-width: 1.5;"></iconify-icon>';
+        });
+
+        const colorBtns = document.querySelectorAll('.color-btn');
+        colorBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const color = btn.getAttribute('data-color');
+                bodyStyle.setProperty('--primary', color);
+                
+                colorBtns.forEach(b => b.classList.replace('ring-[var(--primary)]', 'ring-transparent'));
+                btn.classList.replace('ring-transparent', 'ring-[var(--primary)]');
+            });
+        });
+        colorBtns[0].classList.replace('ring-transparent', 'ring-[var(--primary)]');
+
+        // Floating Title Animation
+        const floatingTitle = document.getElementById('floating-title');
+        let time = 0;
+        function animateFloat() {
+            time += 0.015;
+            const y = Math.sin(time) * 10;
+            floatingTitle.style.transform = `translateY(${y}px)`;
+            requestAnimationFrame(animateFloat);
+        }
+        animateFloat();
+
+        // Scroll Reveal
+        const revealElements = document.querySelectorAll('.scroll-reveal');
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if(entry.isIntersecting) {
+                    entry.target.style.opacity = 1;
+                    entry.target.style.transform = 'translateY(0)';
+                    revealObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+        revealElements.forEach(el => revealObserver.observe(el));
+
+        // 3D Tilt Effect
+        const tiltCards = document.querySelectorAll('.tilt-card');
+        tiltCards.forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+                
+                const rotateX = ((y - centerY) / centerY) * -6;
+                const rotateY = ((x - centerX) / centerX) * 6;
+                
+                card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+            });
+            
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg)`;
+                card.style.transition = `transform 0.5s cubic-bezier(0.23, 1, 0.32, 1)`;
+            });
+            card.addEventListener('mouseenter', () => {
+                card.style.transition = `none`;
+            });
+        });
+    </script>
 </body>
 </html>
