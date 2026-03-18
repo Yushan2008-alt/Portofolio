@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio — YS</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600&family=DM+Sans:wght@300;400;500&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #3b82f6;
+            --primary-glow: rgba(59, 130, 246, 0.25);
+            --cursor-color: #3b82f6;
+            --cursor-glow: rgba(59, 130, 246, 0.55);
+        }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            cursor: none !important;
+        }
+
+        h1, h2, h3, nav, .font-display { font-family: 'Syne', sans-serif; }
+        .font-mono { font-family: 'JetBrains Mono', monospace; }
+
+        * { cursor: none !important; }
+
+        /* Animations */
+        @keyframes pulse-slow { 0%,100%{opacity:1} 50%{opacity:0.4} }
+        @keyframes scan { 0%{transform:translateY(-100%)} 100%{transform:translateY(100vh)} }
+        @keyframes fade-up { from{opacity:0;transform:translateY(1rem)} to{opacity:1;transform:translateY(0)} }
+        @keyframes scale-in { from{opacity:0;transform:scale(0.95)} to{opacity:1;transform:scale(1)} }
+        @keyframes slide-right { from{opacity:0;transform:translateX(-2rem)} to{opacity:1;transform:translateX(0)} }
+        
+        .animate-fade-up { animation: fade-up 0.8s cubic-bezier(0.16,1,0.3,1) forwards; }
+        .animate-scale-in { animation: scale-in 1s cubic-bezier(0.16,1,0.3,1) forwards; }
+        .animate-slide-right { animation: slide-right 0.8s cubic-bezier(0.16,1,0.3,1) forwards; }
+        .delay-100 { animation-delay: 100ms; }
+        .delay-200 { animation-delay: 200ms; }
+        .delay-300 { animation-delay: 300ms; }
+        .delay-400 { animation-delay: 400ms; }
+
+        /* Gradient Text */
+        .gradient-text {
+            background: linear-gradient(135deg, #ffffff 0%, var(--primary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Futuristic Card Base */
+        .futuristic-card {
+            background: rgba(10, 10, 15, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(12px);
+            transition: all 0.4s cubic-bezier(0.23,1,0.32,1);
+            position: relative;
+        }
+        .futuristic-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: inherit;
+            padding: 1px;
+            background: linear-gradient(135deg, var(--primary-glow), transparent 60%);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            opacity: 0;
+            transition: opacity 0.4s;
+        }
+        .futuristic-card:hover::before { opacity: 1; }
+        .futuristic-card:hover { 
+            border-color: rgba(255, 255, 255, 0.15); 
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4), 0 0 0 1px var(--primary-glow); 
+            transform: translateY(-4px) scale(1.02);
+        }
+
+        /* Scanline */
+        .scanline::after {
+            content: '';
+            position: absolute;
+            left: 0; right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--primary), transparent);
+            opacity: 0.15;
+            animation: scan 4s linear infinite;
+            pointer-events: none;
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar { width: 4px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--primary); }
+
+        /* Cursor */
+        #cursor-trail { position: fixed; top: 0; left: 0; pointer-events: none; z-index: 100; }
+        
+        /* Noise */
+        .noise::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+            opacity: 0.03;
+            pointer-events: none;
+            z-index: 9999;
+        }
+
+        .scroll-reveal { opacity: 0; transform: translateY(2rem); transition: all 1s cubic-bezier(0.16,1,0.3,1); }
+        .ai-msg { animation: fade-up 0.3s ease-out; }
+
+        /* Light Mode Adjustments */
+        body.light {
+            --bg: #f4f4f8; --text: #111118; --border: #dddde8; --primary-glow: rgba(59,130,246,0.15);
+            background-color: var(--bg); color: var(--text);
+        }
+        body.light .futuristic-card { background: rgba(255,255,255,0.6); border-color: rgba(0,0,0,0.1); }
+        body.light .text-white { color: #111118; }
+        body.light .text-neutral-300, body.light .text-neutral-400 { color: #4b5563; }
+        body.light .bg-neutral-900\/40 { background-color: rgba(255,255,255,0.6); }
+        body.light .border-white\/10 { border-color: rgba(0,0,0,0.1); }
+        body.light .text-blue-200\/5 { color: rgba(0,0,0,0.04); }
+    </style>
+</head>
+<body class="bg-neutral-950 text-neutral-300 antialiased selection:bg-blue-500/30 selection:text-white transition-colors duration-500 relative overflow-x-hidden noise">
+
+    <!-- Black Hole Canvas -->
+    <canvas id="particles-canvas" class="fixed inset-0 pointer-events-none z-0 opacity-80 mix-blend-screen transition-opacity duration-700"></canvas>
+
+    <!-- Top Glow Line -->
+    <div class="fixed top-0 left-0 right-0 z-50 h-px bg-gradient-to-r from-transparent via-blue-500/50 to-transparent opacity-60"></div>
+
+    <!-- Custom Cursor -->
+    <div id="cursor" class="fixed top-0 left-0 pointer-events-none z-[100]" style="will-change: transform; transform: translate3d(-100px, -100px, 0) translate(-50%, -50%);">
+        <div id="cursor-bloom" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%); width:6rem;height:6rem;border-radius:50%; background:radial-gradient(circle,var(--cursor-glow) 0%,transparent 65%); opacity:0.2; transition:all .3s ease;"></div>
+        <div id="cursor-ring" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%); width:2.5rem;height:2.5rem;border-radius:50%; border:1px solid var(--cursor-color); opacity:0.8; box-shadow:0 0 1rem 0.2rem var(--cursor-glow); transition:all .3s ease;"></div>
+        <div id="cursor-dot" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%); width:0.4rem;height:0.4rem;border-radius:50%; background:var(--cursor-color); box-shadow:0 0 0.8rem 0.2rem var(--cursor-glow);"></div>
+        <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%); width:0.15rem;height:0.15rem;border-radius:50%; background:#fff; z-index:1;"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-40 backdrop-blur-xl border-b border-white/5 bg-neutral-950/50 transition-colors duration-300">
+        <div class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
+            <div class="font-display font-semibold tracking-tight text-xl interactive cursor-pointer text-white drop-shadow-[0_0_10px_rgba(255,255,255,0.3)] hover:scale-110 transition-transform" onclick="window.scrollTo(0,0)">YS</div>
+            
+            <div class="relative items-center p-1 rounded-full border border-white/10 bg-black/20 hidden md:flex shadow-sm backdrop-blur-md">
+                <div id="nav-pill" class="absolute inset-y-1 rounded-full z-0 bg-white/10 transition-all duration-300 ease-out" style="width: 0; left: 0.25rem;"></div>
+                <a href="#home" class="nav-link interactive relative z-10 px-5 py-1.5 text-sm font-light transition-colors text-white">Home</a>
+                <a href="#about" class="nav-link interactive relative z-10 px-5 py-1.5 text-sm font-light transition-colors text-neutral-400 hover:text-white">About</a>
+                <a href="#skills" class="nav-link interactive relative z-10 px-5 py-1.5 text-sm font-light transition-colors text-neutral-400 hover:text-white">Skills</a>
+                <a href="#projects" class="nav-link interactive relative z-10 px-5 py-1.5 text-sm font-light transition-colors text-neutral-400 hover:text-white">Projects</a>
+                <a href="#contact" class="nav-link interactive relative z-10 px-5 py-1.5 text-sm font-light transition-colors text-neutral-400 hover:text-white">Contact</a>
+            </div>
+
+            <div class="flex items-center gap-4">
+                <button id="ai-trigger" class="interactive flex items-center justify-center gap-2 px-3 py-1.5 rounded-full border border-white/10 bg-white/5 text-xs font-light text-neutral-300 hover:border-blue-500/50 hover:text-blue-400 hover:shadow-[0_0_1rem_rgba(59,130,246,0.2)] hover:scale-105 hover:-translate-y-0.5 transition-all">
+                    <iconify-icon icon="solar:magic-stick-3-linear" style="stroke-width: 1.5;"></iconify-icon>
+                    Ask AI
+                    <span class="hidden sm:inline-block ml-1 text-neutral-500 bg-white/5 px-1.5 py-0.5 rounded font-mono text-xs">⌘K</span>
+                </button>
+
+                <!-- Color Theme Swatches -->
+                <div class="flex gap-2 items-center border-l border-white/10 pl-4 hidden sm:flex">
+                    <button class="w-3.5 h-3.5 rounded-full bg-blue-500 interactive color-btn ring-2 ring-transparent ring-offset-2 ring-offset-[var(--bg)] transition-all hover:scale-125" data-color="#3b82f6" aria-label="Blue"></button>
+                    <button class="w-3.5 h-3.5 rounded-full bg-purple-500 interactive color-btn ring-2 ring-transparent ring-offset-2 ring-offset-[var(--bg)] transition-all hover:scale-125" data-color="#a855f7" aria-label="Purple"></button>
+                    <button class="w-3.5 h-3.5 rounded-full bg-green-500 interactive color-btn ring-2 ring-transparent ring-offset-2 ring-offset-[var(--bg)] transition-all hover:scale-125" data-color="#22c55e" aria-label="Green"></button>
+                    <button class="w-3.5 h-3.5 rounded-full bg-yellow-500 interactive color-btn ring-2 ring-transparent ring-offset-2 ring-offset-[var(--bg)] transition-all hover:scale-125" data-color="#eab308" aria-label="Yellow"></button>
+                    <button class="w-3.5 h-3.5 rounded-full bg-orange-500 interactive color-btn ring-2 ring-transparent ring-offset-2 ring-offset-[var(--bg)] transition-all hover:scale-125" data-color="#f97316" aria-label="Orange"></button>
+                    <button class="w-3.5 h-3.5 rounded-full bg-red-500 interactive color-btn ring-2 ring-transparent ring-offset-2 ring-offset-[var(--bg)] transition-all hover:scale-125" data-color="#ef4444" aria-label="Red"></button>
+                    <button class="w-3.5 h-3.5 rounded-full bg-gray-500 interactive color-btn ring-2 ring-transparent ring-offset-2 ring-offset-[var(--bg)] transition-all hover:scale-125" data-color="#9ca3af" aria-label="Grey"></button>
+                </div>
+                
+                <!-- Dark / Light Mode Toggle -->
+                <button id="theme-toggle" class="interactive flex items-center justify-center text-lg text-neutral-400 hover:text-white hover:scale-110 hover:rotate-12 transition-all sm:ml-2">
+                    <iconify-icon icon="solar:sun-linear" style="stroke-width: 1.5;"></iconify-icon>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <main class="relative z-10 pt-24 pb-20">
+        <!-- Hero Section -->
+        <section id="home" class="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 mb-32 opacity-0 animate-scale-in delay-100">
+            <div class="relative w-full min-h-[75vh] sm:min-h-[85vh] flex items-center py-8 sm:py-12 lg:py-16 transition-colors duration-500">
+
+                <!-- Content Grid -->
+                <div class="relative grid grid-cols-1 lg:grid-cols-12 gap-10 items-center w-full">
+                    
+                    <!-- Left: Headline & Badge -->
+                    <div class="lg:col-span-7 flex flex-col items-start opacity-0 animate-slide-right delay-200">
+                        <div class="inline-flex items-center gap-3 px-3 py-1.5 rounded-full border border-white/10 bg-white/5 backdrop-blur-md mb-8 interactive group hover:scale-105 hover:-translate-y-1 transition-all duration-300 cursor-pointer">
+                            <div class="w-6 h-6 rounded-full overflow-hidden border border-white/20">
+                                <img src="image/yushanpose.jpg" alt="Profile" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" onerror="this.style.opacity=0">
+                            </div>
+                            <span class="w-1.5 h-1.5 rounded-full bg-[var(--primary)] shadow-[0_0_8px_var(--primary)] animate-pulse transition-colors duration-300"></span>
+                            <span class="font-mono text-xs tracking-widest text-neutral-300 pr-2 group-hover:text-white transition-colors duration-300">AVAILABLE FOR WORK</span>
+                        </div>
+
+                        <h1 class="text-5xl sm:text-6xl lg:text-7xl leading-[1.05] font-light text-white tracking-tighter font-display">
+                            Crafting digital<br />
+                            <span class="gradient-text font-semibold">experiences.</span>
+                        </h1>
+                    </div>
+
+                    <!-- Right: Copy & CTAs -->
+                    <div class="lg:col-span-5 flex flex-col opacity-0 animate-fade-up delay-300 lg:pt-16">
+                        
+                        <!-- Improved Legibility Box -->
+                        <div class="bg-neutral-900/40 backdrop-blur-md border border-white/10 p-5 sm:p-6 rounded-2xl shadow-xl mb-8 max-w-[42ch] transition-colors duration-500">
+                            <p class="text-sm sm:text-base text-neutral-300 leading-relaxed font-normal">
+                                I build fast, accessible, and highly interactive web applications using modern technologies, refined physics, and seamless backend architecture.
+                            </p>
+                        </div>
+                        
+                        <div class="flex flex-wrap items-center gap-4">
+                            <!-- Gradient Primary Button -->
+                            <a href="#about" class="interactive group relative inline-flex items-center justify-center p-px rounded-lg overflow-hidden transition-all duration-300 active:scale-95 hover:scale-105 hover:-translate-y-1 bg-gradient-to-br from-[var(--primary)] to-cyan-400 shadow-[0_0_2rem_-0.5rem_var(--primary-glow)]">
+                                <span class="relative flex items-center justify-center gap-2 px-6 py-3 rounded-[7px] bg-neutral-950 text-sm font-normal text-white transition-colors duration-300 group-hover:bg-opacity-0">
+                                    CV Details
+                                </span>
+                            </a>
+                            
+                            <!-- Glass Secondary Button -->
+                            <a href="#projects" class="interactive group relative inline-flex items-center justify-center gap-2 px-6 py-3 rounded-lg bg-white/5 border border-white/10 text-sm font-normal text-white transition-all duration-300 hover:bg-white/10 active:scale-95 hover:scale-105 hover:-translate-y-1">
+                                View Projects
+                                <iconify-icon icon="solar:arrow-right-linear" class="text-sm text-neutral-400 group-hover:text-white transition-colors" style="stroke-width: 1.5;"></iconify-icon>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="py-24 px-6 max-w-4xl mx-auto scroll-reveal">
+            <div class="flex items-center gap-4 mb-4">
+                <span class="h-px w-8 bg-[var(--primary)] opacity-50 transition-colors duration-300"></span>
+                <span class="font-mono text-xs tracking-widest uppercase text-[var(--primary)] transition-colors duration-300">01 / About</span>
+            </div>
+            <h2 class="text-3xl sm:text-4xl font-display font-semibold tracking-tight text-white mb-8">Behind the Code</h2>
+            
+            <div class="futuristic-card rounded-2xl p-8 sm:p-10 interactive">
+                <div class="space-y-6 text-neutral-300 leading-relaxed text-sm sm:text-base font-light">
+                    <p>
+                        As a Backend Developer, I act as a 'behind-the-scenes architect', breaking down complex business logic into seamless, functional systems. I specialize in integrating third-party services and ensuring optimal data flow between servers and client interfaces.
+                    </p>
+                    <p>
+                        My focus extends beyond raw code; I aim to deliver scalable technology solutions that meet business needs while providing an exceptional, responsive user experience. I thrive on solving complex architectural problems, optimizing performance, and maintaining rigorous security standards.
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-3 gap-6 mt-10 pt-8 border-t border-white/10">
+                    <div>
+                        <div class="text-2xl sm:text-3xl font-semibold text-white mb-1 font-display tracking-tight">3+</div>
+                        <div class="text-xs text-neutral-500 font-mono uppercase tracking-widest">Years Exp.</div>
+                    </div>
+                    <div>
+                        <div class="text-2xl sm:text-3xl font-semibold text-white mb-1 font-display tracking-tight">15+</div>
+                        <div class="text-xs text-neutral-500 font-mono uppercase tracking-widest">Projects</div>
+                    </div>
+                    <div>
+                        <div class="text-2xl sm:text-3xl font-semibold text-white mb-1 font-display tracking-tight">10+</div>
+                        <div class="text-xs text-neutral-500 font-mono uppercase tracking-widest">Tech Stack</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Skills Section -->
+        <section id="skills" class="py-24 px-6 max-w-6xl mx-auto scroll-reveal">
+            <div class="flex items-center justify-end gap-4 mb-4">
+                <span class="font-mono text-xs tracking-widest uppercase text-[var(--primary)] transition-colors duration-300">02 / Skills</span>
+                <span class="h-px w-8 bg-[var(--primary)] opacity-50 transition-colors duration-300"></span>
+            </div>
+            <h2 class="text-3xl sm:text-4xl font-display font-semibold tracking-tight text-white mb-12 text-right">Technical Arsenal</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="tilt-card futuristic-card interactive rounded-2xl p-8 group" style="transform-style: preserve-3d;">
+                    <div class="w-10 h-10 rounded-lg flex items-center justify-center mb-6 bg-blue-500/10 border border-blue-500/20" style="transform: translateZ(20px);">
+                        <iconify-icon icon="solar:code-square-linear" class="text-lg text-blue-400" style="stroke-width: 1.5;"></iconify-icon>
+                    </div>
+                    <h3 class="text-xl font-semibold tracking-tight text-white mb-3 font-display" style="transform: translateZ(15px);">Frontend</h3>
+                    <p class="text-sm text-neutral-400 font-light leading-relaxed" style="transform: translateZ(10px);">Mastery in React, Vue, vanilla JavaScript, and utility-first CSS frameworks like Tailwind CSS.</p>
+                </div>
+                
+                <div class="tilt-card futuristic-card interactive rounded-2xl p-8 group" style="transform-style: preserve-3d;">
+                    <div class="w-10 h-10 rounded-lg flex items-center justify-center mb-6 bg-purple-500/10 border border-purple-500/20" style="transform: translateZ(20px);">
+                        <iconify-icon icon="solar:magic-stick-3-linear" class="text-lg text-purple-400" style="stroke-width: 1.5;"></iconify-icon>
+                    </div>
+                    <h3 class="text-xl font-semibold tracking-tight text-white mb-3 font-display" style="transform: translateZ(15px);">Motion</h3>
+                    <p class="text-sm text-neutral-400 font-light leading-relaxed" style="transform: translateZ(10px);">Implementing fluid animations and spring physics using Framer Motion and custom WebGL setups.</p>
+                </div>
+
+                <div class="tilt-card futuristic-card interactive rounded-2xl p-8 group" style="transform-style: preserve-3d;">
+                    <div class="w-10 h-10 rounded-lg flex items-center justify-center mb-6 bg-emerald-500/10 border border-emerald-500/20" style="transform: translateZ(20px);">
+                        <iconify-icon icon="solar:server-square-linear" class="text-lg text-emerald-400" style="stroke-width: 1.5;"></iconify-icon>
+                    </div>
+                    <h3 class="text-xl font-semibold tracking-tight text-white mb-3 font-display" style="transform: translateZ(15px);">Architecture</h3>
+                    <p class="text-sm text-neutral-400 font-light leading-relaxed" style="transform: translateZ(10px);">Designing scalable component architectures, robust state management, and optimized API endpoints.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section id="projects" class="py-24 px-6 max-w-6xl mx-auto scroll-reveal overflow-visible">
+            <div class="flex items-center gap-4 mb-4">
+                <span class="h-px w-8 bg-[var(--primary)] opacity-50 transition-colors duration-300"></span>
+                <span class="font-mono text-xs tracking-widest uppercase text-[var(--primary)] transition-colors duration-300">03 / Work</span>
+            </div>
+            <h2 class="text-3xl sm:text-4xl font-display font-semibold tracking-tight text-white mb-12">Featured Work</h2>
+            
+            <div class="relative group/slider mx-auto">
+                <div class="overflow-hidden pb-8 pt-4 -mt-4 -mx-2 px-2"> 
+                    <div id="project-slider" class="flex gap-6 transition-transform duration-700 ease-out will-change-transform">
+                        
+                        <!-- Project 1 -->
+                        <div class="project-slide w-full md:w-[calc(50%-0.75rem)] flex-shrink-0">
+                            <a href="#" class="tilt-card futuristic-card interactive block h-full p-4 rounded-2xl transition-all group" style="transform-style: preserve-3d;">
+                                <div class="aspect-[16/10] w-full rounded-xl mb-6 overflow-hidden relative flex items-center justify-center bg-neutral-900 border border-white/5" style="transform: translateZ(15px);">
+                                    <div class="absolute inset-0 bg-gradient-to-br from-blue-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                                    <iconify-icon icon="solar:gallery-linear" class="text-4xl text-neutral-600 group-hover:scale-110 group-hover:text-blue-400 transition-all duration-500"></iconify-icon>
+                                </div>
+                                <div class="px-2 flex flex-col justify-between h-[calc(100%-auto)]" style="transform: translateZ(25px);">
+                                    <div>
+                                        <h3 class="text-lg font-semibold tracking-tight text-white mb-2 flex items-center justify-between font-display">
+                                            E-Commerce Platform
+                                            <iconify-icon icon="solar:arrow-right-up-linear" class="text-neutral-500 group-hover:text-white transition-colors"></iconify-icon>
+                                        </h3>
+                                        <p class="text-sm text-neutral-400 font-light leading-relaxed mb-6">A high-performance storefront with real-time inventory synchronization and secure payment processing.</p>
+                                    </div>
+                                    <div class="flex flex-wrap gap-2 mt-auto">
+                                        <span class="px-2.5 py-1 rounded-full text-xs border border-white/10 bg-white/5 text-neutral-300">Next.js</span>
+                                        <span class="px-2.5 py-1 rounded-full text-xs border border-white/10 bg-white/5 text-neutral-300">Stripe</span>
+                                        <span class="px-2.5 py-1 rounded-full text-xs border border-white/10 bg-white/5 text-neutral-300">PostgreSQL</span>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+
+                        <!-- Project 2 -->
+                        <div class="project-slide w-full md:w-[calc(50%-0.75rem)] flex-shrink-0">
+                            <a href="#" class="tilt-card futuristic-card interactive block h-full p-4 rounded-2xl transition-all group" style="transform-style: preserve-3d;">
+                                <div class="aspect-[16/10] w-full rounded-xl mb-6 overflow-hidden relative flex items-center justify-center bg-neutral-900 border border-white/5" style="transform: translateZ(15px);">
+                                    <div class="absolute inset-0 bg-gradient-to-br from-purple-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                                    <iconify-icon icon="solar:chart-square-linear" class="text-4xl text-neutral-600 group-hover:scale-110 group-hover:text-purple-400 transition-all duration-500"></iconify-icon>
+                                </div>
+                                <div class="px-2 flex flex-col justify-between h-[calc(100%-auto)]" style="transform: translateZ(25px);">
+                                    <div>
+                                        <h3 class="text-lg font-semibold tracking-tight text-white mb-2 flex items-center justify-between font-display">
+                                            Analytics Dashboard
+                                            <iconify-icon icon="solar:arrow-right-up-linear" class="text-neutral-500 group-hover:text-white transition-colors"></iconify-icon>
+                                        </h3>
+                                        <p class="text-sm text-neutral-400 font-light leading-relaxed mb-6">Interactive data visualization tool capable of processing and displaying thousands of records seamlessly.</p>
+                                    </div>
+                                    <div class="flex flex-wrap gap-2 mt-auto">
+                                        <span class="px-2.5 py-1 rounded-full text-xs border border-white/10 bg-white/5 text-neutral-300">Vue.js</span>
+                                        <span class="px-2.5 py-1 rounded-full text-xs border border-white/10 bg-white/5 text-neutral-300">D3.js</span>
+                                        <span class="px-2.5 py-1 rounded-full text-xs border border-white/10 bg-white/5 text-neutral-300">Node.js</span>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        
+                        <!-- Project 3 -->
+                        <div class="project-slide w-full md:w-[calc(50%-0.75rem)] flex-shrink-0">
+                            <a href="#" class="tilt-card futuristic-card interactive block h-full p-4 rounded-2xl transition-all group" style="transform-style: preserve-3d;">
+                                <div class="aspect-[16/10] w-full rounded-xl mb-6 overflow-hidden relative flex items-center justify-center bg-neutral-900 border border-white/5" style="transform: translateZ(15px);">
+                                    <div class="absolute inset-0 bg-gradient-to-br from-emerald-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                                    <iconify-icon icon="solar:chat-round-line-linear" class="text-4xl text-neutral-600 group-hover:scale-110 group-hover:text-emerald-400 transition-all duration-500"></iconify-icon>
+                                </div>
+                                <div class="px-2 flex flex-col justify-between h-[calc(100%-auto)]" style="transform: translateZ(25px);">
+                                    <div>
+                                        <h3 class="text-lg font-semibold tracking-tight text-white mb-2 flex items-center justify-between font-display">
+                                            Real-Time Chat Engine
+                                            <iconify-icon icon="solar:arrow-right-up-linear" class="text-neutral-500 group-hover:text-white transition-colors"></iconify-icon>
+                                        </h3>
+                                        <p class="text-sm text-neutral-400 font-light leading-relaxed mb-6">A scalable messaging application with WebSocket integration and end-to-end encryption mechanics.</p>
+                                    </div>
+                                    <div class="flex flex-wrap gap-2 mt-auto">
+                                        <span class="px-2.5 py-1 rounded-full text-xs border border-white/10 bg-white/5 text-neutral-300">React</span>
+                                        <span class="px-2.5 py-1 rounded-full text-xs border border-white/10 bg-white/5 text-neutral-300">Socket.io</span>
+                                        <span class="px-2.5 py-1 rounded-full text-xs border border-white/10 bg-white/5 text-neutral-300">Redis</span>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+
+                    </div>
+                </div>
+                
+                <!-- Controls -->
+                <button id="prev-project" class="absolute -left-4 sm:-left-6 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-neutral-900 border border-white/10 text-white flex items-center justify-center opacity-0 group-hover/slider:opacity-100 transition-all shadow-xl hover:border-[var(--primary)] hover:text-[var(--primary)] hover:scale-110 interactive z-10 disabled:opacity-0 disabled:pointer-events-none" disabled>
+                    <iconify-icon icon="solar:arrow-left-linear" style="stroke-width: 1.5;"></iconify-icon>
+                </button>
+                <button id="next-project" class="absolute -right-4 sm:-right-6 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-neutral-900 border border-white/10 text-white flex items-center justify-center opacity-0 group-hover/slider:opacity-100 transition-all shadow-xl hover:border-[var(--primary)] hover:text-[var(--primary)] hover:scale-110 interactive z-10 disabled:opacity-0 disabled:pointer-events-none">
+                    <iconify-icon icon="solar:arrow-right-linear" style="stroke-width: 1.5;"></iconify-icon>
+                </button>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="py-24 px-6 max-w-4xl mx-auto scroll-reveal mb-10 text-center">
+            <div class="mb-6 flex items-center justify-center gap-4">
+                <span class="h-px w-8 bg-[var(--primary)] opacity-50 transition-colors duration-300"></span>
+                <span class="font-mono text-xs tracking-widest uppercase text-[var(--primary)] transition-colors duration-300">04 / Connect</span>
+                <span class="h-px w-8 bg-[var(--primary)] opacity-50 transition-colors duration-300"></span>
+            </div>
+            <h2 class="text-3xl sm:text-4xl font-display font-semibold tracking-tight text-white mb-6">Initiate Contact</h2>
+            <p class="text-sm sm:text-base text-neutral-400 font-light max-w-lg mx-auto mb-12 leading-relaxed">
+                Available for new opportunities and collaborations. Reach out through your preferred secure channel.
+            </p>
+            
+            <div class="flex flex-wrap justify-center gap-4 sm:gap-6">
+                <!-- Links -->
+                <a href="#" class="tilt-card interactive flex flex-col items-center justify-center gap-3 w-[calc(50%-0.5rem)] sm:w-36 h-36 rounded-2xl border border-[var(--border)] bg-[var(--bg)]/50 hover:border-[var(--primary)]/50 hover:bg-[var(--primary)]/5 transition-all group shadow-sm" style="transform-style: preserve-3d;">
+                    <iconify-icon icon="tabler:brand-youtube" class="text-3xl text-[var(--text-muted)] group-hover:text-[var(--primary)] transition-colors" style="stroke-width: 1.5; transform: translateZ(20px);"></iconify-icon>
+                    <span class="text-sm text-[var(--text)] font-normal" style="transform: translateZ(10px);">YouTube</span>
+                </a>
+                
+                <a href="#" class="tilt-card interactive flex flex-col items-center justify-center gap-3 w-[calc(50%-0.5rem)] sm:w-36 h-36 rounded-2xl border border-[var(--border)] bg-[var(--bg)]/50 hover:border-[var(--primary)]/50 hover:bg-[var(--primary)]/5 transition-all group shadow-sm" style="transform-style: preserve-3d;">
+                    <iconify-icon icon="tabler:brand-github" class="text-3xl text-[var(--text-muted)] group-hover:text-[var(--primary)] transition-colors" style="stroke-width: 1.5; transform: translateZ(20px);"></iconify-icon>
+                    <span class="text-sm text-[var(--text)] font-normal" style="transform: translateZ(10px);">GitHub</span>
+                </a>
+
+                <a href="#" class="tilt-card interactive flex flex-col items-center justify-center gap-3 w-[calc(50%-0.5rem)] sm:w-36 h-36 rounded-2xl border border-[var(--border)] bg-[var(--bg)]/50 hover:border-[var(--primary)]/50 hover:bg-[var(--primary)]/5 transition-all group shadow-sm" style="transform-style: preserve-3d;">
+                    <iconify-icon icon="tabler:brand-instagram" class="text-3xl text-[var(--text-muted)] group-hover:text-[var(--primary)] transition-colors" style="stroke-width: 1.5; transform: translateZ(20px);"></iconify-icon>
+                    <span class="text-sm text-[var(--text)] font-normal" style="transform: translateZ(10px);">Instagram</span>
+                </a>
+                
+                <a href="#" class="tilt-card interactive flex flex-col items-center justify-center gap-3 w-[calc(50%-0.5rem)] sm:w-36 h-36 rounded-2xl border border-[var(--border)] bg-[var(--bg)]/50 hover:border-[var(--primary)]/50 hover:bg-[var(--primary)]/5 transition-all group shadow-sm" style="transform-style: preserve-3d;">
+                    <iconify-icon icon="tabler:brand-whatsapp" class="text-3xl text-[var(--text-muted)] group-hover:text-[var(--primary)] transition-colors" style="stroke-width: 1.5; transform: translateZ(20px);"></iconify-icon>
+                    <span class="text-sm text-[var(--text)] font-normal" style="transform: translateZ(10px);">WhatsApp</span>
+                </a>
+                
+                <a href="#" class="tilt-card interactive flex flex-col items-center justify-center gap-3 w-[calc(50%-0.5rem)] sm:w-36 h-36 rounded-2xl border border-[var(--border)] bg-[var(--bg)]/50 hover:border-[var(--primary)]/50 hover:bg-[var(--primary)]/5 transition-all group shadow-sm" style="transform-style: preserve-3d;">
+                    <iconify-icon icon="tabler:brand-linkedin" class="text-3xl text-[var(--text-muted)] group-hover:text-[var(--primary)] transition-colors" style="stroke-width: 1.5; transform: translateZ(20px);"></iconify-icon>
+                    <span class="text-sm text-[var(--text)] font-normal" style="transform: translateZ(10px);">LinkedIn</span>
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <footer class="border-t border-white/5 py-8 px-6 text-center relative z-10 bg-neutral-950/50 backdrop-blur-sm transition-colors duration-300">
+        <p class="font-mono text-xs text-neutral-600 tracking-widest uppercase">© 2025 YS — Engineered with precision</p>
+    </footer>
+
+    <!-- AI Command Palette / Modal -->
+    <div id="ai-modal" class="fixed inset-0 z-50 flex items-start justify-center pt-16 sm:pt-24 px-4 opacity-0 pointer-events-none transition-opacity duration-300">
+        <div class="absolute inset-0 bg-neutral-950/80 backdrop-blur-sm ai-close interactive"></div>
+        
+        <div class="relative w-full max-w-2xl rounded-2xl border border-white/10 bg-neutral-900/90 shadow-2xl overflow-hidden transform scale-95 transition-transform duration-300 flex flex-col scanline backdrop-blur-xl" id="ai-dialog" style="max-height: 70vh;">
+            
+            <div class="flex items-center px-4 py-3 border-b border-white/5 bg-white/[0.02]">
+                <div class="flex items-center gap-2 mr-3">
+                    <div class="w-1.5 h-1.5 rounded-full bg-[var(--primary)] animate-pulse shadow-[0_0_8px_var(--primary)]"></div>
+                    <span class="font-mono text-xs text-[var(--primary)] uppercase tracking-widest opacity-80">System</span>
+                </div>
+                <iconify-icon icon="solar:magnifer-linear" class="text-base text-neutral-500 mr-3"></iconify-icon>
+                <input type="text" id="ai-input" placeholder="Ask about portfolio, stack, or tech..." class="w-full bg-transparent border-none outline-none text-sm text-white placeholder-neutral-500 interactive font-light" autocomplete="off">
+                <button class="text-xs font-mono text-neutral-500 bg-white/5 border border-white/10 px-2 py-1 rounded ml-2 ai-close interactive hover:bg-white/10 hover:scale-105 transition-all tracking-wider">ESC</button>
+            </div>
+
+            <div id="ai-suggestions" class="p-4 flex flex-wrap gap-2 bg-neutral-950/30">
+                <span class="font-mono text-xs text-neutral-500 uppercase tracking-widest w-full mb-2">Suggested Queries</span>
+                <button class="suggestion-btn interactive px-3 py-1.5 rounded-lg border border-white/10 bg-white/5 text-xs text-neutral-400 hover:border-[var(--primary)] hover:text-white hover:scale-105 hover:-translate-y-0.5 transition-all duration-300 font-mono">List technical skills</button>
+                <button class="suggestion-btn interactive px-3 py-1.5 rounded-lg border border-white/10 bg-white/5 text-xs text-neutral-400 hover:border-[var(--primary)] hover:text-white hover:scale-105 hover:-translate-y-0.5 transition-all duration-300 font-mono">Explain E-commerce project</button>
+                <button class="suggestion-btn interactive px-3 py-1.5 rounded-lg border border-white/10 bg-white/5 text-xs text-neutral-400 hover:border-[var(--primary)] hover:text-white hover:scale-105 hover:-translate-y-0.5 transition-all duration-300 font-mono">Contact details</button>
+            </div>
+
+            <div id="ai-results" class="overflow-y-auto p-4 pb-6 hidden flex-col gap-5 flex-1 bg-neutral-950/30"></div>
+        </div>
+    </div>
+
+    <script>
+        // Real-Time Theme and Color Switching
+        const body = document.body;
+        const themeToggle = document.getElementById('theme-toggle');
+        const themeIcon = themeToggle.querySelector('iconify-icon');
+        const colorBtns = document.querySelectorAll('.color-btn');
+        const canvas = document.getElementById('particles-canvas');
+
+        // Dark/Light Mode Logic
+        themeToggle.addEventListener('click', () => {
+            body.classList.toggle('light');
+            if (body.classList.contains('light')) {
+                themeIcon.setAttribute('icon', 'solar:moon-linear');
+                canvas.classList.remove('mix-blend-screen'); // Fixes background invisibility in light mode
+            } else {
+                themeIcon.setAttribute('icon', 'solar:sun-linear');
+                canvas.classList.add('mix-blend-screen');
+            }
+        });
+
+        // Color Palette Switcher Logic
+        colorBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const hexColor = btn.dataset.color;
+                const rgbValue = btn.dataset.rgb;
+
+                // Set Primary UI Colors dynamically
+                document.documentElement.style.setProperty('--primary', hexColor);
+                document.documentElement.style.setProperty('--primary-glow', `rgba(${rgbValue}, 0.25)`);
+                document.documentElement.style.setProperty('--cursor-color', hexColor);
+                document.documentElement.style.setProperty('--cursor-glow', `rgba(${rgbValue}, 0.55)`);
+
+                // Update active button ring
+                colorBtns.forEach(b => b.classList.remove('ring-white', 'ring-neutral-900'));
+                btn.classList.add(body.classList.contains('light') ? 'ring-neutral-900' : 'ring-white');
+            });
+        });
+
+        // Interactive Black Hole Canvas Effect
+        const ctx = canvas.getContext('2d');
+        let width, height, cx, cy;
+        
+        function resizeCanvas() { 
+            width = canvas.width = window.innerWidth; 
+            height = canvas.height = window.innerHeight; 
+            cx = width / 2;
+            cy = height * 0.45; // Shifted slightly upwards for visual balance 
+        }
+        window.addEventListener('resize', resizeCanvas); 
+        resizeCanvas();
+
+        let particles = [];
+        const particleCount = 1200;
+
+        for(let i=0; i<particleCount; i++) {
+            particles.push({
+                angle: Math.random() * Math.PI * 2,
+                radius: Math.random() * (Math.max(width, height)) + 80,
+                speed: 0,
+                size: Math.random() * 1.5 + 0.5,
+                orbitOffset: Math.random() * Math.PI * 2
+            });
+        }
+
+        // Helper to get active theme color RGB for canvas
+        function getCanvasRGB() {
+            const hex = getComputedStyle(document.documentElement).getPropertyValue('--primary').trim() || '#3b82f6';
+            if (hex.length === 7) {
+                return `${parseInt(hex.slice(1, 3), 16)}, ${parseInt(hex.slice(3, 5), 16)}, ${parseInt(hex.slice(5, 7), 16)}`;
+            }
+            return '59, 130, 246'; // Fallback blue
+        }
+
+        let time = 0;
+        function drawBlackHole() {
+            ctx.clearRect(0, 0, width, height);
+            
+            const rColor = getCanvasRGB();
+            const isLight = document.body.classList.contains('light');
+            
+            // Adjust Event Horizon dynamically
+            const eventHorizon = Math.max(Math.min(width, height) * 0.1, 70);
+
+            // 1. Draw glowing accretion disk shadow background
+            const bgGlow = ctx.createRadialGradient(cx, cy, eventHorizon * 0.8, cx, cy, eventHorizon * 4);
+            bgGlow.addColorStop(0, `rgba(${rColor}, 0.15)`);
+            bgGlow.addColorStop(0.4, `rgba(${rColor}, 0.05)`);
+            bgGlow.addColorStop(1, 'rgba(0,0,0,0)');
+            ctx.fillStyle = bgGlow;
+            ctx.fillRect(0, 0, width, height);
+
+            // Calculate and apply physical rules to particles
+            particles.forEach(p => {
+                // Orbital velocity increases as it approaches the center
+                p.speed = 0.002 + (eventHorizon / Math.max(p.radius, eventHorizon)) * 0.015;
+                p.angle += p.speed;
+                
+                // Gravitational pull inward
+                if(p.radius > eventHorizon * 1.05) {
+                    p.radius -= (p.radius - eventHorizon) * 0.0015;
+                } else {
+                    // Reborn at outer edge
+                    p.radius = Math.max(width, height) * 1.5;
+                    p.angle = Math.random() * Math.PI * 2;
+                }
+                
+                p.z = Math.sin(p.angle);
+                p.x = cx + Math.cos(p.angle) * p.radius;
+                
+                // Tilt the viewing angle for 3D simulation
+                p.y = cy + p.z * p.radius * 0.35 + Math.sin(time + p.orbitOffset) * 6;
+            });
+
+            // 2. Draw Background Particles (Z < 0)
+            particles.filter(p => p.z < 0).forEach(p => {
+                let opacity = Math.max(0, Math.min((1 - (p.radius / width)) * 0.8, 0.8));
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+                ctx.fillStyle = `rgba(${rColor}, ${opacity})`;
+                ctx.fill();
+            });
+
+            // 3. Draw The Void (Event Horizon)
+            ctx.beginPath();
+            ctx.arc(cx, cy, eventHorizon, 0, Math.PI * 2);
+            ctx.fillStyle = isLight ? '#111118' : '#000000'; // Void remains dark even in light mode
+            ctx.shadowColor = `rgba(${rColor}, 0.8)`;
+            ctx.shadowBlur = 45;
+            ctx.fill();
+            ctx.shadowBlur = 0; // Reset
+
+            // 4. Draw Photon Ring (Inner edge light)
+            ctx.beginPath();
+            ctx.arc(cx, cy, eventHorizon * 1.01, 0, Math.PI * 2);
+            ctx.strokeStyle = `rgba(${rColor}, 0.6)`;
+            ctx.lineWidth = 1.5;
+            ctx.stroke();
+
+            // 5. Draw Foreground Particles (Z >= 0)
+            particles.filter(p => p.z >= 0).forEach(p => {
+                let opacity = Math.max(0, Math.min((1 - (p.radius / width)) * 0.8 + 0.2, 1));
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, p.size * 1.2, 0, Math.PI * 2);
+                ctx.fillStyle = `rgba(${rColor}, ${opacity})`;
+                ctx.fill();
+            });
+
+            time += 0.01;
+            requestAnimationFrame(drawBlackHole);
+        }
+        drawBlackHole();
+
+        // Custom Cursor
+        const cursor = document.getElementById('cursor');
+        const cursorRing = document.getElementById('cursor-ring');
+        const cursorBloom = document.getElementById('cursor-bloom');
+        let cX = window.innerWidth/2, cY = window.innerHeight/2;
+        let tX = cX, tY = cY;
+        
+        document.addEventListener('mousemove', e => { tX = e.clientX; tY = e.clientY; });
+        
+        function renderCursor() {
+            cX += (tX - cX) * 0.15;
+            cY += (tY - cY) * 0.15;
+            cursor.style.transform = `translate3d(${cX}px, ${cY}px, 0) translate(-50%, -50%)`;
+            requestAnimationFrame(renderCursor);
+        }
+        renderCursor();
+
+        function initInteractivity() {
+            document.querySelectorAll('.interactive, a, button, input').forEach(el => {
+                if(el.dataset.bound) return; el.dataset.bound = true;
+                el.addEventListener('mouseenter', () => {
+                    cursorRing.style.width = '3.5rem'; cursorRing.style.height = '3.5rem';
+                    cursorBloom.style.width = '8rem'; cursorBloom.style.height = '8rem'; cursorBloom.style.opacity = '0.4';
+                });
+                el.addEventListener('mouseleave', () => {
+                    cursorRing.style.width = '2.5rem'; cursorRing.style.height = '2.5rem';
+                    cursorBloom.style.width = '6rem'; cursorBloom.style.height = '6rem'; cursorBloom.style.opacity = '0.2';
+                });
+            });
+        }
+        initInteractivity();
+
+        // Project Slider
+        const slider = document.getElementById('project-slider');
+        const slides = document.querySelectorAll('.project-slide');
+        const prevBtn = document.getElementById('prev-project');
+        const nextBtn = document.getElementById('next-project');
+        let currentSlide = 0;
+
+        function updateSlider() {
+            const isMobile = window.innerWidth < 768;
+            const viewCount = isMobile ? 1 : 2;
+            const max = Math.max(0, slides.length - viewCount);
+            if(currentSlide > max) currentSlide = max;
+            if(currentSlide < 0) currentSlide = 0;
+            const w = slides[0].offsetWidth;
+            slider.style.transform = `translate3d(-${currentSlide * (w + 24)}px, 0, 0)`;
+            prevBtn.disabled = currentSlide === 0;
+            nextBtn.disabled = currentSlide === max;
+        }
+        nextBtn.addEventListener('click', () => { currentSlide++; updateSlider(); });
+        prevBtn.addEventListener('click', () => { currentSlide--; updateSlider(); });
+        window.addEventListener('resize', updateSlider);
+        setTimeout(updateSlider, 100);
+
+        // AI Modal logic
+        const modal = document.getElementById('ai-modal');
+        const dialog = document.getElementById('ai-dialog');
+        const aiInp = document.getElementById('ai-input');
+        const results = document.getElementById('ai-results');
+        const suggs = document.getElementById('ai-suggestions');
+
+        function toggleAI(show) {
+            if(show) {
+                modal.classList.remove('opacity-0', 'pointer-events-none');
+                dialog.classList.remove('scale-95');
+                aiInp.focus();
+                initInteractivity();
+            } else {
+                modal.classList.add('opacity-0', 'pointer-events-none');
+                dialog.classList.add('scale-95');
+            }
+        }
+
+        document.getElementById('ai-trigger').addEventListener('click', () => toggleAI(true));
+        document.querySelectorAll('.ai-close').forEach(b => b.addEventListener('click', () => toggleAI(false)));
+        document.addEventListener('keydown', e => {
+            if(e.key === 'k' && (e.metaKey || e.ctrlKey)) { e.preventDefault(); toggleAI(true); }
+            if(e.key === 'Escape') toggleAI(false);
+        });
+
+        document.querySelectorAll('.suggestion-btn').forEach(b => {
+            b.addEventListener('click', () => {
+                const text = b.textContent;
+                suggs.style.display = 'none';
+                results.style.display = 'flex';
+                results.classList.remove('hidden');
+                
+                results.innerHTML += `
+                    <div class="flex gap-3 justify-end text-sm animate-fade-up font-light">
+                        <div class="bg-[var(--primary)]/10 border border-[var(--primary)]/20 rounded-xl rounded-tr-sm px-4 py-2 text-[var(--text)] max-w-[85%]">${text}</div>
+                    </div>`;
+                
+                setTimeout(() => {
+                    results.innerHTML += `
+                    <div class="flex gap-3 text-sm animate-fade-up font-light">
+                        <div class="w-6 h-6 rounded-full bg-white/5 border border-white/10 flex items-center justify-center shrink-0 mt-1">
+                            <iconify-icon icon="solar:magic-stick-3-linear" class="text-[var(--primary)] text-xs"></iconify-icon>
+                        </div>
+                        <div class="bg-white/5 border border-white/10 rounded-xl rounded-tl-sm px-4 py-3 text-[var(--text)] max-w-[85%] leading-relaxed">
+                            I am currently operating in offline mode. To activate the full conversational capabilities, an API key integration is required in the backend configuration.
+                        </div>
+                    </div>`;
+                    results.scrollTop = results.scrollHeight;
+                }, 600);
+            });
+        });
+
+        // Scroll Reveal
+        const observer = new IntersectionObserver(ents => {
+            ents.forEach(e => {
+                if(e.isIntersecting) {
+                    e.target.style.opacity = 1; e.target.style.transform = 'translateY(0)';
+                    observer.unobserve(e.target);
+                }
+            });
+        }, { threshold: 0.1 });
+        document.querySelectorAll('.scroll-reveal').forEach(el => observer.observe(el));
+
+        // Tilt Effect
+        document.querySelectorAll('.tilt-card').forEach(c => {
+            c.addEventListener('mousemove', e => {
+                const r = c.getBoundingClientRect();
+                const x = e.clientX - r.left, y = e.clientY - r.top;
+                const rx = ((y - r.height/2) / r.height/2) * -5;
+                const ry = ((x - r.width/2) / r.width/2) * 5;
+                c.style.transform = `perspective(1000px) rotateX(${rx}deg) rotateY(${ry}deg) scale3d(1.02, 1.02, 1.02)`;
+            });
+            c.addEventListener('mouseleave', () => c.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) scale3d(1, 1, 1)');
+        });
+
+        // Nav Active State
+        const nLinks = document.querySelectorAll('.nav-link');
+        const nPill = document.getElementById('nav-pill');
+        const sects = document.querySelectorAll('section');
+        
+        const navObs = new IntersectionObserver(ents => {
+            ents.forEach(e => {
+                if(e.isIntersecting) {
+                    const id = e.target.id;
+                    const l = document.querySelector(`.nav-link[href="#${id}"]`);
+                    if(!l) return;
+                    nPill.style.width = `${l.offsetWidth}px`;
+                    nPill.style.left = `${l.offsetLeft}px`;
+                    nLinks.forEach(a => { a.classList.remove('text-white'); a.classList.add('text-neutral-400'); });
+                    l.classList.add('text-white'); l.classList.remove('text-neutral-400');
+                }
+            });
+        }, { rootMargin: '-30% 0px -70% 0px' });
+        sects.forEach(s => navObs.observe(s));
+    </script>
+</body>
+</html>
