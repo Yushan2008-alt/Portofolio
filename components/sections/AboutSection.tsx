@@ -57,9 +57,9 @@ export default function AboutSection() {
             I&apos;m{" "}
             <span className="font-semibold text-white">Yushan</span>, a backend
             developer in the making — currently a student at{" "}
-            <span className="text-violet-400">SMK Telkom Malang</span>{" "}
-            jurusan Rekayasa Perangkat Lunak, building the technical foundation
-            to ship real-world products.
+            <span className="text-violet-400">SMK Telkom Malang</span>
+            , majoring in Software Engineering, building the technical
+            foundation to ship real-world products.
           </p>
           <p className="text-lg leading-relaxed text-neutral-400">
             I&apos;m drawn to the logic behind systems — how data flows, how

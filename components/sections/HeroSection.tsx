@@ -138,7 +138,7 @@ export default function HeroSection() {
               {/* Badge bottom-left */}
               <div className="absolute -bottom-3 -left-3 rounded-lg border border-violet-500/20 bg-[#0f0f1a]/90 px-3 py-2 backdrop-blur-sm">
                 <p className="font-mono text-[10px] text-violet-400">Backend Dev</p>
-                <p className="font-mono text-[9px] text-neutral-600">Rekayasa Perangkat Lunak</p>
+                <p className="font-mono text-[9px] text-neutral-600">Software Engineering</p>
               </div>
 
               {/* Badge top-right */}

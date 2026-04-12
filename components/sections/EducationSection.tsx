@@ -49,7 +49,7 @@ export default function EducationSection() {
             <div className="mb-5 flex flex-wrap items-start justify-between gap-4">
               <div>
                 <h3 className="font-display text-2xl font-bold text-white">
-                  Rekayasa Perangkat Lunak
+                  Software Engineering
                 </h3>
                 <p className="mt-1 text-violet-400">
                   SMK Telkom Malang
