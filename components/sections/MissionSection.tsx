@@ -36,20 +36,27 @@ export default function MissionSection() {
         <div className="pointer-events-none absolute -bottom-16 -left-16 h-56 w-56 rounded-full bg-violet-700/8 blur-3xl" />
 
         <div className="relative">
-          <p className="mb-5 font-mono text-xs tracking-[0.22em] text-violet-400 uppercase">
-            Mission
-          </p>
-          <p className="font-display text-2xl font-bold leading-snug text-white sm:text-3xl md:text-4xl">
-            My mission is to build clean, efficient backend systems
-            that power exceptional digital experiences — from school
-            projects to real-world solutions that{" "}
-            <span className="text-violet-400">make a difference.</span>
+          <p className="mb-6 font-mono text-[10px] tracking-[0.25em] text-violet-400/70 uppercase">
+            / Mission Statement
           </p>
 
+          {/* Split into 2 paragraphs for breathing room */}
+          <div className="space-y-5 max-w-3xl">
+            <p className="font-display text-xl font-medium leading-relaxed text-white/90 sm:text-2xl md:text-[1.65rem]">
+              My mission is to build clean, efficient backend systems
+              that power exceptional digital experiences.
+            </p>
+            <p className="font-sans text-base font-normal leading-loose text-neutral-400 sm:text-lg">
+              From school projects to real-world solutions — I focus on writing
+              code that is readable, scalable, and{" "}
+              <span className="text-violet-400/80">makes a difference.</span>
+            </p>
+          </div>
+
           {/* Tech stack row */}
-          <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-2">
+          <div className="mt-10 flex flex-wrap items-center gap-x-5 gap-y-2">
             {["Node.js", "Java", "MySQL", "REST APIs", "Git", "OOP"].map((t) => (
-              <span key={t} className="font-mono text-sm text-violet-300/50">
+              <span key={t} className="font-mono text-xs text-violet-300/40 tracking-wider">
                 {t}
               </span>
             ))}

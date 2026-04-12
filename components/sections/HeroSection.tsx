@@ -156,10 +156,10 @@ export default function HeroSection() {
               {/* Photo frame with cyber corner brackets */}
               <div className="relative h-[210px] w-[167px] overflow-hidden rounded-xl border border-violet-500/12 sm:h-[260px] sm:w-[207px] md:h-[300px] md:w-[238px] lg:h-[350px] lg:w-[278px]">
                 <Image
-                  src="/yushanpose.jpg"
+                  src="/yushan-profile.png"
                   alt="Yushan — Backend Developer"
                   fill
-                  className="object-cover object-top"
+                  className="object-cover object-top grayscale contrast-[1.08] brightness-[0.92]"
                   priority
                 />
                 {/* Bottom fade */}
