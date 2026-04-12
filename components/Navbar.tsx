@@ -58,7 +58,7 @@ export default function Navbar() {
     activeSection === link.sectionId;
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 border-b border-white/[0.06] bg-[#0e0e1c]/80 backdrop-blur-2xl">
+    <header className="fixed top-0 left-0 right-0 z-50 border-b border-white/[0.05] bg-[#07080f]/85 backdrop-blur-2xl">
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-6">
         {/* Logo */}
         <Link
@@ -94,14 +94,17 @@ export default function Navbar() {
         </nav>
 
         {/* Book a Call CTA */}
-        <a
+        <motion.a
           href="https://wa.me"
           target="_blank"
           rel="noopener noreferrer"
-          className="hidden md:inline-flex items-center gap-2 rounded-xl bg-violet-500 px-4 py-2 text-sm font-medium text-white transition-all duration-200 hover:bg-violet-400 hover:shadow-lg hover:shadow-violet-500/20"
+          whileHover={{ scale: 1.04, y: -1 }}
+          whileTap={{ scale: 0.96 }}
+          transition={{ type: "spring", stiffness: 420, damping: 26 }}
+          className="hidden md:inline-flex items-center gap-2 rounded-lg bg-violet-500 px-4 py-2 text-sm font-medium text-white shadow-md shadow-violet-500/10 hover:bg-violet-400"
         >
           Book a Call
-        </a>
+        </motion.a>
 
         {/* Mobile Hamburger */}
         <button
@@ -131,7 +134,7 @@ export default function Navbar() {
             transition={{ duration: 0.22, ease: "easeInOut" }}
             className="overflow-hidden border-t border-white/[0.04] md:hidden"
           >
-            <nav className="flex flex-col gap-1 bg-[#0e0e1c]/95 px-6 py-3 backdrop-blur-2xl">
+            <nav className="flex flex-col gap-1 bg-[#07080f]/98 px-6 py-3 backdrop-blur-2xl">
               {navLinks.map((link) => (
                 <Link
                   key={link.label}
