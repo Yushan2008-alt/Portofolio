@@ -22,11 +22,9 @@ export default function Navbar() {
   const [scrollProgress, setScrollProgress] = useState(0);
   const [activeSection, setActiveSection] = useState("home");
 
-  // Scroll progress bar
   useEffect(() => {
     const update = () => {
-      const { scrollTop, scrollHeight, clientHeight } =
-        document.documentElement;
+      const { scrollTop, scrollHeight, clientHeight } = document.documentElement;
       const total = scrollHeight - clientHeight;
       setScrollProgress(total > 0 ? (scrollTop / total) * 100 : 0);
     };
@@ -34,35 +32,25 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", update);
   }, []);
 
-  // Active section detection
   useEffect(() => {
     if (!isHome) {
-      // On standalone pages, derive active from pathname
       const match = navLinks.find((l) => l.routePath === pathname);
       setActiveSection(match?.sectionId ?? "home");
       return;
     }
-
-    // On home page, use IntersectionObserver to track scroll position
     const observer = new IntersectionObserver(
       (entries) => {
         for (const entry of entries) {
-          if (entry.isIntersecting) {
-            setActiveSection(entry.target.id);
-          }
+          if (entry.isIntersecting) setActiveSection(entry.target.id);
         }
       },
-      // Section is "active" when it occupies the middle 10% of the viewport
       { rootMargin: "-45% 0px -45% 0px", threshold: 0 }
     );
-
     const sections = document.querySelectorAll("section[id]");
     sections.forEach((s) => observer.observe(s));
     return () => observer.disconnect();
   }, [isHome, pathname]);
 
-  // On home page: hash links for smooth scroll.
-  // On other pages: route links for navigation.
   const getHref = (link: (typeof navLinks)[0]) =>
     isHome ? `#${link.sectionId}` : link.routePath;
 
@@ -70,7 +58,7 @@ export default function Navbar() {
     activeSection === link.sectionId;
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 border-b border-white/[0.04] bg-[#0a0a0f]/85 backdrop-blur-2xl">
+    <header className="fixed top-0 left-0 right-0 z-50 border-b border-white/[0.06] bg-[#0e0e1c]/80 backdrop-blur-2xl">
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-6">
         {/* Logo */}
         <Link
@@ -89,9 +77,7 @@ export default function Navbar() {
                 key={link.label}
                 href={getHref(link)}
                 className={`relative rounded-lg px-4 py-2 text-sm font-medium transition-colors duration-200 ${
-                  active
-                    ? "text-white"
-                    : "text-neutral-500 hover:text-neutral-200"
+                  active ? "text-white" : "text-neutral-500 hover:text-neutral-200"
                 }`}
               >
                 {active && (
@@ -106,6 +92,16 @@ export default function Navbar() {
             );
           })}
         </nav>
+
+        {/* Book a Call CTA */}
+        <a
+          href="https://wa.me"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="hidden md:inline-flex items-center gap-2 rounded-xl bg-violet-500 px-4 py-2 text-sm font-medium text-white transition-all duration-200 hover:bg-violet-400 hover:shadow-lg hover:shadow-violet-500/20"
+        >
+          Book a Call
+        </a>
 
         {/* Mobile Hamburger */}
         <button
@@ -135,7 +131,7 @@ export default function Navbar() {
             transition={{ duration: 0.22, ease: "easeInOut" }}
             className="overflow-hidden border-t border-white/[0.04] md:hidden"
           >
-            <nav className="flex flex-col gap-1 bg-[#0a0a0f]/95 px-6 py-3 backdrop-blur-2xl">
+            <nav className="flex flex-col gap-1 bg-[#0e0e1c]/95 px-6 py-3 backdrop-blur-2xl">
               {navLinks.map((link) => (
                 <Link
                   key={link.label}
@@ -150,6 +146,15 @@ export default function Navbar() {
                   {link.label}
                 </Link>
               ))}
+              <a
+                href="https://wa.me"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-1 rounded-xl bg-violet-500 px-4 py-3 text-center text-sm font-medium text-white"
+                onClick={() => setMenuOpen(false)}
+              >
+                Book a Call
+              </a>
             </nav>
           </motion.div>
         )}
