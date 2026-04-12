@@ -35,7 +35,7 @@ export default function HeroSection() {
           >
             {/* Badge */}
             <motion.div variants={fadeUp}>
-              <span className="inline-flex items-center gap-2 rounded-full border border-violet-500/20 bg-violet-500/5 px-3.5 py-1.5 font-mono text-[10px] tracking-[0.15em] text-violet-400 uppercase sm:text-xs">
+              <span className="inline-flex items-center gap-2 whitespace-nowrap rounded-full border border-violet-500/20 bg-violet-500/5 px-3.5 py-1.5 font-mono text-[10px] tracking-[0.1em] text-violet-400 uppercase sm:text-xs">
                 <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-emerald-400" />
                 SMK Telkom Malang · Open to Collaborate
               </span>
@@ -143,7 +143,7 @@ export default function HeroSection() {
 
               {/* Badge top-right */}
               <div className="absolute -right-3 -top-3 rounded-lg border border-white/8 bg-[#0f0f1a]/90 px-2.5 py-1.5 backdrop-blur-sm">
-                <span className="font-mono text-xs font-bold tracking-widest text-white">YS</span>
+                <span className="font-mono text-[10px] font-bold tracking-wider text-white">Yushan</span>
               </div>
             </div>
           </motion.div>
