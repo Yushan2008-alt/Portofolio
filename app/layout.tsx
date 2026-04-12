@@ -26,19 +26,19 @@ const jetbrainsMono = JetBrains_Mono({
 export const metadata: Metadata = {
   title: "Yushan — Backend Developer",
   description:
-    "Backend developer & SMK RPL student crafting clean, scalable web solutions. View my projects and get in touch.",
-  keywords: ["backend developer", "web developer", "portfolio", "SMK RPL", "Yushan"],
+    "Backend developer & SMK Telkom Malang student crafting clean, scalable web solutions. View my projects and get in touch.",
+  keywords: ["backend developer", "web developer", "portfolio", "SMK Telkom Malang", "Yushan"],
   openGraph: {
     title: "Yushan — Backend Developer",
     description:
-      "Backend developer & SMK RPL student crafting clean, scalable web solutions.",
+      "Backend developer & SMK Telkom Malang student crafting clean, scalable web solutions.",
     type: "website",
     locale: "id_ID",
   },
   twitter: {
     card: "summary_large_image",
     title: "Yushan — Backend Developer",
-    description: "Backend developer & SMK RPL student crafting clean, scalable web solutions.",
+    description: "Backend developer & SMK Telkom Malang student crafting clean, scalable web solutions.",
   },
 };
 

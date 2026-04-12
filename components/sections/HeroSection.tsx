@@ -37,7 +37,7 @@ export default function HeroSection() {
             <motion.div variants={fadeUp}>
               <span className="inline-flex items-center gap-2 rounded-full border border-violet-500/20 bg-violet-500/5 px-3.5 py-1.5 font-mono text-[10px] tracking-[0.15em] text-violet-400 uppercase sm:text-xs">
                 <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-emerald-400" />
-                SMK RPL · Open to Collaborate
+                SMK Telkom Malang · Open to Collaborate
               </span>
             </motion.div>
 
@@ -60,8 +60,8 @@ export default function HeroSection() {
               variants={fadeUp}
               className="max-w-sm text-base leading-relaxed text-neutral-400 sm:text-lg"
             >
-              Crafting clean, scalable backend solutions. SMK RPL student
-              building real-world projects and leveling up every day.
+              Crafting clean, scalable backend solutions. SMK Telkom Malang
+              student building real-world projects and leveling up every day.
             </motion.p>
 
             {/* CTAs */}
@@ -138,7 +138,7 @@ export default function HeroSection() {
               {/* Badge bottom-left */}
               <div className="absolute -bottom-3 -left-3 rounded-lg border border-violet-500/20 bg-[#0f0f1a]/90 px-3 py-2 backdrop-blur-sm">
                 <p className="font-mono text-[10px] text-violet-400">Backend Dev</p>
-                <p className="font-mono text-[9px] text-neutral-600">SMK RPL</p>
+                <p className="font-mono text-[9px] text-neutral-600">Rekayasa Perangkat Lunak</p>
               </div>
 
               {/* Badge top-right */}

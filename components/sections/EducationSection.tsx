@@ -52,7 +52,7 @@ export default function EducationSection() {
                   Rekayasa Perangkat Lunak
                 </h3>
                 <p className="mt-1 text-violet-400">
-                  SMK — Sekolah Menengah Kejuruan
+                  SMK Telkom Malang
                 </p>
               </div>
               <span className="shrink-0 rounded-full border border-violet-500/20 bg-violet-500/5 px-4 py-1.5 font-mono text-xs text-violet-400">
