@@ -1,206 +1,985 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-     <link rel="stylesheet" href="styles.css">
-    <title>Portofolio Website</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- SEO Basic -->
+  <title>Yushan Thoriq — RPL Developer · SMK Telkom Malang</title>
+  <meta name="description" content="Portfolio Yushan Thoriq, siswa RPL SMK Telkom Malang yang berfokus pada pengembangan web dan backend. Lihat proyek, skill, dan prestasi.">
+  <meta name="keywords" content="portfolio, web developer, RPL, SMK Telkom Malang, backend developer, Malang, Node.js">
+  <meta name="author" content="Yushan Thoriq">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://yushan-portfolio.vercel.app">
+  <meta property="og:title" content="Yushan Thoriq — Portfolio">
+  <meta property="og:description" content="Siswa RPL SMK Telkom Malang · Web & Backend Developer">
+  <meta property="og:image" content="https://yushan-portfolio.vercel.app/assets/images/og-preview.jpg">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Yushan Thoriq — Portfolio">
+  <meta name="twitter:description" content="Siswa RPL SMK Telkom Malang · Web & Backend Developer">
+  <meta name="twitter:image" content="https://yushan-portfolio.vercel.app/assets/images/og-preview.jpg">
+
+  <!-- Theme Color -->
+  <meta name="theme-color" content="#030305">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="assets/images/favicon.png">
+  <link rel="apple-touch-icon" href="assets/images/favicon.png">
+
+  <!-- Google Fonts Preconnect -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=JetBrains+Mono:wght@400;500&display=swap">
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="assets/css/style.css?v=13">
 </head>
 <body>
-    <header>
-        <a href="#" class="logo">Yushan</a>
 
-        <nav>
-            <a href="#home">Home</a>
-            <a href="#about">About</a>
-            <a href="#skills">Skills</a>
-            <!-- <a href="#">Experience</a> -->
-            <a href="#contact">Contact</a>
-        </nav>
-    </header>
-    <section class="home" id="home">
-        <div class="home-img">
-            <img src="image/Yushan.jpg" alt="">
+  <!-- Skip Link (Accessibility) -->
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <!-- SVG Noise Filter (invisible, referenced by body::before) -->
+  <svg width="0" height="0" style="position:absolute;pointer-events:none;overflow:hidden;">
+    <filter id="noise">
+      <feTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch"/>
+      <feColorMatrix type="saturate" values="0"/>
+    </filter>
+  </svg>
+
+  <!-- Background Layers -->
+  <div class="ambient-layer" aria-hidden="true"></div>
+  <div class="grid-layer" aria-hidden="true"></div>
+
+  <!-- ==================== LOADING SCREEN ==================== -->
+  <div id="loading-screen" role="status" aria-label="Memuat portfolio...">
+    <div class="loading-inner">
+      <div class="loading-logo gradient-text">YS_</div>
+      <div class="loading-terminal">
+        <div class="loading-line" id="ll1">
+          <span class="t-prompt">system</span><span class="t-dim">@init</span><span class="t-sep"> $ </span><span class="t-cmd" id="ll1-text"></span>
         </div>
-        <div class="home-content">
-            <h3>Hi, Saya <span>Yushan Thoriq</span></h3>
-            <h2 class="typing-text">Saya adalah <span></span></h2>
-            <p>Seorang pengembang web yang bersemangat 
-                menciptakan tampilan dan pengalaman pengguna yang menarik. 
-                Saya menyukai dunia teknologi dan terus belajar hal-hal baru setiap harinya.</p>
-            <div class="social-icons">
-                <a href="https://www.youtube.com/@yushanthoriq3744"><i class="fa-brands fa-youtube"></i></a>
-                <a href="https://github.com/Yushan2008"><i class="fa-brands fa-github"></i></a>
-                <a href="https://wa.me/+6285231654898"><i class="fa-brands fa-whatsapp"></i></a>
-                <a href="https://www.instagram.com/yshnz7/"><i class="fa-brands fa-instagram"></i></a>
-            </div>
-            <a href="#" class="btn">Hire me</a>
+        <div class="loading-line" id="ll2">
+          <span class="t-prompt">system</span><span class="t-dim">@init</span><span class="t-sep"> $ </span><span class="t-cmd" id="ll2-text"></span>
         </div>
-    </section>
-        <section class="about" id="about">
-    <!-- JUDUL DI TOP CENTER -->
-    <h2 class="heading">About <span>Me</span></h2>
-    
-    <!-- WRAPPER UNTUK GAMBAR + CONTENT -->
-    <div class="about-container">
-        <!-- GAMBAR DI KIRI (PERSEGI) -->
-        <div class="about-img">
-            <img src="image/yushanpose.jpg" alt="">
+        <div class="loading-line" id="ll3">
+          <span class="t-prompt">system</span><span class="t-dim">@init</span><span class="t-sep"> $ </span><span class="t-cmd" id="ll3-text"></span>
+        </div>
+      </div>
+      <div class="loading-bar-wrap">
+        <div class="loading-fill" id="loading-fill"></div>
+      </div>
+      <div class="loading-pct" id="loading-pct">0%</div>
+    </div>
+  </div>
+
+  <!-- ==================== SCROLL PROGRESS ==================== -->
+  <div id="scroll-progress" aria-hidden="true"></div>
+
+  <!-- ==================== CUSTOM CURSOR ==================== -->
+  <div class="cursor-dot" aria-hidden="true"></div>
+  <div class="cursor-ring" aria-hidden="true"></div>
+
+  <!-- ==================== NAVBAR ==================== -->
+  <nav id="navbar" aria-label="Navigasi utama">
+    <div class="nav-inner">
+
+      <!-- Logo -->
+      <button class="nav-logo gradient-text" id="nav-logo-btn" aria-label="Kembali ke atas">YS_</button>
+
+      <!-- Nav Pills (desktop) -->
+      <div class="nav-pills-wrap" role="menubar">
+        <div class="nav-pills">
+          <div id="nav-pill" aria-hidden="true"></div>
+          <a href="#hero"          class="nav-link" role="menuitem" data-section="hero">Home</a>
+          <a href="#about"         class="nav-link" role="menuitem" data-section="about">About</a>
+          <a href="#skills"        class="nav-link" role="menuitem" data-section="skills">Skills</a>
+          <a href="#projects"      class="nav-link" role="menuitem" data-section="projects">Projects</a>
+          <a href="#achievements"  class="nav-link" role="menuitem" data-section="achievements">Achievements</a>
+          <a href="#education"    class="nav-link" role="menuitem" data-section="education">Education</a>
+          <a href="#contact"      class="nav-link" role="menuitem" data-section="contact">Contact</a>
+        </div>
+      </div>
+
+      <!-- Right Side -->
+      <div class="nav-right">
+
+        <!-- Color Swatches (desktop only) -->
+        <div class="color-swatches" aria-label="Pilih warna tema">
+          <button class="color-btn active" data-color="#3b82f6" style="background:#3b82f6;" aria-label="Biru" title="Biru"></button>
+          <button class="color-btn" data-color="#a855f7" style="background:#a855f7;" aria-label="Ungu" title="Ungu"></button>
+          <button class="color-btn" data-color="#22c55e" style="background:#22c55e;" aria-label="Hijau" title="Hijau"></button>
+          <button class="color-btn" data-color="#eab308" style="background:#eab308;" aria-label="Kuning" title="Kuning"></button>
+          <button class="color-btn" data-color="#f97316" style="background:#f97316;" aria-label="Oranye" title="Oranye"></button>
+          <button class="color-btn" data-color="#ef4444" style="background:#ef4444;" aria-label="Merah" title="Merah"></button>
+          <button class="color-btn" data-color="#9ca3af" style="background:#9ca3af;" aria-label="Abu" title="Abu"></button>
         </div>
 
-        <!-- CONTENT DI KANAN -->
-        <div class="about-content">
-            <p>
-                Halo! Saya seorang pengembang web yang menciptakan tampilan dan pengalaman pengguna yang modern, interaktif, dan estetis. 
-                Ketertarikan saya pada dunia teknologi membuat saya terus belajar hal-hal baru setiap hari, mulai dari eksplorasi teknologi backend hingga memahami tren terbaru dalam desain dan pengembangan web. 
-                Saya menikmati proses membangun antarmuka yang responsif dan intuitif, serta memastikan setiap detail visual dan fungsional bekerja secara optimal. 
-                Saya terus berupaya memperkuat kemampuan teknis, meningkatkan kreativitas, dan beradaptasi dengan lingkungan kerja yang dinamis agar dapat memberikan hasil terbaik pada setiap proyek yang saya kerjakan.
+        <!-- Download CV -->
+        <a href="cv/CV_Yushan_Saputra.pdf" download="CV_Yushan_Thoriq.pdf" class="btn-cv" aria-label="Download CV Yushan Thoriq">
+          <iconify-icon icon="solar:document-download-linear" width="16"></iconify-icon>
+          <span class="btn-cv-text">Download CV</span>
+        </a>
+
+        <!-- Hamburger (mobile) -->
+        <button class="hamburger" id="hamburger-btn" aria-label="Buka menu navigasi" aria-expanded="false" aria-controls="mobile-menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+
+    </div>
+  </nav>
+
+  <!-- ==================== MOBILE MENU ==================== -->
+  <div id="mobile-menu" class="mobile-menu" aria-hidden="true" role="dialog" aria-label="Menu navigasi mobile">
+    <nav class="mobile-nav" role="menubar">
+      <a href="#hero"         class="mobile-nav-link" role="menuitem" data-section="hero">Home</a>
+      <a href="#about"        class="mobile-nav-link" role="menuitem" data-section="about">About</a>
+      <a href="#skills"       class="mobile-nav-link" role="menuitem" data-section="skills">Skills</a>
+      <a href="#projects"     class="mobile-nav-link" role="menuitem" data-section="projects">Projects</a>
+      <a href="#achievements" class="mobile-nav-link" role="menuitem" data-section="achievements">Achievements</a>
+      <a href="#education"   class="mobile-nav-link" role="menuitem" data-section="education">Education</a>
+      <a href="#contact"     class="mobile-nav-link" role="menuitem" data-section="contact">Contact</a>
+    </nav>
+    <a href="cv/CV_Yushan_Saputra.pdf" download="CV_Yushan_Thoriq.pdf" class="btn btn-primary mobile-cv-btn">
+      <iconify-icon icon="solar:document-download-linear" width="16"></iconify-icon>
+      Download CV
+    </a>
+  </div>
+  <div class="mobile-backdrop" id="mobile-backdrop" aria-hidden="true"></div>
+
+  <!-- ==================== MAIN CONTENT ==================== -->
+  <main id="main-content">
+
+    <!-- ===== HERO ===== -->
+    <section id="hero" aria-labelledby="hero-heading">
+      <div class="hero-container">
+
+        <!-- LEFT: Main content -->
+        <div class="hero-left">
+
+          <!-- Availability badge -->
+          <div class="availability-badge">
+            <span class="badge-dot" aria-hidden="true"></span>
+            Open to Work · Tersedia Magang
+          </div>
+
+          <!-- Heading -->
+          <p class="hero-greeting">Halo, saya</p>
+          <h1 id="hero-heading" class="text-hero gradient-text scramble-hover">Yushan Thoriq</h1>
+
+          <!-- Typed.js -->
+          <div class="typed-container" aria-live="polite">
+            <span class="t-path">// Saya adalah&nbsp;</span>
+            <span id="typed-role"></span>
+          </div>
+
+          <!-- Description -->
+          <div class="hero-desc card">
+            <p class="text-body" style="color:var(--text-secondary);">
+              Membangun sistem backend yang scalable, aman, dan efisien.
+              Fokus pada arsitektur API, manajemen database, dan logika bisnis yang solid.
             </p>
-            <a href="#" class="btn">Selengkapnya</a>
-        </div>
-    </div>
-</section>
-<!-- SKILLS SECTION -->
-<section class="skills" id="skills">
-    <h2 class="heading">My <span>Skills</span></h2>
-    
-    <div class="skills-container">
-        <!-- LEFT SIDE - Description -->
-        <div class="skills-description">
-            <h3>Skills Reflects Our Knowledge</h3>
-            <p>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minus natus tenetur 
-                tempora? Quasi, rem quos omnis. Porro rem aspernatur reiciendis ut 
-                praesentium minima ad, quos, officia! Illo libero, et, distinctio repellat sed 
-                nesciunt est modi quaerat placeat. Quod molestiae, alias?
-            </p>
-            
-            <div class="experience-box">
-                <h2 class="experience-number">3</h2>
-                <p class="experience-text">Years Of<br>Experience</p>
+          </div>
+
+          <!-- CTA Buttons -->
+          <div class="hero-cta">
+            <!-- TODO: Ganti href dengan path CV yang benar, dan download dengan nama file asli -->
+            <a href="cv/CV_Yushan_Saputra.pdf" download="CV_Yushan_Thoriq.pdf"
+               class="btn btn-primary btn-magnetic" aria-label="Download CV">
+              <iconify-icon icon="solar:document-download-linear" width="16"></iconify-icon>
+              Download CV
+            </a>
+            <a href="#projects" class="btn btn-ghost btn-magnetic">
+              Lihat Proyek
+              <iconify-icon icon="solar:arrow-right-linear" width="16"></iconify-icon>
+            </a>
+          </div>
+
+          <!-- Social Links -->
+          <div class="hero-socials">
+            <a href="https://github.com/Yushan2008-alt" target="_blank" rel="noopener noreferrer"
+               class="btn-icon" aria-label="GitHub">
+              <iconify-icon icon="mdi:github" width="18"></iconify-icon>
+            </a>
+            <!-- TODO: Ganti href="#" dengan https://linkedin.com/in/[username] kamu -->
+            <a href="#" target="_blank" rel="noopener noreferrer"
+               class="btn-icon" aria-label="LinkedIn">
+              <iconify-icon icon="mdi:linkedin" width="18"></iconify-icon>
+            </a>
+            <a href="https://www.instagram.com/yshnz7/" target="_blank" rel="noopener noreferrer"
+               class="btn-icon" aria-label="Instagram">
+              <iconify-icon icon="mdi:instagram" width="18"></iconify-icon>
+            </a>
+            <a href="https://wa.me/6285231654898" target="_blank" rel="noopener noreferrer"
+               class="btn-icon" aria-label="WhatsApp">
+              <iconify-icon icon="mdi:whatsapp" width="18"></iconify-icon>
+            </a>
+          </div>
+
+        </div><!-- /hero-left -->
+
+        <!-- RIGHT: Profile card + Terminal + Stats -->
+        <div class="hero-right">
+
+          <!-- Profile Card -->
+          <div class="card hero-profile-card">
+            <div class="hero-avatar" aria-hidden="true">
+              <span class="hero-avatar-initials">YS</span>
             </div>
+            <div class="hero-profile-name">Yushan Thoriq</div>
+            <div class="hero-profile-badge">Backend Developer · RPL</div>
+            <div class="hero-profile-divider"></div>
+            <div class="hero-profile-meta">
+              <div class="hero-meta-row">
+                <iconify-icon icon="solar:map-point-linear" width="14" aria-hidden="true"></iconify-icon>
+                <span>Malang, Jawa Timur</span>
+              </div>
+              <div class="hero-meta-row">
+                <iconify-icon icon="solar:diploma-linear" width="14" aria-hidden="true"></iconify-icon>
+                <span>SMK Telkom Malang</span>
+              </div>
+              <div class="hero-meta-row">
+                <iconify-icon icon="solar:case-minimalistic-linear" width="14" aria-hidden="true"></iconify-icon>
+                <span class="hero-status-open">Open to Work</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Terminal Window -->
+          <div class="terminal-window" aria-label="Terminal output">
+            <div class="terminal-header">
+              <div class="terminal-dots" aria-hidden="true">
+                <span class="dot dot-red"></span>
+                <span class="dot dot-yellow"></span>
+                <span class="dot dot-green"></span>
+              </div>
+              <span class="terminal-title">bash — yushan@smktelkom</span>
+            </div>
+            <div class="terminal-body" id="terminal-output" role="log" aria-live="polite"></div>
+          </div>
+
+          <!-- Stats Row -->
+          <div class="stats-row" role="list">
+            <div class="stat-item card" role="listitem">
+              <div class="stat-number gradient-text" data-count="15">0+</div>
+              <div class="stat-label">Proyek</div>
+            </div>
+            <div class="stat-item card" role="listitem">
+              <div class="stat-number gradient-text" data-count="10">0+</div>
+              <div class="stat-label">Tech Stack</div>
+            </div>
+            <div class="stat-item card" role="listitem">
+              <div class="stat-number gradient-text" data-count="3">0+</div>
+              <div class="stat-label">Tahun Belajar</div>
+            </div>
+          </div>
+
+        </div><!-- /hero-right -->
+      </div><!-- /hero-container -->
+    </section><!-- /hero -->
+
+    <!-- ===== ABOUT ===== -->
+    <section id="about" aria-labelledby="about-heading">
+      <div class="about-container">
+
+        <!-- Section Header -->
+        <div class="section-header reveal">
+          <div class="section-line"></div>
+          <div class="section-tag">
+            <span class="section-comment">// </span>
+            <span class="section-num">01</span>
+            <span class="section-slash"> / </span>
+            <span class="section-name">about_me.js</span>
+          </div>
+          <div class="section-line"></div>
         </div>
 
-        <!-- RIGHT SIDE - Skills Grid -->
-<div class="skills-bars">
-    <div class="skill-item">
-        <div class="skill-header">
-            <span class="skill-name">HTML</span>
-            <span class="skill-percentage">60%</span>
+        <h2 id="about-heading" class="text-h2 reveal scramble-hover" style="margin-bottom:2rem;">Tentang Saya</h2>
+
+        <div class="about-grid">
+
+          <!-- Left: Bio + Fun Facts -->
+          <div class="about-card card reveal">
+            <p class="text-body" style="color:var(--text-secondary);margin-bottom:1rem;">
+              Saya adalah siswa RPL di <strong style="color:var(--text-primary)">SMK Telkom Malang</strong>
+              dengan fokus pada backend development. Selama beberapa tahun belajar coding,
+              saya menemukan bahwa bagian paling menarik dari sebuah aplikasi bukan yang terlihat —
+              tapi <em>logika dan sistem yang bekerja di balik layar</em>.
+            </p>
+            <p class="text-body" style="color:var(--text-secondary);">
+              Saya fokus membangun REST API yang clean, merancang struktur database yang efisien,
+              dan memastikan data mengalir dengan aman antara server dan client.
+              Saat ini terbuka untuk kesempatan
+              <strong style="color:var(--primary)">magang atau kerja sebagai Backend Developer</strong>.
+            </p>
+
+            <div class="about-divider"></div>
+
+            <p class="text-label" style="color:var(--text-muted);margin-bottom:10px;">Fun Facts</p>
+            <div class="fun-facts">
+              <div class="fun-fact">
+                <span aria-hidden="true">⚡</span>
+                <span>Debugging 3 jam, ternyata masalahnya titik koma</span>
+              </div>
+              <div class="fun-fact">
+                <span aria-hidden="true">☕</span>
+                <span>Produktivitas ∝ jumlah kopi yang diminum</span>
+              </div>
+              <div class="fun-fact">
+                <span aria-hidden="true">🌙</span>
+                <span>Best code ditulis jam 10 malam – 2 pagi</span>
+              </div>
+              <div class="fun-fact">
+                <span aria-hidden="true">📚</span>
+                <span>Bisa baca dokumentasi lebih cepat dari novel</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right: Photo + Education -->
+          <div class="about-right reveal delay-200">
+            <div class="profile-placeholder" aria-label="Foto profil Yushan Thoriq">
+              <span class="profile-initials" aria-hidden="true">YS</span>
+            </div>
+
+            <div class="card edu-card">
+              <div class="hero-meta-row" style="margin-bottom:8px;">
+                <iconify-icon icon="solar:diploma-linear" width="16"
+                  style="color:var(--primary);flex-shrink:0;" aria-hidden="true"></iconify-icon>
+                <strong style="font-family:var(--font-display);font-size:0.9375rem;">
+                  SMK Telkom Malang
+                </strong>
+              </div>
+              <p class="text-sm" style="color:var(--text-muted);margin-left:22px;margin-bottom:4px;">
+                Rekayasa Perangkat Lunak — Backend
+              </p>
+              <p class="text-mono" style="color:var(--text-hint);margin-left:22px;">2022 — 2025</p>
+            </div>
+          </div>
+
+        </div><!-- /about-grid -->
+      </div><!-- /about-container -->
+    </section><!-- /about -->
+
+    <!-- ===== SKILLS ===== -->
+    <section id="skills" aria-labelledby="skills-heading">
+      <div class="skills-container">
+
+        <div class="section-header reveal">
+          <div class="section-line"></div>
+          <div class="section-tag">
+            <span class="section-comment">// </span>
+            <span class="section-num">02</span>
+            <span class="section-slash"> / </span>
+            <span class="section-name">tech_stack.json</span>
+          </div>
+          <div class="section-line"></div>
         </div>
+
+        <h2 id="skills-heading" class="text-h2 reveal scramble-hover" style="margin-bottom:2rem;">Technical Arsenal</h2>
+
+        <div class="skills-bento">
+
+          <!-- ── MAIN CARD: Backend tall card ── -->
+          <div class="card skill-main reveal">
+            <div class="skill-card-header">
+              <div class="skill-card-icon" aria-hidden="true">{ }</div>
+              <div>
+                <div class="skill-card-title">Backend</div>
+                <div class="skill-card-sub">Primary · Backend Specialist</div>
+              </div>
+            </div>
+
+            <div class="skill-list">
+              <div class="skill-item">
+                <span class="skill-name">NestJS (TypeScript)</span>
+                <div class="skill-bar"><div class="skill-fill" data-width="65%"></div></div>
+                <span class="skill-level level-advanced">Intermediate</span>
+              </div>
+              <div class="skill-item">
+                <span class="skill-name">Node.js (Express)</span>
+                <div class="skill-bar"><div class="skill-fill" data-width="65%"></div></div>
+                <span class="skill-level level-intermediate">Intermediate</span>
+              </div>
+              <div class="skill-item">
+                <span class="skill-name">REST API Design</span>
+                <div class="skill-bar"><div class="skill-fill" data-width="70%"></div></div>
+                <span class="skill-level level-intermediate">Intermediate</span>
+              </div>
+              <div class="skill-item">
+                <span class="skill-name">Python (basic)</span>
+                <div class="skill-bar"><div class="skill-fill" data-width="20%"></div></div>
+                <span class="skill-level level-beginner">Beginner</span>
+              </div>
+              <div class="skill-item">
+                <span class="skill-name">NextJs</span>
+                <div class="skill-bar"><div class="skill-fill" data-width="25%"></div></div>
+                <span class="skill-level level-advanced">Beginner</span>
+              </div>
+            </div>
+
+            <div class="skill-divider"></div>
+            <div class="skill-sub-title">Database</div>
+
+            <div class="skill-list">
+              <div class="skill-item">
+                <span class="skill-name">MySQL</span>
+                <div class="skill-bar"><div class="skill-fill" data-width="75%"></div></div>
+                <span class="skill-level level-intermediate">Int-Advanced</span>
+              </div>
+              <div class="skill-item">
+                <span class="skill-name">PostgreSQL</span>
+                <div class="skill-bar"><div class="skill-fill" data-width="60%"></div></div>
+                <span class="skill-level level-intermediate">Intermediate</span>
+              </div>
+              <div class="skill-item">
+                <span class="skill-name">DB Design / ERD</span>
+                <div class="skill-bar"><div class="skill-fill" data-width="65%"></div></div>
+                <span class="skill-level level-intermediate">Intermediate</span>
+              </div>
+            </div>
+
+            <div class="badge-cloud" style="margin-top:18px;">
+              <span class="badge badge-node">Node.js</span>
+              <span class="badge badge-mysql">MySQL</span>
+              <span class="badge badge-pgsql">PostgreSQL</span>
+              <span class="badge badge-api">REST API</span>
+              <span class="badge badge-python">Python</span>
+              <span class="badge badge-nextjs">Next.js</span>
+            </div>
+          </div><!-- /skill-main -->
+
+          <!-- ── CELL 1: Projects count ── -->
+          <div class="card skill-cell-1 reveal delay-100">
+            <div class="stat-cell-icon" aria-hidden="true">
+              <iconify-icon icon="solar:folder-with-files-linear" width="22"></iconify-icon>
+            </div>
+            <div class="stat-cell-number gradient-text" data-count="15">0+</div>
+            <div class="stat-cell-label">Proyek Selesai</div>
+          </div>
+
+          <!-- ── CELL 2: Tech Stack count ── -->
+          <div class="card skill-cell-2 reveal delay-200">
+            <div class="stat-cell-icon" aria-hidden="true">
+              <iconify-icon icon="solar:code-square-linear" width="22"></iconify-icon>
+            </div>
+            <div class="stat-cell-number gradient-text" data-count="10">0+</div>
+            <div class="stat-cell-label">Tech Stack</div>
+          </div>
+
+          <!-- ── CELL 3: Tools & DevOps ── -->
+          <div class="card skill-cell-3 reveal delay-100">
+            <div class="cell-title">Tools &amp; DevOps</div>
+            <div class="badge-cloud" style="margin-top:10px;">
+              <span class="badge badge-git">Git</span>
+              <span class="badge badge-git">GitHub</span>
+              <span class="badge badge-api">Postman</span>
+              <span class="badge badge-linux">Linux CLI</span>
+              <span class="badge badge-git">VS Code</span>
+              <span class="badge badge-git">XAMPP</span>
+            </div>
+          </div>
+
+          <!-- ── CELL 4: Frontend + Soft Skills ── -->
+          <div class="card skill-cell-4 reveal delay-200">
+            <div class="cell-title">Supporting</div>
+            <div class="badge-cloud" style="margin-top:10px;margin-bottom:14px;">
+              <span class="badge badge-html">HTML5</span>
+              <span class="badge badge-css">CSS3</span>
+              <span class="badge badge-git">Bootstrap</span>
+              <span class="badge badge-js">JavaScript</span>
+              <span class="badge badge-laravel">Blade</span>
+              <span class="badge badge-nextjs">Next.js</span>
+            </div>
+            <div class="skill-divider"></div>
+            <p class="soft-skills-list">
+              Problem Solving · Teamwork · Fast Learner · Analytical · Documentation
+            </p>
+          </div>
+
+        </div><!-- /skills-bento -->
+      </div><!-- /skills-container -->
+    </section><!-- /skills -->
+
+    <!-- ===== PROJECTS ===== -->
+    <section id="projects" aria-labelledby="projects-heading">
+      <div class="projects-container container">
+
+        <div class="section-header reveal">
+          <div class="section-line"></div>
+          <div class="section-tag">
+            <span class="section-comment">// </span>
+            <span class="section-num">03</span>
+            <span class="section-slash"> / </span>
+            <span class="section-name">featured_work/</span>
+          </div>
+          <div class="section-line"></div>
+        </div>
+
+        <h2 id="projects-heading" class="text-h2 reveal scramble-hover" style="margin-bottom:2rem;">Featured Work</h2>
+
+        <!-- Filter tabs -->
+        <div class="filter-tabs reveal" role="tablist" aria-label="Filter kategori proyek">
+          <button class="filter-btn active" data-filter="all" role="tab" aria-selected="true">Semua</button>
+          <button class="filter-btn" data-filter="backend" role="tab" aria-selected="false">Backend</button>
+          <button class="filter-btn" data-filter="webapp" role="tab" aria-selected="false">Web App</button>
+          <button class="filter-btn" data-filter="database" role="tab" aria-selected="false">Database</button>
+        </div>
+
+        <!-- Project cards grid -->
+        <div class="projects-grid" id="projects-grid">
+
+          <!-- Card 1 — Backend -->
+          <div class="project-card card reveal card-tilt" data-category="backend" data-project-id="1">
+            <div class="project-thumb">
+              <div class="project-thumb-placeholder">
+                <iconify-icon icon="solar:server-bold-duotone" width="48" class="thumb-icon" aria-hidden="true"></iconify-icon>
+              </div>
+              <div class="project-overlay">
+                <button class="btn btn-primary project-detail-btn" data-id="1" aria-label="Lihat detail REST API Gateway">Detail Proyek →</button>
+              </div>
+            </div>
+            <div class="project-meta">
+              <span class="project-cat badge badge-node">Backend</span>
+              <span class="project-date text-mono">2024</span>
+            </div>
+            <h3 class="project-title">REST API Gateway</h3>
+            <p class="project-desc">Layanan API gateway dengan autentikasi JWT, rate limiting, dan dokumentasi Swagger otomatis menggunakan NestJS.</p>
+            <div class="project-tags badge-cloud">
+              <span class="badge badge-node">NestJS</span>
+              <span class="badge badge-js">TypeScript</span>
+              <span class="badge badge-pgsql">PostgreSQL</span>
+            </div>
+          </div>
+
+          <!-- Card 2 — Web App -->
+          <div class="project-card card reveal card-tilt delay-100" data-category="webapp" data-project-id="2">
+            <div class="project-thumb">
+              <div class="project-thumb-placeholder">
+                <iconify-icon icon="solar:laptop-bold-duotone" width="48" class="thumb-icon" aria-hidden="true"></iconify-icon>
+              </div>
+              <div class="project-overlay">
+                <button class="btn btn-primary project-detail-btn" data-id="2" aria-label="Lihat detail School Management System">Detail Proyek →</button>
+              </div>
+            </div>
+            <div class="project-meta">
+              <span class="project-cat badge badge-laravel">Web App</span>
+              <span class="project-date text-mono">2024</span>
+            </div>
+            <h3 class="project-title">School Management System</h3>
+            <p class="project-desc">Sistem manajemen sekolah fullstack untuk pengelolaan siswa, guru, absensi, dan nilai berbasis Laravel & MySQL.</p>
+            <div class="project-tags badge-cloud">
+              <span class="badge badge-laravel">Laravel</span>
+              <span class="badge badge-php">PHP</span>
+              <span class="badge badge-mysql">MySQL</span>
+              <span class="badge badge-html">Blade</span>
+            </div>
+          </div>
+
+          <!-- Card 3 — Database -->
+          <div class="project-card card reveal card-tilt delay-200" data-category="database" data-project-id="3">
+            <div class="project-thumb">
+              <div class="project-thumb-placeholder">
+                <iconify-icon icon="solar:database-bold-duotone" width="48" class="thumb-icon" aria-hidden="true"></iconify-icon>
+              </div>
+              <div class="project-overlay">
+                <button class="btn btn-primary project-detail-btn" data-id="3" aria-label="Lihat detail Inventory Database System">Detail Proyek →</button>
+              </div>
+            </div>
+            <div class="project-meta">
+              <span class="project-cat badge badge-pgsql">Database</span>
+              <span class="project-date text-mono">2023</span>
+            </div>
+            <h3 class="project-title">Inventory Database System</h3>
+            <p class="project-desc">Desain dan implementasi database inventaris dengan stored procedures, triggers, dan laporan berbasis PostgreSQL.</p>
+            <div class="project-tags badge-cloud">
+              <span class="badge badge-pgsql">PostgreSQL</span>
+              <span class="badge badge-git">SQL</span>
+              <span class="badge badge-api">ERD Design</span>
+            </div>
+          </div>
+
+        </div><!-- /projects-grid -->
+      </div><!-- /projects-container -->
+    </section><!-- /projects -->
+
+    <!-- ===== ACHIEVEMENTS ===== -->
+    <!-- ===== ACHIEVEMENTS ===== -->
+    <section id="achievements" aria-labelledby="achievements-heading">
+      <div class="achievements-container container">
+
+        <div class="section-header reveal">
+          <div class="section-line"></div>
+          <div class="section-tag">
+            <span class="section-comment">// </span>
+            <span class="section-num">04</span>
+            <span class="section-slash"> / </span>
+            <span class="section-name">achievements.md</span>
+          </div>
+          <div class="section-line"></div>
+        </div>
+
+        <h2 id="achievements-heading" class="text-h2 reveal scramble-hover" style="margin-bottom:2.5rem;">Prestasi &amp; Sertifikasi</h2>
+
+        <div class="ach-layout">
+
+          <!-- ── KOLOM KIRI: Prestasi & Penghargaan ── -->
+          <div class="ach-col">
+            <h3 class="ach-col-heading reveal">🏆 Prestasi &amp; Penghargaan</h3>
+
+            <!-- Achieve 1 -->
+            <div class="achieve-card card reveal">
+              <div class="achieve-icon">🏆</div>
+              <div class="achieve-body">
+                <div class="achieve-title">
+                  Juara 2 — LKS Web Technologies
+                  <span class="achieve-level level-provinsi">Provinsi</span>
+                </div>
+                <div class="achieve-org">Lomba Kompetensi Siswa · Dinas Pendidikan Jatim</div>
+                <div class="achieve-date">📅 Oktober 2024</div>
+              </div>
+            </div>
+
+            <!-- Achieve 2 -->
+            <div class="achieve-card card reveal delay-100">
+              <div class="achieve-icon">🥈</div>
+              <div class="achieve-body">
+                <div class="achieve-title">
+                  Juara 2 — Web Design Competition
+                  <span class="achieve-level level-kota">Kota</span>
+                </div>
+                <div class="achieve-org">IT Fest SMK Telkom Malang</div>
+                <div class="achieve-date">📅 Maret 2024</div>
+              </div>
+            </div>
+
+            <!-- Achieve 3 -->
+            <div class="achieve-card card reveal delay-200">
+              <div class="achieve-icon">⭐</div>
+              <div class="achieve-body">
+                <div class="achieve-title">
+                  Siswa Berprestasi — Jurusan RPL
+                  <span class="achieve-level level-sekolah">Sekolah</span>
+                </div>
+                <div class="achieve-org">SMK Telkom Malang</div>
+                <div class="achieve-date">📅 Juli 2023</div>
+              </div>
+            </div>
+
+          </div><!-- /ach-col -->
+
+          <!-- ── KOLOM KANAN: Sertifikasi ── -->
+          <div class="ach-col">
+            <h3 class="ach-col-heading reveal delay-100">📜 Sertifikasi &amp; Kursus</h3>
+
+            <!-- TODO: Ganti href="#" pada setiap Verify → dengan URL sertifikat asli dari Dicoding/Cisco -->
+            <div class="cert-card card reveal delay-100">
+              <div class="cert-icon">🛡</div>
+              <div class="cert-body">
+                <div class="cert-name">Belajar Backend dengan Node.js</div>
+                <div class="cert-issuer">Dicoding Indonesia</div>
+                <div class="cert-date">Oktober 2024</div>
+              </div>
+              <!-- TODO: Ganti href="#" dengan link verifikasi Dicoding -->
+              <a href="#" class="cert-verify" aria-label="Verify sertifikat Node.js">Verify →</a>
+            </div>
+
+            <div class="cert-card card reveal delay-200">
+              <div class="cert-icon">🔒</div>
+              <div class="cert-body">
+                <div class="cert-name">Introduction to Cybersecurity</div>
+                <div class="cert-issuer">Cisco Networking Academy</div>
+                <div class="cert-date">Agustus 2024</div>
+              </div>
+              <!-- TODO: Ganti href="#" dengan link verifikasi Cisco NetAcad -->
+              <a href="#" class="cert-verify" aria-label="Verify sertifikat Cisco">Verify →</a>
+            </div>
+
+            <div class="cert-card card reveal">
+              <div class="cert-icon">🚀</div>
+              <div class="cert-body">
+                <div class="cert-name">Belajar Dasar Pemrograman Web</div>
+                <div class="cert-issuer">Dicoding Indonesia</div>
+                <div class="cert-date">Maret 2023</div>
+              </div>
+              <!-- TODO: Ganti href="#" dengan link verifikasi Dicoding -->
+              <a href="#" class="cert-verify" aria-label="Verify sertifikat Web">Verify →</a>
+            </div>
+
+            <div class="cert-card card reveal delay-100">
+              <div class="cert-icon">🗄</div>
+              <div class="cert-body">
+                <div class="cert-name">SQL for Beginners</div>
+                <div class="cert-issuer">Dicoding Indonesia</div>
+                <div class="cert-date">Januari 2023</div>
+              </div>
+              <!-- TODO: Ganti href="#" dengan link verifikasi Dicoding -->
+              <a href="#" class="cert-verify" aria-label="Verify sertifikat SQL">Verify →</a>
+            </div>
+
+          </div><!-- /ach-col -->
+
+        </div><!-- /ach-layout -->
+      </div><!-- /achievements-container -->
+    </section><!-- /achievements -->
+
+    <!-- ===== EDUCATION ===== -->
+    <section id="education" aria-labelledby="education-heading">
+      <div class="edu-container container">
+
+        <div class="section-header reveal">
+          <div class="section-line"></div>
+          <div class="section-tag">
+            <span class="section-comment">// </span>
+            <span class="section-num">05</span>
+            <span class="section-slash"> / </span>
+            <span class="section-name">education.json</span>
+          </div>
+          <div class="section-line"></div>
+        </div>
+
+        <h2 id="education-heading" class="text-h2 reveal scramble-hover" style="margin-bottom:2.5rem;">Riwayat Pendidikan</h2>
+
+        <div class="timeline">
+
+          <!-- SMK Telkom Malang (aktif) -->
+          <div class="timeline-item reveal">
+            <div class="timeline-dot active" aria-hidden="true"></div>
+            <div class="timeline-card card">
+              <div class="timeline-meta">
+                <span class="timeline-period text-mono">2024 — 2026</span>
+                <span class="badge badge-node" style="font-size:0.625rem;">Sedang Berlangsung</span>
+              </div>
+              <h3 class="timeline-school">SMK Telkom Malang</h3>
+              <p class="timeline-major">Rekayasa Perangkat Lunak · Backend Specialist</p>
+              <div class="timeline-divider"></div>
+              <ul class="timeline-details">
+                <li>Ekstrakulikuler: Volly Ball &amp; Artificial Intelligence</li>
+                <li>Jurusan RPL dengan fokus backend development</li>
+                <li>PKL di salah satu perusahaan teknologi di Malang</li>
+              </ul>
+              <div class="badge-cloud" style="margin-top:12px;gap:6px;">
+                <span class="badge badge-js">TypeScript</span>
+                <span class="badge badge-node">Express</span>
+                <span class="badge badge-mysql">MySQL</span>
+                <span class="badge badge-pgsql">PostgreSQL</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- MtsN 3 Malang -->
+          <div class="timeline-item reveal delay-100">
+            <div class="timeline-dot" aria-hidden="true"></div>
+            <div class="timeline-card card">
+              <div class="timeline-meta">
+                <span class="timeline-period text-mono">2021 — 2024</span>
+              </div>
+              <h3 class="timeline-school">MtsN 3 Malang</h3>
+              <p class="timeline-major">Sekolah Menengah Pertama · Malang</p>
+            </div>
+          </div>
+
+        </div><!-- /timeline -->
+      </div><!-- /edu-container -->
+    </section><!-- /education -->
+
+    <!-- ===== CONTACT ===== -->
+    <!-- ===== CONTACT ===== -->
+    <section id="contact" aria-labelledby="contact-heading">
+      <div class="contact-container container">
+
+        <div class="section-header reveal">
+          <div class="section-line"></div>
+          <div class="section-tag">
+            <span class="section-comment">// </span>
+            <span class="section-num">06</span>
+            <span class="section-slash"> / </span>
+            <span class="section-name">contact.sh</span>
+          </div>
+          <div class="section-line"></div>
+        </div>
+
+        <h2 id="contact-heading" class="text-h2 reveal scramble-hover">Mari Terhubung</h2>
+        <p class="text-body reveal" style="max-width:540px;margin:12px 0 3rem;color:var(--text-muted);">
+          Terbuka untuk peluang magang, kerja full-time, atau kolaborasi proyek.
+        </p>
+
+        <div class="contact-grid">
+
+          <!-- Left: Contact info -->
+          <div class="contact-info card reveal">
+            <h3 style="font:600 1.125rem/1 var(--font-display);color:var(--text-primary);margin-bottom:20px;">Reach Out</h3>
+            <div class="contact-list">
+
+              <a href="mailto:yushanthoriq@gmail.com" class="contact-item">
+                <div class="contact-icon">
+                  <iconify-icon icon="solar:letter-linear" width="20"></iconify-icon>
+                </div>
+                <div>
+                  <div class="contact-item-label">Email</div>
+                  <div class="contact-item-value">yushanthoriq@gmail.com</div>
+                </div>
+              </a>
+
+              <!-- TODO: Ganti 62[nomor] dengan nomor WhatsApp aktif, contoh: 6281234567890 -->
+              <a href="https://wa.me/62[nomor]" target="_blank" rel="noopener noreferrer" class="contact-item">
+                <div class="contact-icon">
+                  <iconify-icon icon="tabler:brand-whatsapp" width="20"></iconify-icon>
+                </div>
+                <div>
+                  <div class="contact-item-label">WhatsApp</div>
+                  <!-- TODO: Ganti [nomor] dengan format +62 8xx-xxxx-xxxx -->
+                  <div class="contact-item-value">+62 [nomor]</div>
+                </div>
+              </a>
+
+              <a href="https://github.com/Yushan2008-alt" target="_blank" rel="noopener noreferrer" class="contact-item">
+                <div class="contact-icon">
+                  <iconify-icon icon="tabler:brand-github" width="20"></iconify-icon>
+                </div>
+                <div>
+                  <div class="contact-item-label">GitHub</div>
+                  <div class="contact-item-value">github.com/Yushan2008-alt</div>
+                </div>
+              </a>
+
+              <!-- TODO: Ganti [username] dengan LinkedIn username kamu -->
+              <a href="https://linkedin.com/in/[username]" target="_blank" rel="noopener noreferrer" class="contact-item">
+                <div class="contact-icon">
+                  <iconify-icon icon="tabler:brand-linkedin" width="20"></iconify-icon>
+                </div>
+                <div>
+                  <div class="contact-item-label">LinkedIn</div>
+                  <!-- TODO: Ganti [username] di bawah ini -->
+                  <div class="contact-item-value">linkedin.com/in/[username]</div>
+                </div>
+              </a>
+
+              <div class="contact-item no-link">
+                <div class="contact-icon">
+                  <iconify-icon icon="solar:map-point-linear" width="20"></iconify-icon>
+                </div>
+                <div>
+                  <div class="contact-item-label">Lokasi</div>
+                  <div class="contact-item-value">Malang, Jawa Timur 🗺</div>
+                </div>
+              </div>
+
+            </div><!-- /contact-list -->
+          </div><!-- /contact-info -->
+
+          <!-- Right: Contact form -->
+          <!-- TODO: Daftar di https://formspree.io → buat form baru → salin ID → ganti REPLACE_WITH_YOUR_ID di bawah -->
+          <form id="contact-form" class="card contact-form"
+                action="https://formspree.io/f/REPLACE_WITH_YOUR_ID"
+                method="POST" novalidate>
+            <h3 style="font:600 1.125rem/1 var(--font-display);color:var(--text-primary);margin-bottom:4px;">Kirim Pesan</h3>
+
+            <div class="form-group">
+              <label for="name">Nama Lengkap</label>
+              <input type="text" id="name" name="name" placeholder="Nama kamu" required autocomplete="name">
+            </div>
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input type="email" id="email" name="email" placeholder="email@gmail.com" required autocomplete="email">
+            </div>
+            <div class="form-group">
+              <label for="subject">Subjek</label>
+              <input type="text" id="subject" name="subject" placeholder="Posisi yang dilamar / topik pesan">
+            </div>
+            <div class="form-group">
+              <label for="message">Pesan</label>
+              <textarea id="message" name="message" rows="5"
+                        placeholder="Tuliskan pesanmu di sini..." required></textarea>
+            </div>
+
+            <button type="submit" id="submit-btn" class="btn btn-primary" style="align-self:flex-start;gap:8px;">
+              <span id="btn-text">Kirim Pesan</span>
+              <iconify-icon id="btn-icon" icon="solar:arrow-right-linear" width="16"></iconify-icon>
+            </button>
+
+            <div id="form-status" class="form-status hidden"></div>
+          </form>
+
+        </div><!-- /contact-grid -->
+      </div><!-- /contact-container -->
+    </section><!-- /contact -->
+
+  </main>
+
+  <!-- ==================== FOOTER ==================== -->
+  <footer id="footer" role="contentinfo">
+    <div class="footer-terminal">
+      <span class="t-prompt">yushan</span><span class="footer-t-at">@portfolio</span><span class="footer-t-dollar"> $ </span><span class="t-cmd">echo "Thanks for visiting! 👋"</span>
+    </div>
+    <div class="footer-output t-output">"Thanks for visiting! 👋"</div>
+
+    <nav class="footer-nav" aria-label="Footer navigation">
+      <a href="#hero">Home</a>
+      <a href="#about">About</a>
+      <a href="#skills">Skills</a>
+      <a href="#projects">Projects</a>
+      <a href="#achievements">Achievements</a>
+      <a href="#education">Education</a>
+      <a href="#contact">Contact</a>
+    </nav>
+
+    <div class="footer-socials">
+      <a href="https://github.com/Yushan2008-alt" target="_blank" rel="noopener noreferrer" class="btn btn-icon" aria-label="GitHub" title="GitHub">
+        <iconify-icon icon="tabler:brand-github" width="18"></iconify-icon>
+      </a>
+      <!-- TODO: Ganti href="#" dengan https://linkedin.com/in/[username] kamu -->
+      <a href="#" target="_blank" rel="noopener noreferrer" class="btn btn-icon" aria-label="LinkedIn" title="LinkedIn">
+        <iconify-icon icon="tabler:brand-linkedin" width="18"></iconify-icon>
+      </a>
+      <a href="https://instagram.com/_.yshnthrq" target="_blank" rel="noopener noreferrer" class="btn btn-icon" aria-label="Instagram" title="Instagram">
+        <iconify-icon icon="tabler:brand-instagram" width="18"></iconify-icon>
+      </a>
     </div>
 
-    <div class="skill-item">
-        <div class="skill-header">
-            <span class="skill-name">CSS</span>
-            <span class="skill-percentage">40%</span>
-        </div>
+    <div class="footer-status">
+      <div class="status-dot-green" aria-hidden="true"></div>
+      <span>All systems operational</span>
     </div>
 
-    <div class="skill-item">
-        <div class="skill-header">
-            <span class="skill-name">JavaScript</span>
-            <span class="skill-percentage">70%</span>
+    <p class="footer-copy">&copy; 2025 Yushan Thoriq &middot; Built with ❤️ &amp; ☕ in Malang</p>
+  </footer>
+
+  <!-- ==================== PROJECT MODAL ==================== -->
+  <div id="project-modal" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="modal-title" hidden>
+    <div class="modal-backdrop" id="modal-backdrop"></div>
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <div class="modal-header-meta">
+          <span id="modal-cat" class="badge"></span>
         </div>
+        <h2 id="modal-title" class="modal-title"></h2>
+        <button id="modal-close" class="btn btn-icon modal-close-btn" aria-label="Tutup modal">
+          <iconify-icon icon="solar:close-circle-linear" width="22"></iconify-icon>
+        </button>
+      </div>
+      <div class="modal-body" id="modal-body">
+        <!-- Rendered dynamically by JS -->
+      </div>
     </div>
+  </div>
 
-    <div class="skill-item">
-        <div class="skill-header">
-            <span class="skill-name">PHP</span>
-            <span class="skill-percentage">50%</span>
-        </div>
-    </div>
-</div>
-</section>
-<script>
-// State untuk tracking contact view
-let isContactView = false;
+  <!-- ==================== BACK TO TOP ==================== -->
+  <button id="back-to-top" aria-label="Kembali ke atas halaman">
+    <iconify-icon icon="solar:arrow-up-linear" width="18"></iconify-icon>
+  </button>
 
-// Smooth scroll animation untuk navbar links
-document.querySelectorAll('nav a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        
-        const targetId = this.getAttribute('href');
-        
-        // Jika klik Contact
-        if (targetId === '#contact') {
-            activateContactView();
-        } else {
-            // Jika sedang di contact view, deactivate dulu
-            if (isContactView) {
-                deactivateContactView(() => {
-                    scrollToSection(targetId);
-                });
-            } else {
-                scrollToSection(targetId);
-            }
-        }
-    });
-});
-
-function scrollToSection(targetId) {
-    const targetSection = document.querySelector(targetId);
-    if (targetSection) {
-        targetSection.scrollIntoView({
-            behavior: 'smooth',
-            block: 'start'
-        });
-    }
-}
-
-function activateContactView() {
-    isContactView = true;
-    
-    // Scroll ke home dulu
-    document.querySelector('#home').scrollIntoView({
-        behavior: 'smooth',
-        block: 'start'
-    });
-    
-    setTimeout(() => {
-        const socialIcons = document.querySelector('.social-icons');
-        
-        // Tambah class untuk animasi garis bawah (TANPA BLUR)
-        socialIcons.classList.add('contact-active');
-    }, 500);
-}
-
-function deactivateContactView(callback) {
-    const socialIcons = document.querySelector('.social-icons');
-    
-    // Hapus class
-    socialIcons.classList.remove('contact-active');
-    
-    setTimeout(() => {
-        isContactView = false;
-        if (callback) callback();
-    }, 600);
-}
-
-// Intersection Observer untuk animasi scroll
-document.addEventListener("DOMContentLoaded", () => {
-    const about = document.querySelector('.about');
-    const skills = document.querySelector('.skills');
-
-    const observerOptions = {
-        threshold: 0.2
-    };
-
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('show');
-            } else {
-                entry.target.classList.remove('show');
-            }
-        });
-    }, observerOptions);
-
-    if (about) observer.observe(about);
-    if (skills) observer.observe(skills);
-});
-</script>
+  <!-- External Scripts -->
+  <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+  <script src="assets/js/main.js?v=11" defer></script>
 </body>
 </html>
