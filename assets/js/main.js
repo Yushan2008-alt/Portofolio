@@ -297,16 +297,16 @@ function initTerminal() {
   if (!output) return;
 
   const lines = [
-    { type: 'cmd',    text: 'whoami' },
-    { type: 'output', text: 'Yushan Thoriq — Backend Developer · RPL' },
+    { type: 'cmd',    text: 'who am i' },
+    { type: 'output', text: 'Yushan Thoriq — Junior Backend Developer · RPL' },
     { type: 'cmd',    text: 'cat skills.json' },
     { type: 'output', text: '{' },
-    { type: 'json',   key: '  "backend"',  val: '["Nest.js", "Node.js"]' },
+    { type: 'json',   key: '  "backend"',  val: '["Nest.js", "Node.js", "Laravel"]' },
     { type: 'json',   key: '  "database"', val: '["MySQL", "PostgreSQL"]' },
-    { type: 'json',   key: '  "tools"',    val: '["Git", "Postman", "VS Code"]' },
+    { type: 'json',   key: '  "tools"',    val: '["Git", "Postman", "Swagger", "VS Code"]' },
     { type: 'output', text: '}' },
     { type: 'cmd',    text: 'echo $STATUS' },
-    { type: 'output', text: '🟢 Open to work · Magang tersedia' },
+    { type: 'output', text: '🟢 Open to work · Available for Internship' },
     { type: 'cursor' },
   ];
 
