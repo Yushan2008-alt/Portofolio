@@ -879,12 +879,6 @@ section {
   gap: 12px;
 }
 
-.achieve-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 12px;
-}
-
 .contact-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -1187,10 +1181,6 @@ section {
   }
 
   .projects-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .achieve-grid {
     grid-template-columns: 1fr;
   }
 
@@ -2253,125 +2243,6 @@ section {
   }
 }
 
-/* === ACHIEVEMENTS SECTION (redesigned) === */
-#achievements {
-  padding: 96px 0;
-  position: relative;
-}
-
-.achievements-container {
-  max-width: 1100px;
-  margin: 0 auto;
-  padding: 0 24px;
-}
-
-/* 2-column layout + PKL spanning full width */
-.ach-layout {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 20px;
-}
-
-.ach-col {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-.ach-col-heading {
-  font: 600 0.9375rem / 1 var(--font-display);
-  color: var(--text-secondary);
-  margin-bottom: 4px;
-}
-
-/* Achievement card */
-.achieve-card {
-  display: flex;
-  gap: 14px;
-  align-items: flex-start;
-  padding: 16px;
-}
-
-.achieve-icon {
-  width: 40px;
-  height: 40px;
-  border-radius: 10px;
-  background: linear-gradient(135deg, rgba(251,191,36,0.12) 0%, rgba(251,191,36,0.04) 100%);
-  border: 0.5px solid rgba(251,191,36,0.2);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.25rem;
-  flex-shrink: 0;
-}
-
-.achieve-body { display: flex; flex-direction: column; gap: 4px; min-width: 0; }
-
-.achieve-title {
-  font-size: 0.9375rem;
-  font-weight: 500;
-  color: var(--text-primary);
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  flex-wrap: wrap;
-}
-
-.achieve-level {
-  font: 400 0.625rem / 1 var(--font-mono);
-  padding: 2px 8px;
-  border-radius: 999px;
-  border: 0.5px solid;
-  flex-shrink: 0;
-}
-
-.level-nasional { background: rgba(251,191,36,0.1);  border-color: rgba(251,191,36,0.25);  color: #fbbf24; }
-.level-provinsi { background: rgba(139,92,246,0.1);  border-color: rgba(139,92,246,0.25);  color: #a78bfa; }
-.level-kota     { background: rgba(59,130,246,0.1);  border-color: rgba(59,130,246,0.25);  color: #60a5fa; }
-.level-sekolah  { background: rgba(16,185,129,0.1);  border-color: rgba(16,185,129,0.25);  color: #10b981; }
-
-.achieve-org  { font-size: 0.8125rem; color: var(--text-muted); }
-.achieve-date { font: 400 0.75rem / 1 var(--font-mono); color: var(--text-hint); }
-
-/* Certificate card */
-.cert-card {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 14px;
-}
-
-.cert-icon {
-  width: 36px;
-  height: 36px;
-  border-radius: 8px;
-  background: linear-gradient(135deg, rgba(20,184,166,0.12) 0%, rgba(20,184,166,0.04) 100%);
-  border: 0.5px solid rgba(20,184,166,0.2);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.1rem;
-  flex-shrink: 0;
-}
-
-.cert-body   { flex: 1; min-width: 0; }
-.cert-name   { font-size: 0.875rem; font-weight: 500; color: var(--text-primary); }
-.cert-issuer { font-size: 0.75rem; color: var(--text-muted); }
-.cert-date   { font: 400 0.6875rem / 1 var(--font-mono); color: var(--text-hint); }
-
-.cert-verify {
-  font: 400 0.6875rem / 1 var(--font-mono);
-  color: var(--success);
-  border: 0.5px solid rgba(16,185,129,0.3);
-  padding: 4px 10px;
-  border-radius: 6px;
-  white-space: nowrap;
-  text-decoration: none;
-  transition: all 0.2s ease;
-  flex-shrink: 0;
-}
-.cert-verify:hover { background: rgba(16,185,129,0.1); }
-
 /* PKL card */
 .pkl-card {
   display: flex;
@@ -2426,10 +2297,7 @@ section {
 }
 
 @media (max-width: 768px) {
-  .ach-layout { grid-template-columns: 1fr; }
   .pkl-card   { grid-column: auto; flex-direction: column; }
-  #achievements { padding: 64px 16px; }
-  .achievements-container { padding: 0; }
 }
 
 
@@ -2909,7 +2777,7 @@ section {
 
   /* Section spacing tighter */
   #hero, #about, #skills, #projects,
-  #achievements, #education, #contact {
+  #education, #contact {
     padding-left: 16px;
     padding-right: 16px;
   }

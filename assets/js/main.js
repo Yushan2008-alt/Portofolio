@@ -723,7 +723,7 @@ if (window.matchMedia('(hover: hover)').matches) {
   }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
 
   // Apply stagger delays to direct children of grid containers
-  document.querySelectorAll('.projects-grid, .achieve-grid, .skills-bento').forEach(grid => {
+  document.querySelectorAll('.projects-grid, .skills-bento').forEach(grid => {
     [...grid.children].forEach((child, i) => {
       if (!child.dataset.delay) child.dataset.delay = i * 80;
     });
