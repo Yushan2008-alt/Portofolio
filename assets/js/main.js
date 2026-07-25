@@ -83,7 +83,7 @@
   lerpCursor();
 
   // Hover enlarge on interactive elements
-  const interactives = 'a, button, [role="button"], label, input, textarea, select, .color-btn, .nav-link';
+  const interactives = 'a, button, [role="button"], label, input, textarea, select, .nav-link';
   document.addEventListener('mouseover', e => {
     if (e.target.closest(interactives)) {
       dot.classList.add('cursor-hover');
@@ -203,39 +203,8 @@
 // 4. COLOR THEME SWITCHER
 // ─────────────────────────────────────────────
 (function initColorSwitcher() {
-  const root       = document.documentElement;
-  const colorBtns  = document.querySelectorAll('.color-btn');
-
-  function hexToRgb(hex) {
-    const r = parseInt(hex.slice(1,3), 16);
-    const g = parseInt(hex.slice(3,5), 16);
-    const b = parseInt(hex.slice(5,7), 16);
-    return { r, g, b };
-  }
-
-  function applyColor(hex) {
-    const { r, g, b } = hexToRgb(hex);
-    root.style.setProperty('--primary',        hex);
-    root.style.setProperty('--primary-glow',   `rgba(${r},${g},${b},0.25)`);
-    root.style.setProperty('--primary-dim',    `rgba(${r},${g},${b},0.08)`);
-    root.style.setProperty('--primary-border', `rgba(${r},${g},${b},0.25)`);
-
-    colorBtns.forEach(btn => {
-      btn.classList.toggle('active', btn.dataset.color === hex);
-    });
-  }
-
-  colorBtns.forEach(btn => {
-    btn.addEventListener('click', () => {
-      const color = btn.dataset.color;
-      applyColor(color);
-      localStorage.setItem('portfolio-color', color);
-    });
-  });
-
-  // Restore saved color
-  const saved = localStorage.getItem('portfolio-color');
-  if (saved) applyColor(saved);
+  // Clear legacy stored color preference so default elegant gold CSS variables take effect
+  localStorage.removeItem('portfolio-color');
 })();
 
 
