@@ -111,7 +111,7 @@
 
 
         <!-- Download CV -->
-        <a href="cv/CV_Yushan_Saputra.pdf" download="CV_Yushan_Thoriq.pdf" class="btn-cv" aria-label="Download CV Yushan Thoriq">
+        <a href="cv/CV_Yushan_Thoriq.pdf" download="CV_Yushan_Thoriq.pdf" class="btn-cv" aria-label="Download CV Yushan Thoriq">
           <iconify-icon icon="solar:document-download-linear" width="16"></iconify-icon>
           <span class="btn-cv-text">Download CV</span>
         </a>
@@ -137,7 +137,7 @@
       <a href="#education"   class="mobile-nav-link" role="menuitem" data-section="education">Education</a>
       <a href="#contact"     class="mobile-nav-link" role="menuitem" data-section="contact">Contact</a>
     </nav>
-    <a href="cv/CV_Yushan_Saputra.pdf" download="CV_Yushan_Thoriq.pdf" class="btn btn-primary mobile-cv-btn">
+    <a href="cv/CV_Yushan_Thoriq.pdf" download="CV_Yushan_Thoriq.pdf" class="btn btn-primary mobile-cv-btn">
       <iconify-icon icon="solar:document-download-linear" width="16"></iconify-icon>
       Download CV
     </a>
@@ -181,7 +181,7 @@
           <!-- CTA Buttons -->
           <div class="hero-cta">
             <!-- TODO: Ganti href dengan path CV yang benar, dan download dengan nama file asli -->
-            <a href="cv/CV_Yushan_Saputra.pdf" download="CV_Yushan_Thoriq.pdf"
+            <a href="cv/CV_Yushan _Thoriq.pdf" download="CV_Yushan_Thoriq.pdf"
                class="btn btn-primary btn-magnetic" aria-label="Download CV">
               <iconify-icon icon="solar:document-download-linear" width="16"></iconify-icon>
               Download CV
@@ -199,7 +199,7 @@
               <iconify-icon icon="mdi:github" width="18"></iconify-icon>
             </a>
             <!-- TODO: Ganti href="#" dengan https://linkedin.com/in/[username] kamu -->
-            <a href="#" target="_blank" rel="noopener noreferrer"
+            <a href="https://www.linkedin.com/in/yushan-thoriq-3585a9424/" target="_blank" rel="noopener noreferrer"
                class="btn-icon" aria-label="LinkedIn">
               <iconify-icon icon="mdi:linkedin" width="18"></iconify-icon>
             </a>
@@ -221,7 +221,7 @@
           <!-- Profile Card -->
           <div class="card hero-profile-card">
             <div class="hero-avatar" aria-hidden="true">
-              <span class="hero-avatar-initials">YS</span>
+              <img src="image/Profile_Home_Section.jpg" alt="Foto profil Yushan Thoriq" class="hero-avatar-img" loading="lazy">
             </div>
             <div class="hero-profile-name">Yushan Thoriq</div>
             <div class="hero-profile-badge">Junior Backend Developer · RPL</div>
@@ -334,7 +334,7 @@
           <!-- Right: Photo + Education -->
           <div class="about-right reveal delay-200">
             <div class="profile-placeholder" aria-label="Foto profil Yushan Thoriq">
-              <span class="profile-initials" aria-hidden="true">YS</span>
+              <img src="image/Profile_About_Section.jpeg" alt="Foto profil Yushan Thoriq" class="about-profile-img" loading="lazy">
             </div>
 
             <div class="card edu-card">
@@ -543,7 +543,6 @@
           <button class="filter-btn active" data-filter="all" role="tab" aria-selected="true">Semua</button>
           <button class="filter-btn" data-filter="backend" role="tab" aria-selected="false">Backend</button>
           <button class="filter-btn" data-filter="webapp" role="tab" aria-selected="false">Web App</button>
-          <button class="filter-btn" data-filter="database" role="tab" aria-selected="false">Database</button>
         </div>
 
         <!-- Project cards grid -->
@@ -552,74 +551,70 @@
           <!-- Card 1 — Backend -->
           <div class="project-card card reveal card-tilt" data-category="backend" data-project-id="1">
             <div class="project-thumb">
-              <div class="project-thumb-placeholder">
-                <iconify-icon icon="solar:server-bold-duotone" width="48" class="thumb-icon" aria-hidden="true"></iconify-icon>
-              </div>
+              <img src="image/Projek1_Backend.png" alt="REST API Gateway thumbnail" class="project-thumb-img" loading="lazy">
               <div class="project-overlay">
                 <button class="btn btn-primary project-detail-btn" data-id="1" aria-label="Lihat detail REST API Gateway">Detail Proyek →</button>
               </div>
             </div>
             <div class="project-meta">
               <span class="project-cat badge badge-node">Backend</span>
-              <span class="project-date text-mono">2024</span>
+              <span class="project-date text-mono">2025</span>
             </div>
             <h3 class="project-title">REST API Gateway</h3>
             <p class="project-desc">Layanan API gateway dengan autentikasi JWT, rate limiting, dan dokumentasi Swagger otomatis menggunakan NestJS.</p>
             <div class="project-tags badge-cloud">
               <span class="badge badge-node">NestJS</span>
               <span class="badge badge-js">TypeScript</span>
-              <span class="badge badge-pgsql">PostgreSQL</span>
+              <span class="badge badge-mysql">MySQL</span>
             </div>
           </div>
 
           <!-- Card 2 — Web App -->
           <div class="project-card card reveal card-tilt delay-100" data-category="webapp" data-project-id="2">
             <div class="project-thumb">
-              <div class="project-thumb-placeholder">
-                <iconify-icon icon="solar:laptop-bold-duotone" width="48" class="thumb-icon" aria-hidden="true"></iconify-icon>
-              </div>
+              <img src="image/Projek1_WebApp.png" alt="Ruang Teduh thumbnail" class="project-thumb-img" loading="lazy">
               <div class="project-overlay">
-                <button class="btn btn-primary project-detail-btn" data-id="2" aria-label="Lihat detail School Management System">Detail Proyek →</button>
+                <a href="https://ruangteduh.vercel.app" target="_blank" rel="noopener noreferrer" class="btn btn-primary">Buka Proyek ↗</a>
+                <button class="btn btn-ghost project-detail-btn" data-id="2" aria-label="Lihat detail Ruang Teduh">Detail →</button>
               </div>
             </div>
             <div class="project-meta">
               <span class="project-cat badge badge-laravel">Web App</span>
-              <span class="project-date text-mono">2024</span>
+              <span class="project-date text-mono">2026</span>
             </div>
-            <h3 class="project-title">School Management System</h3>
-            <p class="project-desc">Sistem manajemen sekolah fullstack untuk pengelolaan siswa, guru, absensi, dan nilai berbasis Laravel & MySQL.</p>
+            <h3 class="project-title">Ruang Teduh</h3>
+            <p class="project-desc">Platform dukungan kesehatan mental bilingual (ID/EN) yang menjembatani krisis depresi dan pencegahan bunuh diri dengan pendekatan empatik, non-klinis, dan ramah budaya.</p>
             <div class="project-tags badge-cloud">
-              <span class="badge badge-laravel">Laravel</span>
-              <span class="badge badge-php">PHP</span>
-              <span class="badge badge-mysql">MySQL</span>
-              <span class="badge badge-html">Blade</span>
+              <span class="badge badge-next">Next.js</span>
+              <span class="badge badge-react">React</span>
+              <span class="badge badge-pgsql">PostgreSQL</span>
+              <span class="badge badge-css">Tailwind CSS</span>
             </div>
           </div>
 
-          <!-- Card 3 — Database -->
-          <div class="project-card card reveal card-tilt delay-200" data-category="database" data-project-id="3">
+          <!-- Card 3 — Web App 2 -->\
+          <div class="project-card card reveal card-tilt delay-200" data-category="webapp" data-project-id="3">
             <div class="project-thumb">
-              <div class="project-thumb-placeholder">
-                <iconify-icon icon="solar:database-bold-duotone" width="48" class="thumb-icon" aria-hidden="true"></iconify-icon>
-              </div>
+              <img src="image/Projek2_WebApp.png" alt="Project 2 Web App thumbnail" class="project-thumb-img" loading="lazy">
               <div class="project-overlay">
-                <button class="btn btn-primary project-detail-btn" data-id="3" aria-label="Lihat detail Inventory Database System">Detail Proyek →</button>
+                <button class="btn btn-ghost project-detail-btn" data-id="3" aria-label="Lihat detail proyek web app 2">Detail →</button>
               </div>
             </div>
             <div class="project-meta">
-              <span class="project-cat badge badge-pgsql">Database</span>
-              <span class="project-date text-mono">2023</span>
+              <span class="project-cat badge badge-laravel">Web App</span>
+              <span class="project-date text-mono">2025</span>
             </div>
-            <h3 class="project-title">Inventory Database System</h3>
-            <p class="project-desc">Desain dan implementasi database inventaris dengan stored procedures, triggers, dan laporan berbasis PostgreSQL.</p>
+            <h3 class="project-title">School Management System</h3>
+            <p class="project-desc">Sistem manajemen sekolah berbasis web untuk pengelolaan data siswa, jadwal pelajaran, dan laporan akademik secara terpusat.</p>
             <div class="project-tags badge-cloud">
-              <span class="badge badge-pgsql">PostgreSQL</span>
-              <span class="badge badge-git">SQL</span>
-              <span class="badge badge-api">ERD Design</span>
+              <span class="badge badge-laravel">Laravel</span>
+              <span class="badge badge-mysql">MySQL</span>
+              <span class="badge badge-html">Blade Template</span>
             </div>
           </div>
 
         </div><!-- /projects-grid -->
+
       </div><!-- /projects-container -->
     </section><!-- /projects -->
 
@@ -745,14 +740,14 @@
               </a>
 
               <!-- TODO: Ganti [username] dengan LinkedIn username kamu -->
-              <a href="https://linkedin.com/in/[username]" target="_blank" rel="noopener noreferrer" class="contact-item">
+              <a href="https://www.linkedin.com/in/yushan-thoriq-3585a9424" target="_blank" rel="noopener noreferrer" class="contact-item">
                 <div class="contact-icon">
                   <iconify-icon icon="tabler:brand-linkedin" width="20"></iconify-icon>
                 </div>
                 <div>
                   <div class="contact-item-label">LinkedIn</div>
                   <!-- TODO: Ganti [username] di bawah ini -->
-                  <div class="contact-item-value">linkedin.com/in/[username]</div>
+                  <div class="contact-item-value">linkedin.com/in/yushan thoriq</div>
                 </div>
               </a>
 
@@ -762,7 +757,7 @@
                 </div>
                 <div>
                   <div class="contact-item-label">Lokasi</div>
-                  <div class="contact-item-value">Malang, Jawa Timur 🗺</div>
+                  <div class="contact-item-value">Malang, Jawa Timur</div>
                 </div>
               </div>
 
@@ -783,10 +778,6 @@
             <div class="form-group">
               <label for="email">Email</label>
               <input type="email" id="email" name="email" placeholder="email@gmail.com" required autocomplete="email">
-            </div>
-            <div class="form-group">
-              <label for="subject">Subjek</label>
-              <input type="text" id="subject" name="subject" placeholder="Posisi yang dilamar / topik pesan">
             </div>
             <div class="form-group">
               <label for="message">Pesan</label>
@@ -819,7 +810,7 @@
       <a href="#hero">Home</a>
       <a href="#about">About</a>
       <a href="#skills">Skills</a>
-      <a href="#projects">Projects</a>
+      <a href="#projects">Projects</a> 
       <a href="#education">Education</a>
       <a href="#contact">Contact</a>
     </nav>
@@ -829,10 +820,10 @@
         <iconify-icon icon="tabler:brand-github" width="18"></iconify-icon>
       </a>
       <!-- TODO: Ganti href="#" dengan https://linkedin.com/in/[username] kamu -->
-      <a href="#" target="_blank" rel="noopener noreferrer" class="btn btn-icon" aria-label="LinkedIn" title="LinkedIn">
+      <a href="https://www.linkedin.com/in/yushan-thoriq-3585a9424" target="_blank" rel="noopener noreferrer" class="btn btn-icon" aria-label="LinkedIn" title="LinkedIn">
         <iconify-icon icon="tabler:brand-linkedin" width="18"></iconify-icon>
       </a>
-      <a href="https://instagram.com/_.yshnthrq" target="_blank" rel="noopener noreferrer" class="btn btn-icon" aria-label="Instagram" title="Instagram">
+      <a href="https://z-p42.www.instagram.com/yshnz7/" target="_blank" rel="noopener noreferrer" class="btn btn-icon" aria-label="Instagram" title="Instagram">
         <iconify-icon icon="tabler:brand-instagram" width="18"></iconify-icon>
       </a>
     </div>
