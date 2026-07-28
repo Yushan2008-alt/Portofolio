@@ -512,7 +512,7 @@ const PROJECTS = [
 
 
 // ─────────────────────────────────────────────
-// 13. CONTACT FORM (Supabase Edge Function + Gmail SMTP)
+// 13. CONTACT FORM (Vercel Serverless Function + Nodemailer SMTP)
 // ─────────────────────────────────────────────
 (function initContactForm() {
   const form = document.getElementById('contact-form');
@@ -555,7 +555,7 @@ const PROJECTS = [
         throw new Error(resData.error || 'Server error');
       }
     } catch (err) {
-      status.textContent = '✗ Gagal mengirimpesan. Silakan hubungi via WhatsApp atau Email langsung.';
+      status.textContent = '✗ Gagal mengirim pesan. Silakan hubungi via WhatsApp atau Email langsung.';
       status.className   = 'form-status error';
     } finally {
       btn.disabled = false;
