@@ -1451,7 +1451,7 @@ section {
   display: grid;
   grid-template-columns: 3fr 2fr;
   gap: 28px;
-  align-items: stretch;
+  align-items: start;
 }
 
 .about-card {
@@ -1495,13 +1495,11 @@ section {
   display: flex;
   flex-direction: column;
   gap: 12px;
-  height: 100%;
 }
 
 .profile-placeholder {
   width: 100%;
-  flex: 1;
-  min-height: 0;
+  aspect-ratio: 1.1 / 1;
   border-radius: 16px;
   background: linear-gradient(135deg, rgba(59,130,246,0.15), rgba(139,92,246,0.12));
   border: 0.5px solid var(--border);
@@ -1522,7 +1520,7 @@ section {
 
 .about-profile-img {
   width: 100%;
-  height: 100%;
+  height: 115%;
   object-fit: cover;
   object-position: center top;
   border-radius: 16px;
@@ -1530,8 +1528,7 @@ section {
 }
 
 .edu-card {
-  padding: 20px;
-  flex-shrink: 0;
+  padding: 16px 20px;
 }
 
 /* === SKILLS SECTION === */
@@ -1772,23 +1769,21 @@ section {
     max-width: 100%;
   }
 
-  .profile-placeholder {
-    width: 100%;
-    max-width: 260px;
-    height: 240px;
-    flex: none;
-    margin: 0 auto;
-  }
-
   .about-grid {
     grid-template-columns: 1fr;
-    align-items: start;
+    gap: 16px;
   }
 
   .about-right {
     order: -1;
-    align-items: center;
-    height: auto;
+    gap: 6px;
+  }
+
+  .profile-placeholder {
+    width: 100%;
+    max-width: 280px;
+    height: 240px;
+    margin: 0 auto;
   }
 
   .fun-facts {
