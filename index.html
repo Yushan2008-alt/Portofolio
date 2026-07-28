@@ -59,7 +59,7 @@
   <!-- ==================== LOADING SCREEN ==================== -->
   <div id="loading-screen" role="status" aria-label="Memuat portfolio...">
     <div class="loading-inner">
-      <div class="loading-logo gradient-text">YS_</div>
+      <div class="loading-logo gradient-text">My Portofolio</div>
       <div class="loading-terminal">
         <div class="loading-line" id="ll1">
           <span class="t-prompt">system</span><span class="t-dim">@init</span><span class="t-sep"> $ </span><span class="t-cmd" id="ll1-text"></span>
@@ -90,7 +90,7 @@
     <div class="nav-inner">
 
       <!-- Logo -->
-      <button class="nav-logo gradient-text" id="nav-logo-btn" aria-label="Kembali ke atas">YS_</button>
+      <button class="nav-logo gradient-text" id="nav-logo-btn" aria-label="Kembali ke atas">Yushan</button>
 
       <!-- Nav Pills (desktop) -->
       <div class="nav-pills-wrap" role="menubar">
@@ -110,10 +110,10 @@
 
 
 
-        <!-- Download CV -->
-        <a href="cv/CV_Yushan_Thoriq.pdf" download="CV_Yushan_Thoriq.pdf" class="btn-cv" aria-label="Download CV Yushan Thoriq">
-          <iconify-icon icon="solar:document-download-linear" width="16"></iconify-icon>
-          <span class="btn-cv-text">Download CV</span>
+        <!-- CV Preview -->
+        <a href="cv/CV_Yushan _Thoriq.pdf" target="_blank" rel="noopener noreferrer" class="btn-cv" aria-label="Preview CV Yushan Thoriq">
+          <iconify-icon icon="solar:eye-linear" width="16"></iconify-icon>
+          <span class="btn-cv-text">CV Preview</span>
         </a>
 
         <!-- Hamburger (mobile) -->
@@ -137,9 +137,9 @@
       <a href="#education"   class="mobile-nav-link" role="menuitem" data-section="education">Education</a>
       <a href="#contact"     class="mobile-nav-link" role="menuitem" data-section="contact">Contact</a>
     </nav>
-    <a href="cv/CV_Yushan_Thoriq.pdf" download="CV_Yushan_Thoriq.pdf" class="btn btn-primary mobile-cv-btn">
-      <iconify-icon icon="solar:document-download-linear" width="16"></iconify-icon>
-      Download CV
+    <a href="cv/CV_Yushan _Thoriq.pdf" target="_blank" rel="noopener noreferrer" class="btn btn-primary mobile-cv-btn">
+      <iconify-icon icon="solar:eye-linear" width="16"></iconify-icon>
+      CV Preview
     </a>
   </div>
   <div class="mobile-backdrop" id="mobile-backdrop" aria-hidden="true"></div>
@@ -180,7 +180,6 @@
 
           <!-- CTA Buttons -->
           <div class="hero-cta">
-            <!-- TODO: Ganti href dengan path CV yang benar, dan download dengan nama file asli -->
             <a href="cv/CV_Yushan _Thoriq.pdf" download="CV_Yushan_Thoriq.pdf"
                class="btn btn-primary btn-magnetic" aria-label="Download CV">
               <iconify-icon icon="solar:document-download-linear" width="16"></iconify-icon>
@@ -594,21 +593,22 @@
           <!-- Card 3 — Web App 2 -->
           <div class="project-card card reveal card-tilt delay-200" data-category="webapp" data-project-id="3">
             <div class="project-thumb">
-              <img src="image/Projek1_WebApp.png" alt="School Management System thumbnail" class="project-thumb-img" loading="lazy">
+              <img src="image/Projek1_WebApp.png" alt="Analisi Tim Media IPNU IPPNU thumbnail" class="project-thumb-img" loading="lazy">
               <div class="project-overlay">
-                <button class="btn btn-primary project-detail-btn" data-id="3" aria-label="Lihat detail School Management System">Detail Proyek →</button>
+                <button class="btn btn-primary project-detail-btn" data-id="3" aria-label="Lihat detail Analisi Tim Media IPNU IPPNU">Detail Proyek →</button>
               </div>
             </div>
             <div class="project-meta">
-              <span class="project-cat badge badge-laravel">Web App</span>
+              <span class="project-cat badge badge-next">Web App</span>
               <span class="project-date text-mono">2025</span>
             </div>
-            <h3 class="project-title">School Management System</h3>
-            <p class="project-desc">Sistem manajemen sekolah berbasis web untuk pengelolaan data siswa, jadwal pelajaran, dan laporan akademik secara terpusat.</p>
+            <h3 class="project-title">Analisis Tim Media IPNU IPPNU</h3>
+            <p class="project-desc">Sistem analisis tim media IPNU IPPNU untuk mengelola dan menganalisis konten media sosial secara terpusat.</p>
             <div class="project-tags badge-cloud">
-              <span class="badge badge-laravel">Laravel</span>
-              <span class="badge badge-mysql">MySQL</span>
-              <span class="badge badge-html">Blade Template</span>
+              <span class="badge badge-next">Next.js</span>
+              <span class="badge badge-react">React</span>
+              <span class="badge badge-css">Tailwind CSS</span>
+              <span class="badge badge-pgsql">PostgreSQL</span>
             </div>
           </div>
 
@@ -763,10 +763,9 @@
             </div><!-- /contact-list -->
           </div><!-- /contact-info -->
 
-          <!-- Right: Contact form -->
-          <!-- TODO: Daftar di https://formspree.io → buat form baru → salin ID → ganti REPLACE_WITH_YOUR_ID di bawah -->
+          <!-- Right: Contact form (Supabase Edge Function Endpoint) -->
           <form id="contact-form" class="card contact-form"
-                action="https://formspree.io/f/REPLACE_WITH_YOUR_ID"
+                action="https://YOUR_SUPABASE_PROJECT_REF.supabase.co/functions/v1/send-email"
                 method="POST" novalidate>
             <h3 style="font:600 1.125rem/1 var(--font-display);color:var(--text-primary);margin-bottom:4px;">Kirim Pesan</h3>
 

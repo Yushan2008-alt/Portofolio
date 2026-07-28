@@ -423,21 +423,21 @@ const PROJECTS = [
     stack: ['Next.js', 'React', 'PostgreSQL', 'Tailwind CSS', 'Vercel'],
     stackClasses: ['badge-next', 'badge-react', 'badge-pgsql', 'badge-html', 'badge-css'],
     github: 'https://github.com/Yushan2008-alt/IdeBussines',
-    demo: 'https://ruangteduh.vercel.app',
+    demo: 'https://ide-bussines.vercel.app/',
   },
   {
     id: 3,
     category: 'webapp',
     categoryLabel: 'Web App',
-    badgeClass: 'badge-laravel',
+    badgeClass: 'badge-next',
     year: '2025',
-    title: 'School Management System',
-    desc: 'Sistem manajemen sekolah berbasis web untuk pengelolaan data siswa, jadwal pelajaran, absensi, dan laporan akademik secara terpusat menggunakan Laravel dan MySQL.',
-    highlights: ['Manajemen Data Siswa & Guru', 'Penjadwalan Pelajaran Dinamis', 'Laporan Akademik Otomatis', 'Role-based Access Control'],
-    stack: ['Laravel', 'MySQL', 'Blade Template', 'Bootstrap'],
-    stackClasses: ['badge-laravel', 'badge-mysql', 'badge-html', 'badge-css'],
+    title: 'Analisis Tim Media IPNU IPPNU',
+    desc: 'Sistem analisis tim media IPNU IPPNU untuk mengelola dan menganalisis konten media sosial secara terpusat.',
+    highlights: ['Analisis Konten Media Sosial', 'Pemantauan Tren', 'Laporan Otomatis', 'Dashboard Interaktif'],
+    stack: ['Next.js', 'React', 'PostgreSQL', 'Tailwind CSS'],
+    stackClasses: ['badge-next', 'badge-react', 'badge-pgsql', 'badge-css'],
     github: 'https://github.com/Yushan2008-alt',
-    demo: null,
+    demo: 'https://media-pearl-five.vercel.app/',
   },
 ];
 
@@ -512,10 +512,10 @@ const PROJECTS = [
 
 
 // ─────────────────────────────────────────────
-// 13. CONTACT FORM (Formspree async)
+// 13. CONTACT FORM (Supabase Edge Function + Gmail SMTP)
 // ─────────────────────────────────────────────
 (function initContactForm() {
-  const form    = document.getElementById('contact-form');
+  const form = document.getElementById('contact-form');
   if (!form) return;
 
   form.addEventListener('submit', async function(e) {
@@ -526,27 +526,36 @@ const PROJECTS = [
     const btnIcon = document.getElementById('btn-icon');
     const status  = document.getElementById('form-status');
 
+    const formData = new FormData(form);
+    const payload  = {
+      name:    formData.get('name'),
+      email:   formData.get('email'),
+      message: formData.get('message'),
+    };
+
     // Loading state
     btn.disabled = true;
     btnText.textContent = 'Mengirim...';
     if (btnIcon) btnIcon.setAttribute('icon', 'solar:spinner-linear');
 
     try {
-      const response = await fetch(e.target.action, {
+      const response = await fetch(form.action, {
         method:  'POST',
-        body:    new FormData(e.target),
-        headers: { 'Accept': 'application/json' },
+        headers: { 'Content-Type': 'application/json' },
+        body:    JSON.stringify(payload),
       });
 
-      if (response.ok) {
+      const resData = await response.json().catch(() => ({}));
+
+      if (response.ok && (resData.success || !resData.error)) {
         status.textContent = '✓ Pesan berhasil dikirim! Saya akan membalas secepatnya.';
         status.className   = 'form-status success';
-        e.target.reset();
+        form.reset();
       } else {
-        throw new Error('server error');
+        throw new Error(resData.error || 'Server error');
       }
-    } catch {
-      status.textContent = '✗ Gagal mengirim. Coba hubungi via WhatsApp atau Email langsung.';
+    } catch (err) {
+      status.textContent = '✗ Gagal mengirimpesan. Silakan hubungi via WhatsApp atau Email langsung.';
       status.className   = 'form-status error';
     } finally {
       btn.disabled = false;
